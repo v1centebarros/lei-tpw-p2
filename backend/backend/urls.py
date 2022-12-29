@@ -16,6 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from core.views.books import bookList, bookDetail, bookCreate, bookUpdate, bookDelete
+from core.views.auth import login, logout, register
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("register/", register, name="register"),
+    path("login/", login, name="login"),
+    path("books/", bookList, name="book-list"),
+    path("book-detail/<str:pk>/", bookDetail, name="book-detail"),
+    path("book-create/", bookCreate, name="book-create"),
+    path("book-update/<str:pk>/", bookUpdate, name="book-update"),
+    path("book-delete/<str:pk>/", bookDelete, name="book-delete"),
 ]
