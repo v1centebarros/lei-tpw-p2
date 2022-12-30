@@ -1,12 +1,22 @@
+<style>
+    @media only screen and (min-width: 1400px) {
+        .avatar {
+            margin-left: 46rem;
+        }
+        .searchBar {
+            margin-left: 30rem;
+        }
+    }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    
-    <a class="navbar-brand" href="/">Bookify</a>
+
+    <a class="navbar-brand" href="">Bookify</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -16,16 +26,35 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
             </li>
-            <li class="nav-item dropdown">
+
+            <form class="searchBar">
+                <div class="form-white input-group" style="width: 250px;">
+                    <input type="search" class="form-control rounded" placeholder="Search or jump to... ( / )"
+                        aria-label="Search" aria-describedby="search-addon" />
+                </div>
+            </form>
+
+            <li class="nav-item dropleft avatar">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    Dropdown link
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle"
+                        height="22" alt="" loading="lazy" />
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/login">Login</a>
-                    <a class="dropdown-item" href="/signup">Sign Up</a>
-                </div>
+            <li>
+                <a class="dropdown-item" href="/login">Login</a>
             </li>
-        </ul>
+            <li>
+                <a class="dropdown-item" href="/signup">Sign Up</a>
+            </li>
+            <li>
+                <hr class="dropdown-divider" />
+            </li>
+            <li>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </li>
+    </div>
+    </li>
+    </ul>
     </div>
 </nav>

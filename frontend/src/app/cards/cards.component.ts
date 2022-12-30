@@ -4,9 +4,6 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-cards',
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.css'],
-  template:`
-  <h6 class="category text-info">{{title}}</h6>
-  `
 })
 export class CardsComponent implements OnInit{
     @Input() title?: number;
@@ -15,6 +12,4 @@ export class CardsComponent implements OnInit{
   
     ngOnInit(): void {
     }
-  
-
 }
