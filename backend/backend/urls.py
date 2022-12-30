@@ -1,31 +1,26 @@
-"""backend URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 
-from core.views.books import bookList, bookDetail, bookCreate, bookUpdate, bookDelete
+import core.views.publisher
 from core.views.auth import login, logout, register
 
+# from core.views.publisher import create_publisher, publisher_details,publisher_list
+
+
+router = routers.DefaultRouter()
+router.register(r'publishers', core.views.publisher.PublisherViewSet)
+router.register(r'books', core.views.publisher.BookViewSet)
+router.register(r'authors', core.views.publisher.AuthorViewSet)
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("register/", register, name="register"),
-    path("login/", login, name="login"),
-    path("books/", bookList, name="book-list"),
-    path("book-detail/<str:pk>/", bookDetail, name="book-detail"),
-    path("book-create/", bookCreate, name="book-create"),
-    path("book-update/<str:pk>/", bookUpdate, name="book-update"),
-    path("book-delete/<str:pk>/", bookDelete, name="book-delete"),
+    path('', include(router.urls)),
+    path("admin", admin.site.urls),
+    path("register", register, name="register"),
+    path("login", login, name="login"),
+    # path("books/", book_list, name="book-list"),
+    # path("publisher/<int:id>", PublisherDetail.as_view()),
+
+    # path("publishers", PublisherList.as_view()),
 ]
