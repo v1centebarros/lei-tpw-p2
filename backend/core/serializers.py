@@ -10,14 +10,14 @@ class CustomUserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'first_name', 'last_name', 'birth_date']
 
 class AuthorSerializer(serializers.ModelSerializer):
-    user_data = serializers.SerializerMethodField()
+    user = serializers.SerializerMethodField()
     publishers = serializers.SerializerMethodField()
 
     class Meta:
         model = Author
-        fields = ('id', 'user', 'user_data', 'publishers')
+        fields = ('id', 'user', 'publishers')
 
-    def get_user_data(self, obj):
+    def get_user(self, obj):
         user_serializer = CustomUserSerializer(obj.user)
         return user_serializer.data
 
@@ -25,19 +25,26 @@ class AuthorSerializer(serializers.ModelSerializer):
         publisher_serializer = PublisherSerializer(obj.publishers.all(), many=True)
         return publisher_serializer.data
 
+class BookSerializer(serializers.ModelSerializer):
+    authors = serializers.SerializerMethodField()
+    publisher = serializers.SerializerMethodField()
+    class Meta:
+        model = Book
+        fields = ('id', 'name', 'pages', 'publish_date','authors', 'language', 'publisher', 'isbn', 'description')
+
+    def get_authors(self, obj):
+        author_serializer = AuthorSerializer(obj.authors.all(), many=True)
+        return author_serializer.data
+
+    def get_publisher(self, obj):
+        publisher_serializer = PublisherSerializer(obj.publisher)
+        return publisher_serializer.data
 
 
 
 class PublisherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Publisher
-        fields = "__all__"
-
-class BookSerializer(serializers.ModelSerializer):
-    authors = serializers.ListField()
-    publisher = PublisherSerializer()
-    class Meta:
-        model = Book
         fields = "__all__"
 
 

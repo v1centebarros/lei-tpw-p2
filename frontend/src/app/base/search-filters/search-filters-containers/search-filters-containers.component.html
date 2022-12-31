@@ -1,22 +1,6 @@
 <div class="flex flex row justify-center gap-4">
   <select class="select">
-    <option disabled selected>Rating</option>
-    <option>Homer</option>
-    <option>Marge</option>
-    <option>Bart</option>
-    <option>Lisa</option>
-    <option>Maggie</option>
-  </select>
-  <select class="select">
-    <option disabled selected>Year</option>
-    <option>Homer</option>
-    <option>Marge</option>
-    <option>Bart</option>
-    <option>Lisa</option>
-    <option>Maggie</option>
-  </select>
-  <select class="select">
-    <option disabled selected>Publisher</option>
+    <option [value]="-1" selected>Rating</option>
     <option>Homer</option>
     <option>Marge</option>
     <option>Bart</option>
@@ -24,9 +8,23 @@
     <option>Maggie</option>
   </select>
 
+  <select class="select">
+    <option selected [value]="-1">Year</option>
+    <option>Homer</option>
+    <option>Marge</option>
+    <option>Bart</option>
+    <option>Lisa</option>
+    <option>Maggie</option>
+  </select>
 
   <select class="select">
-    <option disabled selected>Language</option>
+    <option [value]="-1" selected>Publisher</option>
+    <option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.name}}</option>
+  </select>
+
+
+  <select class="select">
+    <option [value]="-1" selected>Language</option>
     <option>Homer</option>
     <option>Marge</option>
     <option>Bart</option>

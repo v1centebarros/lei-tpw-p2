@@ -29,6 +29,11 @@ class BookViewSet(viewsets.ModelViewSet):
         else:
             return Response(serializer.errors)
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()

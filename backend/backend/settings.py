@@ -139,3 +139,7 @@ AUTH_USER_MODEL = "core.CustomUser"
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ["Bearer"]
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+]
