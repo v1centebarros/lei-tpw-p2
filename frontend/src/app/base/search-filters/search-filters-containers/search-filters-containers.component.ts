@@ -9,7 +9,7 @@ import {Publisher} from "../../../models/publisher.model";
 })
 export class SearchFiltersContainersComponent implements OnInit {
 
-  publishers: Publisher[];
+  publishers: Publisher[] = [];
   constructor(private publisherService: PublisherService){ }
 
   ngOnInit() {

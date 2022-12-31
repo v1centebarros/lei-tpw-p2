@@ -1,0 +1,12 @@
+<div class="flex flex-col space-y-4 m-4 h-screen xl:container xl:mx-auto">
+    <app-navbar></app-navbar>
+    <ul>
+        <li>
+            <h1 class="text-2xl font-bold">{{ book.name }}</h1>
+            <p *ngFor="let author of book.authors">
+                {{ author.user.username }}
+            </p>
+            <p class="text-sm">{{ book.description }}</p>
+        </li>
+    </ul>
+</div>

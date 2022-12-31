@@ -10,6 +10,7 @@ import { SearchFiltersContainersComponent } from './base/search-filters/search-f
 import { BooksContainerComponent } from './base/books-container/books-container.component';
 import { BookComponent } from './base/book/book.component';
 import { HttpClientModule} from "@angular/common/http";
+import { BookDetailsComponent } from './base/book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule} from "@angular/common/http";
     SearchContainerComponent,
     SearchFiltersContainersComponent,
     BooksContainerComponent,
-    BookComponent
+    BookComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,

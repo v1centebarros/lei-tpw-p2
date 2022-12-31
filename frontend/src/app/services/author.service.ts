@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Book} from "../models/book.model";
-
+import {Author} from "../models/author.model";
 
 
 const httpOptions = {
@@ -18,11 +17,7 @@ export class BookService {
   private baseUrl = 'http://localhost:8000/';
   constructor(private http: HttpClient) { }
 
-  getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.baseUrl + 'books/');
-  }
-
-  getBook(id: number): Observable<Book> {
-    return this.http.get<Book>(this.baseUrl + 'books/' + id + '/');
+  getBooks(): Observable<Author[]> {
+    return this.http.get<Author[]>(this.baseUrl + 'authors/');
   }
 }
