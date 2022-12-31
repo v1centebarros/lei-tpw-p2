@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
-import core.views.publisher
+import core.views.book, core.views.publisher, core.views.auth, core.views.author
 from core.views.auth import login, logout, register
 
 # from core.views.publisher import create_publisher, publisher_details,publisher_list
@@ -11,8 +11,8 @@ from core.views.auth import login, logout, register
 
 router = routers.DefaultRouter()
 router.register(r'publishers', core.views.publisher.PublisherViewSet)
-router.register(r'books', core.views.publisher.BookViewSet)
-router.register(r'authors', core.views.publisher.AuthorViewSet)
+router.register(r'books', core.views.book.BookViewSet)
+router.register(r'authors', core.views.author.AuthorViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
