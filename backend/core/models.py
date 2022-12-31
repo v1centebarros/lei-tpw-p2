@@ -4,7 +4,7 @@ from django.db import models
 
 class  CustomUser(AbstractUser):
     birth_date = models.DateField(null=True, blank=True)
-    #TODO: Favorite Books
+    favourites = models.ManyToManyField('Book', related_name='favourite_books', blank=True)
 
 class Publisher(models.Model):
     name = models.CharField(max_length=255)
@@ -26,6 +26,7 @@ class Book(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     isbn = models.CharField(max_length=13)
     description = models.TextField()
+    image = models.ImageField(upload_to='images/', blank=False, null=False, default='default.jpg')
 
 class Review(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
