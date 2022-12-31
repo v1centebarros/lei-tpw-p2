@@ -1,12 +1,59 @@
 <div class="flex flex-col space-y-4 m-4 h-screen xl:container xl:mx-auto">
     <app-navbar></app-navbar>
-    <ul>
-        <li>
-            <h1 class="text-2xl font-bold">{{ book.name }}</h1>
-            <p *ngFor="let author of book.authors">
-                {{ author.user.username }}
-            </p>
-            <p class="text-sm">{{ book.description }}</p>
-        </li>
-    </ul>
+  <div class="w-full flex card bg-base-100 rounded-lg">
+
+    <div class="card-body">
+
+      <div class="flex flex-row">
+        <div class="mr-3">
+          <img src="https://placeimg.com/300/500/people" alt="" class="rounded">
+        </div>
+        <div class="flex-1">
+          <p class="text-6xl font-bold mb-4">A Song of Ice and Fire: A Game of Thrones</p>
+          <div class="rating rating-lg mb-5">
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" checked />
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
+          </div>
+
+          <p class="text-xl font-bold mb-4">Authors <span class="font-light text-lg">George R. Martin</span></p>
+          <p class="text-xl font-bold mb-4">Number of Pages <span class="font-light text-lg">500</span></p>
+          <p class="text-xl font-bold mb-4">Language <span class="font-light text-lg">En</span></p>
+          <p class="text-xl font-bold mb-4">Publish Date: <span class="font-light text-lg">01-01-2000</span></p>
+          <p class="text-xl font-bold mb-4">ISBN: <span class="font-light text-lg">9789898800985</span></p>
+        </div>
+      </div>
+      <p class="text-xl font-bold ">Description:</p>
+      <p class="font-light text-lg text-justify">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque massa placerat duis ultricies. Nulla at volutpat diam ut. Amet venenatis urna cursus eget nunc scelerisque viverra. Eleifend mi in nulla posuere sollicitudin. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus. Nunc aliquet bibendum enim facilisis gravida neque convallis. At varius vel pharetra vel turpis nunc. Consequat mauris nunc congue nisi. Morbi quis commodo odio aenean sed. In metus vulputate eu scelerisque felis imperdiet. Aenean et tortor at risus viverra adipiscing. Id velit ut tortor pretium viverra suspendisse potenti nullam ac. Id velit ut tortor pretium.
+      </p>
+    </div>
+  </div>
+
+  <div class="w-full flex card bg-base-100 rounded-lg mt-4">
+    <div class="card-body justify-between flex flex-row">
+      <p class="text-3xl font-bold">Reviews</p>
+      <button class="btn btn-primary">Add Review</button>
+    </div>
+  </div>
+
+  <div class="w-full flex card bg-base-100 rounded-lg mt-4">
+    <div class="card-body flex flex-row">
+      <div class="avatar my-auto">
+        <div class="mask mask-squircle w-16 h-16">
+          <img src="https://placeimg.com/300/500/people" alt=""/>
+        </div>
+      </div>
+      <div class="my-auto">
+        <p class="font-bold">Bob Boss</p>
+        <p>10min ago</p>
+      </div>
+      <div class="my-auto">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque massa placerat duis ultricies. Nulla at volutpat diam ut. Amet venenatis urna cursus eget nunc scelerisque viverra. Eleifend mi in nulla posuere sollicitudin. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus. Nunc aliquet bibendum enim facilisis gravida neque convallis. At varius vel pharetra vel turpis nunc. Consequat mauris nunc congue nisi. Morbi quis commodo odio aenean sed. In metus vulputate eu scelerisque felis imperdiet. Aenean et tortor at risus viverra adipiscing. Id velit ut tortor pretium viverra suspendisse potenti nullam ac. Id velit ut tortor pretium. </p>
+
+      </div>
+    </div>
+  </div>
 </div>
