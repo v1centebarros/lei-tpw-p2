@@ -41,21 +41,23 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    authors = serializers.PrimaryKeyRelatedField(many=True, queryset=Author.objects.all())
-    publisher = serializers.PrimaryKeyRelatedField(queryset=Publisher.objects.all())
+    authors = serializers.SlugRelatedField(many=True, queryset=Author.objects.all(), slug_field='user__username')
+    publisher = serializers.SlugRelatedField(queryset=Publisher.objects.all(), slug_field='name')
 
     class Meta:
         model = Book
         fields = ('id', 'name', 'pages', 'publish_date', 'language', 'authors', 'publisher', 'isbn', 'description', 'image')
 
     def create(self, validated_data):
-        authors_data = validated_data.pop('authors')
-        publisher_data = validated_data.pop('publisher')
-        book = Book.objects.create(**validated_data)
-        for author_data in authors_data:
-            book.authors.add(author_data)
-        book.publisher = publisher_data
+        authors = validated_data.pop('authors')
+        publisher = validated_data.pop('publisher')
+        print("PUBLISHER: ",publisher)
+        book = Book.objects.create(publisher=publisher)
+        for author in authors:
+            book.authors.add(author)
+        book.publisher = publisher
         book.save()
+
         return book
 
 

@@ -12,9 +12,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        pprint(serializer.initial_data)
         serializer.is_valid(raise_exception=True)
-        pprint(serializer.validated_data)
 
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
