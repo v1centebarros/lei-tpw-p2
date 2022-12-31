@@ -3,30 +3,28 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SearchBannerComponent } from './search-banner/search-banner.component';
-import { FooterComponent } from './footer/footer.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { CardsComponent } from './cards/cards.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BaseComponent } from './base/base/base.component';
+import { NavbarComponent } from './base/navbar/navbar.component';
+import { SearchContainerComponent } from './base/search-container/search-container.component';
+import { SearchFiltersContainersComponent } from './base/search-filters/search-filters-containers/search-filters-containers.component';
+import { BooksContainerComponent } from './base/books-container/books-container.component';
+import { BookComponent } from './base/book/book.component';
+import { HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    HomeComponent,
+    BaseComponent,
     NavbarComponent,
-    SearchBannerComponent,
-    FooterComponent,
-    SignUpComponent,
-    CardsComponent
+    SearchContainerComponent,
+    SearchFiltersContainersComponent,
+    BooksContainerComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    NgbModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
