@@ -128,7 +128,9 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
 
     ],
-    "DEFAULT_FILTER_BACKENDS": ['django_filters.rest_framework.DjangoFilterBackend']
+    "DEFAULT_FILTER_BACKENDS": [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ]
 }
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

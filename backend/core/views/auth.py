@@ -3,11 +3,9 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import AccessToken
-
 from ..models import CustomUser
 
 all_tokens = {}
-
 
 def get_username(request):
     token = request.headers['Authorization'].split(' ')[1]
