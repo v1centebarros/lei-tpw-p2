@@ -13,6 +13,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'birth_date',
+            'description',
             'favourites',
             'image',
         ]
@@ -23,9 +24,10 @@ class PublicCustomUserSerializer(serializers.Serializer):
     email = serializers.EmailField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
-    birth_date = serializers.DateField()
+    birth_date = serializers.DateField(allow_null=True, required=False)
     favourites = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    image = serializers.ImageField()
+    image = serializers.ImageField(allow_null=True, required=False)
+    description = serializers.CharField()
 
 
 class PublisherSerializer(serializers.ModelSerializer):
@@ -50,14 +52,14 @@ class PublicPublisherSerializer(serializers.Serializer):
 
 
 class AuthorSerializer(serializers.ModelSerializer):
-    user = serializers.SlugRelatedField(queryset=CustomUser.objects.all(), slug_field='username')
+    user = PublicCustomUserSerializer()
     publishers = serializers.SlugRelatedField(queryset=Publisher.objects.all(), slug_field='name', many=True)
     class Meta:
         model = Author
         fields = [
             'id',
             'user',
-            'publishers'
+            'publishers',
         ]
 
 

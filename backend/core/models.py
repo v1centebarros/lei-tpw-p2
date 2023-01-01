@@ -12,6 +12,7 @@ def upload_location_books(instance, filename):
 class  CustomUser(AbstractUser):
     birth_date = models.DateField(null=True, blank=True)
     favourites = models.ManyToManyField('Book', related_name='favourite_books', blank=True)
+    description = models.TextField(max_length=500, default='', blank=True)
     image = models.ImageField(upload_to=upload_location_users, blank=True, null=True, default='default.jpg')
 
 
