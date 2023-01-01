@@ -1,6 +1,5 @@
 <div class="max-w-xl mx-auto p-6 my-6 bg-base-100 rounded-xl shadow-xl" id="login-container">
-  <h1 class="text-5xl font-bold mb-6 tracking-wider">Sign Up</h1>
-
+  <h1 class="text-5xl font-bold mb-6 tracking-wider h-full">Sign Up</h1>
   <form
     [formGroup]="form"
   >
@@ -117,8 +116,10 @@
       <div class="text-error" *ngIf="form.get('image')?.touched && form.get('image')?.invalid">
         <div *ngIf="form.get('image')?.errors?.['required']">Image is required</div>
       </div>
-      <input type="submit" value="Sign Up" class="btn btn-primary mt-6" [disabled]="form.invalid"/>
-
+      <div class="flex flex-row mt-6 justify-between">
+        <a routerLink="/" class="btn btn-accent w-5/12">Go Back</a>
+        <input type="submit" value="Sign Up" class="btn btn-primary w-5/12" [disabled]="form.invalid"/>
+      </div>
 
     </div>
   </form>
