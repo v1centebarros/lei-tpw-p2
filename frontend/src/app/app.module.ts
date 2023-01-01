@@ -12,6 +12,10 @@ import { BookComponent } from './base/book/book.component';
 import { HttpClientModule} from "@angular/common/http";
 import { BookDetailsComponent} from "./book-details/book-details.component";
 import { AuthorsComponent } from './authors/authors.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AddBookComponent } from './base/add-book/add-book.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +27,17 @@ import { AuthorsComponent } from './authors/authors.component';
     BooksContainerComponent,
     BookComponent,
     BookDetailsComponent,
-    AuthorsComponent
+    AuthorsComponent,
+    LoginComponent,
+    SignupComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

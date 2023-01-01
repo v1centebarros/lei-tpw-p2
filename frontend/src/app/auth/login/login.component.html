@@ -1,0 +1,34 @@
+<div class="max-w-xl mx-auto mt-64 p-6 bg-base-100 rounded-xl shadow-xl" id="login-container">
+  <h1 class="text-5xl font-bold mb-6 tracking-wider">Login</h1>
+  <form action="." method="POST" [formGroup]="form">
+    <div class="form-control mb-4 space-y-4">
+
+      <label class="input-group w-full input-group-lg">
+        <span class="w-1/4">Username</span>
+        <input type="text" name="username" class="w-3/4 input input-primary input-bordered input-lg"
+               placeholder="Username"
+               formControlName="username">
+      </label>
+
+
+      <label class="input-group w-full input-group-lg">
+        <span class="w-1/4">Password </span>
+        <input type="password" name="password" class="w-3/4 input input-bordered input-primary input-lg"
+               placeholder="Password" formControlName="password">
+      </label>
+
+
+      <div class="mb-4">
+        <button class="btn btn-active btn-primary btn-wide w-full" type="submit" [disabled]="form.invalid">Submit
+        </button>
+      </div>
+
+      <div class="text-center mt-5 space-x-2">
+        <p class="text-base"> Don't have an account? <a class="text-primary font-bold" routerLinkActive="active"
+                                                        routerLink="/signup"> Create a
+          account</a></p>
+      </div>
+    </div>
+
+  </form>
+</div>
