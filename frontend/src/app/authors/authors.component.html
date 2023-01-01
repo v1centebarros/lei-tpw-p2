@@ -24,9 +24,7 @@
       <figure><img src="{{author.user.image}}" alt="Author"/></figure>
       <div class="card-body">
         <h2 class="card-title">{{author.user.first_name}} {{author.user.last_name}}</h2>
-        <div *ngIf="author.user.description.length > 50">
-          <p>{{author.user.description.substring(0, 50)}}...</p>
-        </div>
+          <p class="line-clamp-5">{{author.user.description}}...</p>
         <div class="card-actions justify-end">
           <button class="btn btn-primary">More</button>
         </div>
