@@ -10,7 +10,8 @@ import { SearchFiltersContainersComponent } from './base/search-filters/search-f
 import { BooksContainerComponent } from './base/books-container/books-container.component';
 import { BookComponent } from './base/book/book.component';
 import { HttpClientModule} from "@angular/common/http";
-import { BookDetailsComponent } from './base/book-details/book-details.component';
+import { BookDetailsComponent} from "./book-details/book-details.component";
+import { AuthorsComponent } from './authors/authors.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BookDetailsComponent } from './base/book-details/book-details.component
     SearchFiltersContainersComponent,
     BooksContainerComponent,
     BookComponent,
-    BookDetailsComponent
+    BookDetailsComponent,
+    AuthorsComponent
   ],
   imports: [
     BrowserModule,
