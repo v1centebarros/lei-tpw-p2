@@ -16,6 +16,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AddBookComponent } from './base/add-book/add-book.component';
+import { ProfileComponent } from './profile/profile.component';
+import { PublisherComponent } from './publisher/publisher.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AddBookComponent } from './base/add-book/add-book.component';
     AuthorsComponent,
     LoginComponent,
     SignupComponent,
-    AddBookComponent
+    AddBookComponent,
+    ProfileComponent,
+    PublisherComponent,
   ],
   imports: [
     BrowserModule,

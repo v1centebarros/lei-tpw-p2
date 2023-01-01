@@ -6,7 +6,7 @@
 
       <div class="flex flex-row">
         <div class="mr-3">
-          <img src={{book.image}} alt="" class="rounded">
+          <img src="{{book.image}}" alt="" class="rounded">
         </div>
         <div class="flex-1">
           <p class="text-6xl font-bold mb-4">{{book.name}}</p>
@@ -17,6 +17,7 @@
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
           </div>
+          <!--TODO: Adaptar isto para apenas um autor-->
           <p class="text-xl font-bold mb-4">
             Authors:
             <span class="font-light text-lg">
@@ -36,9 +37,9 @@
     </div>
   </div>
 
-  <div class="w-full flex card bg-base-100 rounded-lg mt-4">
-    <div class="card-body justify-between flex flex-row">
-      <p class="text-3xl font-bold">Reviews</p>
+  <div class="w-full flex bg-base-100 rounded-lg mt-4">
+    <div class="flex flex-row justify-between p-4 w-full">
+      <p class="text-3xl font-bold my-auto">Reviews</p>
       <button class="btn btn-primary">Add Review</button>
     </div>
   </div>
@@ -47,7 +48,7 @@
     <div class="card-body flex flex-row">
       <div class="avatar my-auto">
         <div class="mask mask-squircle w-16 h-16">
-          <img src={{review.user.image}} alt=""/>
+          <img src="{{review.user.image}}" alt=""/>
         </div>
       </div>
       <div class="my-auto">
