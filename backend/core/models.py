@@ -1,11 +1,18 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+def upload_location_users(instance, filename):
+    return '/'.join(['users', filename])
+
+
+def upload_location_books(instance, filename):
+    return '/'.join(['books', filename])
+
 
 class  CustomUser(AbstractUser):
     birth_date = models.DateField(null=True, blank=True)
     favourites = models.ManyToManyField('Book', related_name='favourite_books', blank=True)
-    image = models.ImageField(upload_to='images/', blank=True, default='default.jpg')
+    image = models.ImageField(upload_to=upload_location_users, blank=True, null=True, default='default.jpg')
 
 
 class Publisher(models.Model):
@@ -36,7 +43,7 @@ class Book(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     isbn = models.CharField(max_length=13)
     description = models.TextField()
-    image = models.ImageField(upload_to='images/', blank=False, null=False, default='default.jpg')
+    image = models.ImageField(upload_to=upload_location_books, blank=False, null=False, default='default.jpg')
 
     def __str__(self):
         return self.name
@@ -46,6 +53,7 @@ class Review(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     review = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.review

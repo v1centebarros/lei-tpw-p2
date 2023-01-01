@@ -17,6 +17,16 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'image',
         ]
 
+class PublicCustomUserSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    username = serializers.CharField()
+    email = serializers.EmailField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    birth_date = serializers.DateField()
+    favourites = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    image = serializers.ImageField()
+
 
 class PublisherSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,6 +39,14 @@ class PublisherSerializer(serializers.ModelSerializer):
             'country',
             'website',
         ]
+
+class PublicPublisherSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    address = serializers.CharField()
+    city = serializers.CharField()
+    country = serializers.CharField()
+    website = serializers.URLField()
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -45,7 +63,8 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 class PublicAuthorSerializer(serializers.Serializer):
     id = serializers.IntegerField()
-    user = serializers.SlugRelatedField(queryset=CustomUser.objects.all(), slug_field='username')
+    user = PublicCustomUserSerializer()
+    publishers = PublicPublisherSerializer(many=True)
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -67,10 +86,40 @@ class BookSerializer(serializers.ModelSerializer):
         ]
 
 
+class PublicBookSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    pages = serializers.IntegerField()
+    publish_date = serializers.DateField()
+    language = serializers.CharField()
+    authors = PublicAuthorSerializer(many=True)
+    publisher = PublicPublisherSerializer()
+    isbn = serializers.CharField()
+    description = serializers.CharField()
+    image = serializers.ImageField()
+
+
 class ReviewSerializer(serializers.ModelSerializer):
+    user = PublicCustomUserSerializer()
+    book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all())
+    date = serializers.DateTimeField(format="%d/%m/%Y %H:%M:%S")
     class Meta:
         model = Review
-        fields = "__all__"
+        fields = [
+            'id',
+            'book',
+            'user',
+            'review',
+            'date',
+        ]
+
+
+class PublicReviewSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all())
+    user = PublicCustomUserSerializer()
+    review = serializers.CharField()
+    date = serializers.DateTimeField(format="%d/%m/%Y %H:%M:%S")
 
 
 class RatingSerializer(serializers.ModelSerializer):

@@ -6,10 +6,10 @@
 
       <div class="flex flex-row">
         <div class="mr-3">
-          <img src="https://placeimg.com/300/500/people" alt="" class="rounded">
+          <img src={{book.image}} alt="" class="rounded">
         </div>
         <div class="flex-1">
-          <p class="text-6xl font-bold mb-4">A Song of Ice and Fire: A Game of Thrones</p>
+          <p class="text-6xl font-bold mb-4">{{book.name}}</p>
           <div class="rating rating-lg mb-5">
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" checked />
@@ -17,17 +17,21 @@
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
           </div>
-
-          <p class="text-xl font-bold mb-4">Authors <span class="font-light text-lg">George R. Martin</span></p>
-          <p class="text-xl font-bold mb-4">Number of Pages <span class="font-light text-lg">500</span></p>
-          <p class="text-xl font-bold mb-4">Language <span class="font-light text-lg">En</span></p>
-          <p class="text-xl font-bold mb-4">Publish Date: <span class="font-light text-lg">01-01-2000</span></p>
-          <p class="text-xl font-bold mb-4">ISBN: <span class="font-light text-lg">9789898800985</span></p>
+          <p class="text-xl font-bold mb-4">
+            Authors:
+            <span class="font-light text-lg">
+              <span *ngFor="let author of book.authors">{{author.user.first_name}} {{author.user.last_name}}</span>
+            </span>
+          </p>
+          <p class="text-xl font-bold mb-4">Number of Pages <span class="font-light text-lg">{{book.pages}}</span></p>
+          <p class="text-xl font-bold mb-4">Language <span class="font-light text-lg">{{book.language}}</span></p>
+          <p class="text-xl font-bold mb-4">Publish Date: <span class="font-light text-lg">{{book.publish_date}}</span></p>
+          <p class="text-xl font-bold mb-4">ISBN: <span class="font-light text-lg">{{book.isbn}}</span></p>
         </div>
       </div>
       <p class="text-xl font-bold ">Description:</p>
       <p class="font-light text-lg text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque massa placerat duis ultricies. Nulla at volutpat diam ut. Amet venenatis urna cursus eget nunc scelerisque viverra. Eleifend mi in nulla posuere sollicitudin. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus. Nunc aliquet bibendum enim facilisis gravida neque convallis. At varius vel pharetra vel turpis nunc. Consequat mauris nunc congue nisi. Morbi quis commodo odio aenean sed. In metus vulputate eu scelerisque felis imperdiet. Aenean et tortor at risus viverra adipiscing. Id velit ut tortor pretium viverra suspendisse potenti nullam ac. Id velit ut tortor pretium.
+        {{book.description}}
       </p>
     </div>
   </div>
@@ -39,19 +43,19 @@
     </div>
   </div>
 
-  <div class="w-full flex card bg-base-100 rounded-lg mt-4">
+  <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews">
     <div class="card-body flex flex-row">
       <div class="avatar my-auto">
         <div class="mask mask-squircle w-16 h-16">
-          <img src="https://placeimg.com/300/500/people" alt=""/>
+          <img src={{review.user.image}} alt=""/>
         </div>
       </div>
       <div class="my-auto">
-        <p class="font-bold">Bob Boss</p>
-        <p>10min ago</p>
+        <p class="font-bold">{{review.user.username}}</p>
+        <p>{{review.date}}</p>
       </div>
       <div class="my-auto">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque massa placerat duis ultricies. Nulla at volutpat diam ut. Amet venenatis urna cursus eget nunc scelerisque viverra. Eleifend mi in nulla posuere sollicitudin. Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus. Nunc aliquet bibendum enim facilisis gravida neque convallis. At varius vel pharetra vel turpis nunc. Consequat mauris nunc congue nisi. Morbi quis commodo odio aenean sed. In metus vulputate eu scelerisque felis imperdiet. Aenean et tortor at risus viverra adipiscing. Id velit ut tortor pretium viverra suspendisse potenti nullam ac. Id velit ut tortor pretium. </p>
+        <p>{{review.review}}</p>
 
       </div>
     </div>

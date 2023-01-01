@@ -11,4 +11,5 @@ export class Book {
   publisher: Publisher;
   isbn: string;
   description: string;
+  image: string;
 }
