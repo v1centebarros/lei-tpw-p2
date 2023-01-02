@@ -19,14 +19,14 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-2 gap-4">
+  <div class="grid grid-cols-2 gap-4" *ngFor="let author of authors">
     <div class="card card-side bg-base-100 shadow-xl">
-      <figure><img src="" alt="Author"/></figure>
+      <figure><img src="http://127.0.0.1:8000{{author.image}}" alt="Author"/></figure>
       <div class="card-body">
-        <h2 class="card-title"></h2>
-          <p class="line-clamp-5"></p>
+        <h2 class="card-title">{{author.first_name}} {{author.last_name}}</h2>
+          <p class="line-clamp-5">{{author.description}}</p>
         <div class="card-actions justify-end">
-          <button class="btn btn-primary">More</button>
+          <button class="btn btn-primary" routerLink="/profile/{{author.id}}">More</button>
         </div>
       </div>
     </div>

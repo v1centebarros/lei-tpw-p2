@@ -5,50 +5,39 @@
     <div class="card-body">
       <div class="flex flex-row">
         <div class="mr-3">
-          <img src="https://placeimg.com/300/400/people" alt="" class="rounded">
+          <img src={{user.image}} alt="" class="rounded">
         </div>
 
         <div class="flex-1">
-          <p class="text-6xl font-bold mb-4">Vicente Barros</p>
-          <p class="text-xl font-bold mb-4">Username: <span class="font-light text-lg">v1centebarros</span></p>
-          <p class="text-xl font-bold mb-4">Email: <span class="font-light text-lg">bobboss@gmail.com</span></p>
-          <p class="text-xl font-bold mb-4">Birthday: <span class="font-light text-lg">05/10/2001</span><span
-            class="font-extralight text-lg ml-1">(21)</span></p>
+          <p class="text-6xl font-bold mb-4">{{user.first_name}} {{user.last_name}}</p>
+          <p class="text-xl font-bold mb-4">Username: <span class="font-light text-lg">{{user.username}}</span></p>
+          <p class="text-xl font-bold mb-4">Email: <span class="font-light text-lg">{{user.email}}</span></p>
+          <p class="text-xl font-bold mb-4">Birthday: <span class="font-light text-lg">{{user.birth_date}}</span><span
+            class="font-extralight text-lg ml-1">{{user_age}}</span></p>
 
           <!-- Mostrar só quando tem livros-->
-          <p class="text-xl font-bold mb-4">Average Reviews per Book: <span class="font-light text-lg">5</span></p>
+          <p class="text-xl font-bold mb-4">Average Rating: <span class="font-light text-lg">{{avg_rating}}</span></p>
         </div>
       </div>
 
       <p class="text-xl font-bold ">Description:</p>
-      <p class="font-light text-lg text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Pharetra et ultrices neque ornare aenean euismod elementum. Euismod lacinia at quis risus sed
-        vulputate odio. Integer eget aliquet nibh praesent tristique magna sit amet. Fames ac turpis egestas sed tempus
-        urna. Ut morbi tincidunt augue interdum velit euismod. Scelerisque eleifend donec pretium vulputate sapien nec
-        sagittis aliquam. Volutpat consequat mauris nunc congue. Cursus vitae congue mauris rhoncus aenean vel elit. Et
-        netus et malesuada fames. Volutpat est velit egestas dui id. Vel eros donec ac odio tempor. Ut diam quam nulla
-        porttitor massa id. Ridiculus mus mauris vitae ultricies leo integer. Aliquet sagittis id consectetur purus ut
-        faucibus. Lacus vel facilisis volutpat est velit egestas dui id ornare. At urna condimentum mattis pellentesque
-        id nibh tortor id. Pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus. Nisl condimentum
-        id venenatis a condimentum vitae sapien.
-      </p>
+      <p class="font-light text-lg text-justify">{{user.description}}</p>
     </div>
   </div>
 
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
     <p class="text-3xl font-bold p-4">Reviews</p>
   </div>
-  <div class="w-full flex bg-base-100 rounded-lg mt-4"><!--*ngFor="let i of [1,2,3]"-->
+  <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews">
     <div class="pt-4 pl-4 pr-4">
-      <div class=""> <!--*ngFor="let i of [1,2,3]"-->
-        <a routerLink="/book/1" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">O livro do homem
-          burro </a>
-        <span class="font-light">(02/12/2022)</span>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Pharetra et ultrices neque ornare aenean euismod elementum. Euismod lacinia at quis risus sed
-          vulputate odio. Integer eget aliquet nibh praesent tristique magna sit amet. Fames ac turpis egestas sed
-          tempus urna. Ut morbi tincidunt augue interdum velit euismod.</p>
+      <div class="" *ngFor="let review of reviews">
+        <a routerLink="/book/1" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">
+          {{review.book_info.name}}
+        </a>
+        <span class="font-light">{{review.date}}</span>
+        <p>
+          {{review.review}}
+        </p>
         <div class="divider"></div>
       </div>
     </div>
@@ -57,5 +46,5 @@
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
     <p class="text-3xl font-bold p-4">My Books</p>
   </div>
-  <app-books-container></app-books-container>
+  <app-books-container [user_id]="user.id"></app-books-container>
 </div>

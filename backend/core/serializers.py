@@ -83,19 +83,21 @@ class PublicBookSerializer(serializers.Serializer):
     publisher = PublicPublisherSerializer()
     isbn = serializers.CharField()
     description = serializers.CharField()
-    image = serializers.ImageField()
+    image = serializers.ImageField(use_url=True)
 
 
 class ReviewSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all(), write_only=True)
     user_info = PublicCustomUserSerializer(source='user', read_only=True)
-    book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all())
+    book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all(), write_only=True)
+    book_info = PublicBookSerializer(source='book', read_only=True)
     date = serializers.DateTimeField(format="%d/%m/%Y %H:%M:%S")
     class Meta:
         model = Review
         fields = [
             'id',
             'book',
+            'book_info',
             'user',
             'user_info',
             'review',
