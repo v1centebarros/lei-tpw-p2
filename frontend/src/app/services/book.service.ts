@@ -4,11 +4,9 @@ import {Observable} from "rxjs";
 import {Book} from "../models/book.model";
 
 
-
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 }
-
 
 
 @Injectable({

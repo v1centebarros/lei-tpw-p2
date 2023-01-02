@@ -1,4 +1,4 @@
-import { Author } from './author.model';
+import { User } from './user.model';
 import { Publisher } from './publisher.model';
 
 export class Book {
@@ -6,7 +6,7 @@ export class Book {
   name: string;
   pages: number;
   publish_date: Date;
-  authors: Author[];
+  author_info: User;
   language: string;
   publisher: Publisher;
   isbn: string;

@@ -12,8 +12,8 @@ def upload_location_books(instance, filename):
 class  CustomUser(AbstractUser):
     birth_date = models.DateField(null=True, blank=True)
     favourites = models.ManyToManyField('Book', related_name='favourite_books', blank=True)
-    description = models.TextField(max_length=500, default='', blank=True)
-    image = models.ImageField(upload_to=upload_location_users, blank=True, null=True, default='default.jpg')
+    description = models.TextField(max_length=500, default='', blank=True, null=True)
+    image = models.ImageField(upload_to=upload_location_users, blank=True, null=True, default='users/default.jpg')
 
 
 class Publisher(models.Model):
@@ -27,12 +27,11 @@ class Publisher(models.Model):
         return self.name
 
 
-class Author(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    publishers = models.ManyToManyField(Publisher)
+class Genre(models.Model):
+    name = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.user.username
+        return self.name
 
 
 class Book(models.Model):
@@ -40,11 +39,12 @@ class Book(models.Model):
     pages = models.IntegerField()
     publish_date = models.DateField()
     language = models.CharField(max_length=255)
-    authors = models.ManyToManyField(Author)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='books')
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     isbn = models.CharField(max_length=13)
     description = models.TextField()
-    image = models.ImageField(upload_to=upload_location_books, blank=False, null=False, default='default.jpg')
+    image = models.ImageField(upload_to=upload_location_books, blank=False, null=False, default='books/default.jpg')
+    genres = models.ManyToManyField(Genre, related_name='genres', blank=True)
 
     def __str__(self):
         return self.name

@@ -1,20 +1,12 @@
 <div class="flex flex row justify-center gap-4">
   <select class="select">
     <option [value]="-1" selected>Rating</option>
-    <option>Homer</option>
-    <option>Marge</option>
-    <option>Bart</option>
-    <option>Lisa</option>
-    <option>Maggie</option>
+    <option *ngFor="let rating of ratings" [value]="rating">{{rating}}</option>
   </select>
 
   <select class="select">
     <option selected [value]="-1">Year</option>
-    <option>Homer</option>
-    <option>Marge</option>
-    <option>Bart</option>
-    <option>Lisa</option>
-    <option>Maggie</option>
+    <option *ngFor="let year of years" [value]="year">{{year}}</option>
   </select>
 
   <select class="select">
@@ -25,11 +17,7 @@
 
   <select class="select">
     <option [value]="-1" selected>Language</option>
-    <option>Homer</option>
-    <option>Marge</option>
-    <option>Bart</option>
-    <option>Lisa</option>
-    <option>Maggie</option>
+    <option *ngFor="let language of languages" [value]="language">{{language}}</option>
   </select>
 </div>
 
