@@ -44,6 +44,8 @@ export class ProfileComponent {
         (user: User) => {
             this.user = user;
             this.user_age = this.get_age();
+            this.getBooksFromUser();  
+            this.getUserReviews();
         }
     );
   }
