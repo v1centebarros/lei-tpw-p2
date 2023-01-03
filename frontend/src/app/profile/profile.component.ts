@@ -5,6 +5,7 @@ import { Book } from '../models/book.model';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Review } from '../models/review.model';
+import { Session } from '../models/session.model';
 
 @Component({
   selector: 'app-profile',
@@ -12,25 +13,48 @@ import { Review } from '../models/review.model';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  user: User;
+  user!: User;
+  user_id: number;
+  session!: Session | null;
   books_from_user: Book[];
   user_age: number;
   reviews: Review[];
+  avg_rating: number;
+  
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private location: Location,
-  ) { }
+  ) { 
+    this.user = User.getNullUser();
+    this.user_age = 0;
+    this.avg_rating = 0;
+    this.session = Session.getCurrentSession();
+
+  }
 
   ngOnInit() {
+    if (this.session === null) return;
+
+    let user_id = this.session?._user_id;
+    console.log(user_id)
+
+    this.userService.getUser(user_id).subscribe(
+        (user: User) => {
+            this.user = user;
+            this.user_age = this.get_age();
+            this.getBooksFromUser();  
+            this.getUserReviews();
+        }
+    );
+
     this.getUser();
     this.getBooksFromUser();
     this.getUserReviews();
   }
 
-  getUser() {
-    const id = +Number(this.route.snapshot.paramMap.get('id'));
+  getUser(id:number) {
     this.userService.getUser(id)
       .subscribe(user => this.user = user);
   }

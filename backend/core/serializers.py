@@ -1,5 +1,6 @@
 
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from .models import Book, Publisher, Review, Rating, CustomUser, Genre
 
 
@@ -18,8 +19,14 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'description',
             'favourites',
             'image',
-            'avg_rating',
+            'password',
+            'avg_rating'
         ]
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = CustomUser.objects.create_user(**validated_data)
+        return user
 
 class PublicCustomUserSerializer(serializers.Serializer):
     id = serializers.IntegerField()

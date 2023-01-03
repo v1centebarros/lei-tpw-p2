@@ -16,6 +16,9 @@ class  CustomUser(AbstractUser):
     image = models.ImageField(upload_to=upload_location_users, blank=True, null=True, default='users/default.jpg')
     avg_rating = models.FloatField(default=0)
 
+    def __str__(self):
+        return self.username
+
 
 class Publisher(models.Model):
     name = models.CharField(max_length=255)

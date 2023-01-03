@@ -59,6 +59,12 @@ def register(request):
     email = request.data['email']
     username = request.data['username']
     password = request.data['password']
+    first_name = request.data['first_name']
+    last_name = request.data['last_name']
+    birth_date = request.data['birth_date']
+    description = request.data['description']
+    image = request.data['image']
+
 
     # Authenticate user
     user = authenticate(username=username, password=password)
@@ -66,7 +72,8 @@ def register(request):
     if not user:
 
         # Save user
-        user = CustomUser.objects.create_user(username, email, password)
+        user = CustomUser.objects.create_user(username, email, password, first_name, last_name,birth_date,description,image)
+        user.set_password(password)
         user.save()
 
 
@@ -90,15 +97,18 @@ def login(request):
     password = request.data['password']
 
     user = authenticate(request, username=username, password=password)
-
+    
     if user:
         # Get token
         token = get_tokens_for_user(user)
+        user_data = CustomUser.objects.all().filter(username=username).values()
 
         return Response({
             "Message": "Login Successful",
             "Code": "HTTP_200_OK",
-            "Authorization": "Bearer " + token
+            "Authorization": "Bearer " + token,
+            "user_id": user_data.first()["id"],
+            "username": user_data.first()["username"]
         }, status=status.HTTP_200_OK)
 
     return Response({
