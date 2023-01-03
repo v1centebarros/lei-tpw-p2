@@ -23,5 +23,5 @@ export class BookPost {
   publisher: string;
   isbn: string;
   description: string;
-  image: string;
+  image: File | null;
 }

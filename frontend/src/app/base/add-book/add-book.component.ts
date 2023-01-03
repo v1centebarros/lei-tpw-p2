@@ -14,7 +14,6 @@ import { Book, BookPost } from 'src/app/models/book.model';
 export class AddBookComponent {
   publishers: Publisher[];
   languages: Language[];
-
   form: FormGroup;
 
   constructor(
@@ -30,7 +29,7 @@ export class AddBookComponent {
       'publisher': new FormControl('', [Validators.required]),
       'isbn': new FormControl('', [Validators.required]),
       'description': new FormControl('', [Validators.required]),
-      'image': new FormControl('', [Validators.required]),
+      'image': new FormControl(File, [Validators.required]),
     })
 
   }
@@ -50,8 +49,13 @@ export class AddBookComponent {
       .subscribe(publishers => this.publishers = publishers);
   }
 
+  onImageChange(event: any): void {
+    this.form.value.image = event.target.files[0];
+  }
+
   onSubmit(): void {
     const form_data = this.form.value;
+    console.log(form_data.image);
     const book: BookPost = {
       author: 1,
       name: form_data.name,

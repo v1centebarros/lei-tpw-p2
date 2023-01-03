@@ -63,7 +63,6 @@ class PublicPublisherSerializer(serializers.Serializer):
 
 class BookSerializer(serializers.ModelSerializer):
     publisher = serializers.SlugRelatedField(queryset=Publisher.objects.all(), slug_field='name')
-    genres = serializers.SlugRelatedField(many=True, queryset=Genre.objects.all(), slug_field='name')
     author = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all(), write_only=True)
     author_info = PublicCustomUserSerializer(source='author', read_only=True)
     avg_rating = serializers.FloatField(read_only=True)
@@ -81,7 +80,6 @@ class BookSerializer(serializers.ModelSerializer):
             'isbn',
             'description',
             'image',
-            'genres',
             'avg_rating'
         ]
 
