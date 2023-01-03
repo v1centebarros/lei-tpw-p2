@@ -17,7 +17,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'last_name',
             'birth_date',
             'description',
-            'favourites',
             'image',
             'password',
             'avg_rating'

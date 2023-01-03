@@ -40,6 +40,10 @@ export class ProfileComponent {
     let user_id = this.session?._user_id;
     console.log(user_id)
 
+    if (this.route.snapshot.paramMap.get('id') !== null) {
+      user_id = +Number(this.route.snapshot.paramMap.get('id'));
+    }
+
     this.userService.getUser(user_id).subscribe(
         (user: User) => {
             this.user = user;
