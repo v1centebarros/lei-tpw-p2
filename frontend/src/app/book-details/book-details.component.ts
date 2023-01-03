@@ -46,10 +46,9 @@ export class BookDetailsComponent implements OnInit{
   }
 
   submitReview(): void {
-    console.log(this.userReview);
-    //TODO
-    // this.reviewService.addReview(review)
-    //   .subscribe(review => this.reviews.push(review));
+    const id = +Number(this.route.snapshot.paramMap.get('id'));
+    this.reviewService.submitReview(id, this.userReview)
+      .subscribe(() => this.getBookReviews());
 
   }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Session } from '../../models/session.model';
+import {Search} from "../../models/search.model";
 
 
 @Component({
@@ -17,8 +18,7 @@ export class BaseComponent {
   language: string;
 
 
-  constructor() { 
-  }
+
 
   onSearchChanged(search: Search): void {
     this.query = search.query;
@@ -33,14 +33,14 @@ export class BaseComponent {
     router.events.subscribe(
       () => {
         if (!this.loggedIn() && (location.path() !== '/login' && location.path() != '/register')) {
-          window.location.href = "/login";
+          // window.location.href = "/login";
           router.navigate(['/login']);
         }
       }
     )
   }
 
-  
+
   // Check if current user is logged in
   loggedIn() {
     return (Session.getCurrentSession() !== null);

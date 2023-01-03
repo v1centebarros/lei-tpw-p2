@@ -20,13 +20,13 @@ export class ProfileComponent {
   user_age: number;
   reviews: Review[];
   avg_rating: number;
-  
+
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private location: Location,
-  ) { 
+  ) {
     this.user = User.getNullUser();
     this.user_age = 0;
     this.avg_rating = 0;
@@ -44,12 +44,12 @@ export class ProfileComponent {
         (user: User) => {
             this.user = user;
             this.user_age = this.get_age();
-            this.getBooksFromUser();  
+            this.getBooksFromUser();
             this.getUserReviews();
         }
     );
 
-    this.getUser();
+    this.getUser(user_id);
     this.getBooksFromUser();
     this.getUserReviews();
   }
