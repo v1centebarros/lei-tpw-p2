@@ -33,6 +33,11 @@ export class NavbarComponent {
 
     }
 
+  // Check if current user is logged in
+  loggedIn() {
+    return (Session.getCurrentSession() !== null);
+  }
+
 
   logout() {
     localStorage.removeItem('user');
