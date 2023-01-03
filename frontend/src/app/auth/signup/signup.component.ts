@@ -64,7 +64,7 @@ export class SignupComponent implements OnInit{
               return;
           }
               
-          this.authService.register( email,username, password).subscribe({
+          this.authService.register( email,username, password, firstName, lastName, description, birthDate).subscribe({
               next: items =>
               {
                   console.log("User registered");

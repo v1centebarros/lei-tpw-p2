@@ -23,8 +23,9 @@ export class AuthService {
         return this.httpClient.post<Session>(uri, {'username': username, 'password': password}, httpOptions);
     }
 
-    register(email: string, username: string, password: string): Observable<Object> {
+    register(email: string, username: string, password: string, firstName:string, lastName:string, description:string, birth_date:string
+        ): Observable<Object> {
         const uri = this.baseUrl + 'users/';
-        return this.httpClient.post(uri, {'email': email, 'username': username, 'password': password}, httpOptions);
+        return this.httpClient.post(uri, {'email': email, 'username': username, 'password': password , "first_name":firstName, "last_name": lastName, "description":description, "birth_date":birth_date}, httpOptions);
     }
 }
