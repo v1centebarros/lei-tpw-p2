@@ -1,5 +1,8 @@
-<div class="flex flex-col space-y-4 m-4 h-screen xl:container xl:mx-auto">
-  <app-navbar></app-navbar>
-  <app-search-container></app-search-container>
-  <app-books-container></app-books-container>
+<div *ngIf="loggedIn()">
+  <div class="flex flex-col space-y-4 m-4 h-screen xl:container xl:mx-auto">
+    <app-navbar></app-navbar>
+    <app-search-container></app-search-container>
+    <app-books-container></app-books-container>
+  </div>
 </div>
+
