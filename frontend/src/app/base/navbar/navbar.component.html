@@ -4,12 +4,13 @@
   </div>
   <div class="flex-none gap-2">
     <ul class="menu menu-horizontal px-1">
-      <li routerLink="/authors"><a>Authors</a></li>
+      <li><a routerLink="/authors">Authors</a></li>
       <li><a>Stats</a></li>
+      <li *ngIf="!loggedIn()"><a routerLink="/login">login</a></li>
     </ul>
 
 
-    <div class="dropdown dropdown-end">
+    <div class="dropdown dropdown-end" *ngIf="loggedIn()">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
           <img src="https://placeimg.com/80/80/people"  alt=""/>
@@ -21,5 +22,8 @@
         <li><a routerLink="/login"  (click)="logout()">Logout</a></li>
       </ul>
     </div>
+
+    
+
   </div>
 </div>

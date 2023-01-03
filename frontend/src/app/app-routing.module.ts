@@ -10,7 +10,7 @@ import {AddBookComponent} from "./base/add-book/add-book.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {PublisherComponent} from "./publisher/publisher.component";
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: BaseComponent },
   { path: 'book/:id', component: BookDetailsComponent },
   {path: 'addbook', component:AddBookComponent },
