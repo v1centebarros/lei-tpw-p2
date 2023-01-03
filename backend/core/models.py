@@ -45,7 +45,7 @@ class Book(models.Model):
     isbn = models.CharField(max_length=13)
     description = models.TextField()
     image = models.ImageField(upload_to=upload_location_books, blank=False, null=False, default='books/default.jpg')
-    genres = models.ManyToManyField(Genre, related_name='genres', blank=True)
+    genres = models.ManyToManyField(Genre, related_name='genres', blank=True,null=True)
     avg_rating = models.FloatField(default=0)
 
     def __str__(self):

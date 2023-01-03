@@ -72,7 +72,7 @@
         name="publisher"
         formControlName="publisher"
         >
-        <option *ngFor="let publisher of publishers" value={{publisher.id}}>{{publisher.name}}</option>
+        <option *ngFor="let publisher of publishers" value={{publisher.name}}>{{publisher.name}}</option>
       </select>
       <div class="text-error" *ngIf="form.get('publisher')?.touched && form.get('publisher')?.invalid">
         <div *ngIf="form.get('publisher')?.errors?.['required']">Publisher is required</div>
