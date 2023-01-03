@@ -97,15 +97,18 @@ def login(request):
     password = request.data['password']
 
     user = authenticate(request, username=username, password=password)
-
+    
     if user:
         # Get token
         token = get_tokens_for_user(user)
+        user_data = CustomUser.objects.all().filter(username=username).values()
 
         return Response({
             "Message": "Login Successful",
             "Code": "HTTP_200_OK",
-            "Authorization": "Bearer " + token
+            "Authorization": "Bearer " + token,
+            "user_id": user_data.first()["id"],
+            "username": user_data.first()["username"]
         }, status=status.HTTP_200_OK)
 
     return Response({
