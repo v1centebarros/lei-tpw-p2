@@ -29,7 +29,7 @@ class CustomUserViewSet(viewsets.ModelViewSet):
 
         return Response(reviews_info)
 
-    @action(detail=True, methods=['get'], name='Average Rating of user books')
+    @action(detail=True, methods=['get'], name='Get User Average Rating')
     def get_user_average_rating(self, request, pk=None):
         books = Book.objects.filter(author=pk)
         ratings = Rating.objects.filter(book__in=books)
@@ -43,4 +43,3 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         avg_rating = sum(avg_rating_per_book) / len(avg_rating_per_book)
 
         return Response(avg_rating)
-

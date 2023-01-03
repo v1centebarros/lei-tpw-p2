@@ -1,5 +1,5 @@
 <div class="flex flex-col space-y-4 m-4 h-screen xl:container xl:mx-auto">
   <app-navbar></app-navbar>
-  <app-search-container></app-search-container>
-  <app-books-container></app-books-container>
+  <app-search-filters-containers (searchChanged)="onSearchChanged($event)"></app-search-filters-containers>
+  <app-books-container [query]="query" [avg_rating]="avg_rating" [year]="year" [publisher]="publisher" [language]="language"></app-books-container>
 </div>

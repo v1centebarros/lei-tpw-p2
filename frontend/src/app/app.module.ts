@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BaseComponent } from './base/base/base.component';
 import { NavbarComponent } from './base/navbar/navbar.component';
-import { SearchContainerComponent } from './base/search-container/search-container.component';
 import { SearchFiltersContainersComponent } from './base/search-filters/search-filters-containers/search-filters-containers.component';
 import { BooksContainerComponent } from './base/books-container/books-container.component';
 import { BookComponent } from './base/book/book.component';
@@ -24,7 +23,6 @@ import { PublisherComponent } from './publisher/publisher.component';
     AppComponent,
     BaseComponent,
     NavbarComponent,
-    SearchContainerComponent,
     SearchFiltersContainersComponent,
     BooksContainerComponent,
     BookComponent,
