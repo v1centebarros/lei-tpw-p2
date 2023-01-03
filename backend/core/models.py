@@ -14,6 +14,7 @@ class  CustomUser(AbstractUser):
     favourites = models.ManyToManyField('Book', related_name='favourite_books', blank=True)
     description = models.TextField(max_length=500, default='', blank=True, null=True)
     image = models.ImageField(upload_to=upload_location_users, blank=True, null=True, default='users/default.jpg')
+    avg_rating = models.FloatField(default=0)
 
 
 class Publisher(models.Model):

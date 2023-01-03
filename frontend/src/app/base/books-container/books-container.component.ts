@@ -33,7 +33,6 @@ export class BooksContainerComponent implements OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     const search: Search = {
       query: this.query,
       avg_rating: this.avg_rating,

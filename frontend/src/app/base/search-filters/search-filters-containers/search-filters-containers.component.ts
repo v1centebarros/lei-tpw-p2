@@ -28,7 +28,13 @@ export class SearchFiltersContainersComponent implements OnInit {
   constructor(
     private publisherService: PublisherService,
     private bookService: BookService
-  ){ }
+  ){
+    this.query = '';
+    this.avg_rating = 0;
+    this.year = 0;
+    this.publisher = '';
+    this.language = '';
+   }
 
   ngOnInit() {
     this.getPublishers();

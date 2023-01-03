@@ -1,20 +1,24 @@
 <div class="flex flex-col space-y-3">
-  <input type="text" placeholder="Search your book" class="input w-8/12 mx-auto" [(ngModel)]="query" (ngModelChange)="onSearchChanged()"/>\
+  <input type="text" placeholder="Search your book" class="input w-8/12 mx-auto" [(ngModel)]="query" (ngModelChange)="onSearchChanged()"/>
   <div class="flex flex row justify-center gap-4">
     <select class="select" [(ngModel)]="avg_rating" (ngModelChange)="onSearchChanged()">
+      <option selected value=0>Rating</option>
       <option *ngFor="let rating of ratings" [value]="rating">{{rating}}</option>
     </select>
 
     <select class="select" [(ngModel)]="year" (ngModelChange)="onSearchChanged()">
+      <option selected value=0>Year</option>
       <option *ngFor="let year of years" [value]="year">{{year}}</option>
     </select>
 
     <select class="select" [(ngModel)]="publisher" (ngModelChange)="onSearchChanged()">
+      <option selected value="">Publisher</option>
       <option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.name}}</option>
     </select>
 
 
     <select class="select" [(ngModel)]="language" (ngModelChange)="onSearchChanged()">
+      <option selected value="">Language</option>
       <option *ngFor="let language of languages" [value]="language">{{language}}</option>
     </select>
   </div>

@@ -14,6 +14,8 @@ import { Location } from '@angular/common';
 export class BookDetailsComponent implements OnInit{
   book: Book;
   reviews: Review[];
+  showReviews: boolean = false;
+  userReview: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +39,18 @@ export class BookDetailsComponent implements OnInit{
     const id = +Number(this.route.snapshot.paramMap.get('id'));
     this.reviewService.getBookReviews(id)
       .subscribe(book => this.reviews = book);
+  }
+
+  showReviewsToggle(): void {
+    this.showReviews = !this.showReviews;
+  }
+
+  submitReview(): void {
+    console.log(this.userReview);
+    //TODO
+    // this.reviewService.addReview(review)
+    //   .subscribe(review => this.reviews.push(review));
+
   }
 }
 

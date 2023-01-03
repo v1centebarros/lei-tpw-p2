@@ -11,6 +11,7 @@ class BookFilter(filters.FilterSet):
     class Meta:
         model = Book
         fields = {
+            "name": ["icontains"],
             "language": ["exact"],
             "publish_date": ["year"],
             "publisher": ["exact"],

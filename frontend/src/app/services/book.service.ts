@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Book} from "../models/book.model";
 import { User } from '../models/user.model';
@@ -33,15 +33,23 @@ export class BookService {
   }
 
   getBooksWithFilters(search: Search): Observable<Book[]> {
-    const paramsToMap = new Map();
+    let params = new HttpParams();
     if (search.query) {
-      paramsToMap.set('query', search.query);
-      paramsToMap.set('avg_rating__gte', search.avg_rating);
-      paramsToMap.set('publish_date_year', search.year);
-      paramsToMap.set('publisher', search.publisher);
-      paramsToMap.set('language', search.language);
+      params = params.append('name__icontains', search.query);
     }
-    return this.http.get<Book[]>(this.baseUrl + 'books/', {params: Object.fromEntries(paramsToMap)});
+    if (search.avg_rating) {
+      params = params.append('avg_rating__gte', search.avg_rating.toString());
+    }
+    if (search.year) {
+      params = params.append('publish_date_year', search.year.toString());
+    }
+    if (search.publisher) {
+      params = params.append('publisher', search.publisher);
+    }
+    if (search.language) {
+      params = params.append('language', search.language);
+    }
+    return this.http.get<Book[]>(this.baseUrl + 'books/', {params: params});
   }
 
   getAvailableLanguages(): Observable<Language[]> {
@@ -50,6 +58,11 @@ export class BookService {
 
   getAvailableYears(): Observable<Year[]> {
     return this.http.get<Year[]>(this.baseUrl + 'books/get_available_years/');
+  }
+
+  addBook(book: Book): Observable<Book> {
+    console.log(book)
+    return this.http.post<Book>(this.baseUrl + 'books/', book, httpOptions);
   }
 
 }

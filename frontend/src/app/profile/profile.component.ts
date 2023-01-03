@@ -16,7 +16,6 @@ export class ProfileComponent {
   books_from_user: Book[];
   user_age: number;
   reviews: Review[];
-  avg_rating: number;
 
   constructor(
     private userService: UserService,
@@ -28,7 +27,6 @@ export class ProfileComponent {
     this.getUser();
     this.getBooksFromUser();
     this.getUserReviews();
-    this.getUserAvgRating();
   }
 
   getUser() {
@@ -60,9 +58,4 @@ export class ProfileComponent {
       .subscribe(reviews => this.reviews = reviews);
   }
 
-  getUserAvgRating() {
-    const id = +Number(this.route.snapshot.paramMap.get('id'));
-    this.userService.getUserAvgRating(id)
-      .subscribe(avg => this.avg_rating = avg);
-  }
 }

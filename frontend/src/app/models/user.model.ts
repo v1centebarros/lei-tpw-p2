@@ -7,4 +7,5 @@ export class User {
     birth_date: string;
     image: string;
     description: string;
+    avg_rating: number;
 }
