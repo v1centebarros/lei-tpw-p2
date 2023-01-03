@@ -45,6 +45,7 @@ class Book(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to=upload_location_books, blank=False, null=False, default='books/default.jpg')
     genres = models.ManyToManyField(Genre, related_name='genres', blank=True)
+    avg_rating = models.FloatField(default=0)
 
     def __str__(self):
         return self.name
@@ -62,8 +63,20 @@ class Review(models.Model):
 
 class Rating(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='ratings')
     rating = models.IntegerField()
+
+    def save(self, *args, **kwargs):
+        # Calculate the average rating for the book
+        book = self.book
+        ratings = book.ratings.all()
+        sum_ratings = sum(rating.rating for rating in ratings)
+        if len(ratings) > 0:
+            book.avg_rating = sum_ratings / len(ratings)
+        else:
+            book.avg_rating = 0
+        book.save()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.rating

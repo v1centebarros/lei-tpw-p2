@@ -12,8 +12,9 @@ class BookFilter(filters.FilterSet):
         model = Book
         fields = {
             "language": ["exact"],
-            "publish_date": ["exact", "year"],
+            "publish_date": ["year"],
             "publisher": ["exact"],
+            "avg_rating": ["gte"],
         }
 
 

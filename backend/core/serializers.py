@@ -56,6 +56,7 @@ class BookSerializer(serializers.ModelSerializer):
     genres = serializers.SlugRelatedField(many=True, queryset=Genre.objects.all(), slug_field='name')
     author = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all(), write_only=True)
     author_info = PublicCustomUserSerializer(source='author', read_only=True)
+    avg_rating = serializers.FloatField(read_only=True)
     class Meta:
         model = Book
         fields = [
@@ -70,7 +71,8 @@ class BookSerializer(serializers.ModelSerializer):
             'isbn',
             'description',
             'image',
-            'genres'
+            'genres',
+            'avg_rating'
         ]
 
 
@@ -114,16 +116,21 @@ class PublicReviewSerializer(serializers.Serializer):
 
 
 class RatingSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
-    book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all())
+    user = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all(), write_only=True)
+    user_info = PublicCustomUserSerializer(source='user', read_only=True)
+    book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all(), write_only=True)
+    book_info = PublicBookSerializer(source='book', read_only=True)
     class Meta:
         model = Rating
         fields = [
             'id',
-            'user',
             'book',
-            'rating'
+            'book_info',
+            'user',
+            'user_info',
+            'rating',
         ]
+
 
 
 class GenreSerializer(serializers.ModelSerializer):
