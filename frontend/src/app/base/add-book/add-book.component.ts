@@ -4,7 +4,8 @@ import { Publisher } from 'src/app/models/publisher.model';
 import { Language } from 'src/app/models/language.model';
 import { PublisherService } from 'src/app/services/publisher.service';
 import { BookService } from 'src/app/services/book.service';
-import { Book, BookPost } from 'src/app/models/book.model';
+import { Session } from 'src/app/models/session.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-book',
@@ -14,12 +15,14 @@ import { Book, BookPost } from 'src/app/models/book.model';
 export class AddBookComponent {
   publishers: Publisher[];
   languages: Language[];
+  session!: Session | null;
 
   form: FormGroup;
 
   constructor(
     private publisherService: PublisherService,
-    private bookService: BookService
+    private bookService: BookService,
+    private router: Router,
   ) {
     this.form = new FormGroup({
       'name': new FormControl('', [Validators.required]),
@@ -30,8 +33,8 @@ export class AddBookComponent {
       'publisher': new FormControl('', [Validators.required]),
       'isbn': new FormControl('', [Validators.required]),
       'description': new FormControl('', [Validators.required]),
-      'image': new FormControl('', [Validators.required]),
-    })
+    }),
+    this.session = Session.getCurrentSession();
 
   }
 
@@ -52,19 +55,20 @@ export class AddBookComponent {
 
   onSubmit(): void {
     const form_data = this.form.value;
-    const book: BookPost = {
-      author: 1,
-      name: form_data.name,
-      pages: form_data.pages,
-      publish_date: form_data.publishDate,
-      language: form_data.language,
-      publisher: form_data.publisher,
-      isbn: form_data.isbn,
-      description: form_data.description,
-      image: form_data.image,
-    }
 
-    this.bookService.addBook(book).subscribe();
+    this.bookService.addBook(
+      form_data.name,
+      form_data.pages,
+      form_data.publishDate,
+      form_data.language,
+      this.session?.get_user_id() as number,
+      form_data.publisher,
+      form_data.isbn,
+      form_data.description,
+    ).subscribe();
+
+    this.router.navigate(['/profile']);
+
   }
 
 }

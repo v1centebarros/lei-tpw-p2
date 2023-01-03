@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user.model';
 import { UserService } from '../services/user.service';
-import { Book } from '../models/book.model';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Review } from '../models/review.model';
 import { Session } from '../models/session.model';
+import { Book } from '../models/book.model';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
-  user!: User;
+export class ProfileComponent implements OnInit{
+  user: User;
   user_id: number;
   session!: Session | null;
-  books_from_user: Book[];
   user_age: number;
   reviews: Review[];
   avg_rating: number;
+  books: Book[];
 
 
   constructor(
@@ -37,41 +37,25 @@ export class ProfileComponent {
   ngOnInit() {
     if (this.session === null) return;
 
-    let user_id = this.session?._user_id;
-    console.log(user_id)
-
-    if (this.route.snapshot.paramMap.get('id') !== null) {
-      user_id = +Number(this.route.snapshot.paramMap.get('id'));
+    const url_id = +Number(this.route.snapshot.paramMap.get('id')!);
+    if ( url_id !== 0) {
+      this.user_id = url_id;
+    } else {
+      this.user_id = this.session.get_user_id();
     }
 
-    this.userService.getUser(user_id).subscribe(
-        (user: User) => {
-            this.user = user;
-            this.user_age = this.get_age();
-            this.getBooksFromUser();
-            this.getUserReviews();
-        }
-    );
-
-    this.getUser(user_id);
-    this.getBooksFromUser();
+    this.getUser(this.user_id);
     this.getUserReviews();
+    this.getUserBooks();
   }
 
   getUser(id:number) {
-    this.userService.getUser(id)
-      .subscribe(user => this.user = user);
+    this.userService.getUser(id).subscribe(user => this.user = user);
   }
 
-  getBooksFromUser() {
-    const id = +Number(this.route.snapshot.paramMap.get('id'));
-    this.userService.getBooksFromUser(id)
-      .subscribe(books => this.books_from_user = books);
-  }
-
-  get_age() {
+  get_age(birth_data: string) {
     const today = new Date();
-    const birthDate = new Date(this.user.birth_date);
+    const birthDate = new Date(birth_data);
     let age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
@@ -81,9 +65,13 @@ export class ProfileComponent {
   }
 
   getUserReviews() {
-    const id = +Number(this.route.snapshot.paramMap.get('id'));
-    this.userService.getUserReviews(id)
+    this.userService.getUserReviews(this.user_id)
       .subscribe(reviews => this.reviews = reviews);
+  }
+
+  getUserBooks() {
+    this.userService.getBooksFromUser(this.user_id)
+      .subscribe(books => this.books = books);
   }
 
 }

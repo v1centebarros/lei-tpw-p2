@@ -12,11 +12,16 @@
           <p class="text-6xl font-bold mb-4">{{user.first_name}} {{user.last_name}}</p>
           <p class="text-xl font-bold mb-4">Username: <span class="font-light text-lg">{{user.username}}</span></p>
           <p class="text-xl font-bold mb-4">Email: <span class="font-light text-lg">{{user.email}}</span></p>
-          <p class="text-xl font-bold mb-4">Birthday: <span class="font-light text-lg">{{user.birth_date}}</span><span
-            class="font-extralight text-lg ml-1">({{user_age}} years)</span></p>
+          <p class="text-xl font-bold mb-4">Birthday: 
+            <span class="font-light text-lg">{{user.birth_date}}</span>
+            <span class="font-extralight text-lg ml-1">({{get_age(user.birth_date)}} years)</span>
+          </p>
+
 
           <!-- Mostrar só quando tem livros-->
-          <p class="text-xl font-bold mb-4">Average Rating: <span class="font-light text-lg">{{user.avg_rating}}</span></p>
+          <p class="text-xl font-bold mb-4" *ngIf="books">Average Rating: 
+            <span class="font-light text-lg" *ngIf="books.length > 0">{{user.avg_rating}}</span>
+          </p>
         </div>
       </div>
 
@@ -30,8 +35,8 @@
   </div>
   <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews">
     <div class="pt-4 pl-4 pr-4">
-      <div class="" *ngFor="let review of reviews">
-        <a routerLink="/book/1" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">
+      <div class="">
+        <a routerLink="/book/{{review.book_info.id}}" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">
           {{review.book_info.name}}
         </a>
         <span class="font-light">{{review.date}}</span>
@@ -46,5 +51,5 @@
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
     <p class="text-3xl font-bold p-4">My Books</p>
   </div>
-  <app-books-container [user_id]="user.id"></app-books-container>
+  <app-books-container [user_id]="user_id"></app-books-container>
 </div>

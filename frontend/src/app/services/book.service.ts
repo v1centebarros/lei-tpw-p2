@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Book, BookPost} from "../models/book.model";
+import {Book} from "../models/book.model";
 import { User } from '../models/user.model';
 import { Year } from '../models/year.model';
 import { Language } from '../models/language.model';
@@ -60,9 +60,19 @@ export class BookService {
     return this.http.get<Year[]>(this.baseUrl + 'books/get_available_years/');
   }
 
-  addBook(book: BookPost): Observable<Book> {
-    console.log("BOOKPOSTED",book)
-    return this.http.post<Book>(this.baseUrl + 'books/', book, httpOptions);
+  addBook(name: String, Pages: Number, publish_date: String, Language: String, Author: Number, Publisher: String, Isbn: Number, Description: String): Observable<Book> {
+
+    return this.http.post<Book>(this.baseUrl + 'books/', {
+      name: name,
+      pages: Pages,
+      publish_date: publish_date,
+      language: Language,
+      author: Author,
+      publisher: Publisher,
+      isbn: Isbn,
+      description: Description
+    }, httpOptions);
+
   }
 
 }

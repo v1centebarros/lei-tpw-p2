@@ -33,6 +33,11 @@ export class BooksContainerComponent implements OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (this.user_id) {
+      this.getBooksFromUser();
+      return;
+    }
+
     const search: Search = {
       query: this.query,
       avg_rating: this.avg_rating,
@@ -43,7 +48,6 @@ export class BooksContainerComponent implements OnChanges{
     this.bookService.getBooksWithFilters(search).subscribe(books => this.books = books);
   }
 
-   
   getBooks(): void {
     this.bookService.getBooks().subscribe(books => this.books = books);
   }
