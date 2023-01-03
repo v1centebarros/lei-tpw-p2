@@ -67,6 +67,7 @@ def register(request):
 
         # Save user
         user = CustomUser.objects.create_user(username, email, password)
+        user.set_password(password)
         user.save()
 
 

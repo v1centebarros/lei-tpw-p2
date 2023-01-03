@@ -3,6 +3,7 @@
 
   <form
     [formGroup]="form"
+    (ngSubmit)="onSubmit()"
   >
     <div class="form-control">
       <label class="label">
@@ -119,7 +120,7 @@
       <div class="text-error" *ngIf="form.get('image')?.touched && form.get('image')?.invalid">
         <div *ngIf="form.get('image')?.errors?.['required']">Birth Date is required</div>
       </div>
-      <input type="submit" value="Sign Up" class="btn btn-primary mt-6" [disabled]="form.invalid"/>
+      <input type="submit" value="Register" class="btn btn-primary mt-6" [disabled]="form.invalid"/>
     </div>
 
     <div class="text-center mt-5 space-x-2">

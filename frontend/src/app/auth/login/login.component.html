@@ -1,6 +1,6 @@
 <div class="max-w-xl mx-auto mt-64 p-6 bg-base-100 rounded-xl shadow-xl" id="login-container">
   <h1 class="text-5xl font-bold mb-6 tracking-wider">Login</h1>
-  <form action="." method="POST" [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-control mb-4 space-y-4">
 
       <label class="input-group w-full input-group-lg">

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,7 @@ export class LoginComponent {
 
   form: FormGroup;
 
-  constructor() {
+  constructor( private authService: AuthService ) {
     this.form = new FormGroup({
       'username': new FormControl('', [Validators.required]),
       'password': new FormControl('', [Validators.required])
@@ -18,7 +20,31 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    // @ts-ignore
+    let username = this.form.get("username").value;
+    // @ts-ignore
+    let password = this.form.get("password").value;
+
+    console.log(password)
+
+    this.authService.login(username, password).subscribe({
+      next: session =>{
+        localStorage.setItem('user', JSON.stringify(session));
+        console.log(session);
+
+        setTimeout(() => {
+          window.location.replace("/home");
+      }, 1000);
+      
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
+
+
+    this.form.reset();
+
   }
 
 }

@@ -15,6 +15,9 @@ class  CustomUser(AbstractUser):
     description = models.TextField(max_length=500, default='', blank=True, null=True)
     image = models.ImageField(upload_to=upload_location_users, blank=True, null=True, default='users/default.jpg')
 
+    def __str__(self):
+        return self.username
+
 
 class Publisher(models.Model):
     name = models.CharField(max_length=255)
