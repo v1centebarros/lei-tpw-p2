@@ -14,7 +14,7 @@ export class Session{
         if (storedUser !== undefined && storedUser !== null) {
 
             let currentSessionJsonObj = JSON.parse(storedUser);
-            return new Session(currentSessionJsonObj['user_id'], currentSessionJsonObj['username'], currentSessionJsonObj['token']);
+            return new Session(currentSessionJsonObj['Authorization'], currentSessionJsonObj['username'], currentSessionJsonObj['user_id']);
 
         }
 

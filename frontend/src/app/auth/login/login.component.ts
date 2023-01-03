@@ -30,7 +30,6 @@ export class LoginComponent {
     this.authService.login(username, password).subscribe({
       next: session =>{
         localStorage.setItem('user', JSON.stringify(session));
-        console.log(session);
 
         setTimeout(() => {
           window.location.replace("/home");
