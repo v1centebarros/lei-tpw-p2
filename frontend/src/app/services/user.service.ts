@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../models/user.model";
 import { Book } from '../models/book.model';
@@ -25,8 +25,10 @@ export class UserService {
     return this.http.get<Review[]>(this.baseUrl + 'users/' + id + '/get_user_reviews/');
   }
 
-  getUserAvgRating(id: number): Observable<number> {
-    return this.http.get<number>(this.baseUrl + 'users/' + id + '/get_user_average_rating/');
+  getAuthorByRating(rating: number): Observable<User[]> {
+    let params = new HttpParams();
+    params = params.append('avg_rating__gte', rating.toString());
+    return this.http.get<User[]>(this.baseUrl + 'users/', {params: params});
   }
 
 }

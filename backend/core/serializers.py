@@ -5,11 +5,13 @@ from .models import Book, Publisher, Review, Rating, CustomUser, Genre
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
     class Meta:
         model = CustomUser
         fields = [
             'id',
             'username',
+            'password',
             'email',
             'first_name',
             'last_name',
@@ -18,6 +20,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'favourites',
             'image',
             'password',
+            'avg_rating'
         ]
         extra_kwargs = {'password': {'write_only': True}}
 
@@ -93,6 +96,7 @@ class PublicBookSerializer(serializers.Serializer):
     isbn = serializers.CharField()
     description = serializers.CharField()
     image = serializers.ImageField(use_url=True)
+    author = PublicCustomUserSerializer()
 
 
 class ReviewSerializer(serializers.ModelSerializer):

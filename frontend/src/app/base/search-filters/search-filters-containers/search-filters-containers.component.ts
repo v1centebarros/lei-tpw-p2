@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {PublisherService} from "../../../services/publisher.service";
 import {Publisher} from "../../../models/publisher.model";
 import {BookService} from "../../../services/book.service";
-import {Book} from "../../../models/book.model";
+import { Year } from '../../../models/year.model';
+import { Language } from '../../../models/language.model';
+import { Search } from '../../../models/search.model';
+import { OutletContext } from '@angular/router';
 
 @Component({
   selector: 'app-search-filters-containers',
@@ -10,19 +13,33 @@ import {Book} from "../../../models/book.model";
   styleUrls: ['./search-filters-containers.component.css']
 })
 export class SearchFiltersContainersComponent implements OnInit {
-  years: Number[] = [];
+  @Output() searchChanged = new EventEmitter<Search>();
+  years: Year[] = [];
   ratings: number[] = [1, 2, 3, 4, 5];
-  languages: string[] = ['English', 'French', 'German', 'Spanish', 'Italian', 'Russian', 'Chinese', 'Japanese', 'Portuguese'];
+  languages: Language[] = [];
+  query: string;
+  avg_rating: number;
+  year: number;
+  publisher: string;
+  language: string;
+
 
   publishers: Publisher[] = [];
   constructor(
     private publisherService: PublisherService,
     private bookService: BookService
-  ){ }
+  ){
+    this.query = '';
+    this.avg_rating = 0;
+    this.year = 0;
+    this.publisher = '';
+    this.language = '';
+   }
 
   ngOnInit() {
     this.getPublishers();
     this.getBooksYearsAvailable();
+    this.getBookLanguagesAvailable();
   }
 
   getPublishers(): void {
@@ -30,15 +47,21 @@ export class SearchFiltersContainersComponent implements OnInit {
   }
 
   getBooksYearsAvailable(): void {
-    this.bookService.getBooks().subscribe(books => {
-      books.forEach(book => {
-        let bookDate = new Date(book.publish_date);
-        let bookYear = bookDate.getFullYear();
-        if (!this.years.includes(bookYear)) {
-          this.years.push(bookYear);
-        }
-      });
-    }
-    );
+    this.bookService.getAvailableYears().subscribe(years => this.years = years);
   }
+
+  getBookLanguagesAvailable(): void {
+    this.bookService.getAvailableLanguages().subscribe(languages => this.languages = languages);
+  }
+
+  onSearchChanged(): void {
+    this.searchChanged.emit({
+      query: this.query,
+      avg_rating: this.avg_rating,
+      year: this.year,
+      publisher: this.publisher,
+      language: this.language
+    });
+  }
+
 }

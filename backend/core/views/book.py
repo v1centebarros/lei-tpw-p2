@@ -11,6 +11,7 @@ class BookFilter(filters.FilterSet):
     class Meta:
         model = Book
         fields = {
+            "name": ["icontains"],
             "language": ["exact"],
             "publish_date": ["year"],
             "publisher": ["exact"],
@@ -33,3 +34,26 @@ class BookViewSet(viewsets.ModelViewSet):
             authors_info.append(CustomUserSerializer(CustomUser.objects.get(id=author['author'])).data)
 
         return Response(authors_info)
+
+    @action(detail=False, methods=['get'], name='Get Available Years')
+    def get_available_years(self, request):
+        years = Book.objects.values('publish_date').distinct()
+        years_info = []
+        for year in years:
+            if year['publish_date'].year not in years_info:
+                years_info.append(year['publish_date'].year)
+        
+        return Response(years_info)
+    
+
+    @action(detail=False, methods=['get'], name='Get Available Languages')
+    def get_available_languages(self, request):
+        languages = Book.objects.values('language').distinct()
+        languages_info = []
+        for language in languages:
+            if language['language'] not in languages_info:
+                languages_info.append(language['language'])
+        
+        return Response(languages_info)
+
+

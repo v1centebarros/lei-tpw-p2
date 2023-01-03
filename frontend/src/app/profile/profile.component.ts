@@ -48,6 +48,10 @@ export class ProfileComponent {
             this.getUserReviews();
         }
     );
+
+    this.getUser();
+    this.getBooksFromUser();
+    this.getUserReviews();
   }
 
   getUser(id:number) {
@@ -78,9 +82,4 @@ export class ProfileComponent {
       .subscribe(reviews => this.reviews = reviews);
   }
 
-  getUserAvgRating() {
-    const id = +Number(this.route.snapshot.paramMap.get('id'));
-    this.userService.getUserAvgRating(id)
-      .subscribe(avg => this.avg_rating = avg);
-  }
 }

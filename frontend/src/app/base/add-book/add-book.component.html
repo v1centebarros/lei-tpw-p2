@@ -54,10 +54,9 @@
       <select
         class="input input-bordered"
         name="language"
-        formControlName="language">
-        <option value="English">English</option>
-        <option value="French">French</option>
-        <option value="Spanish">Spanish</option>
+        formControlName="language"
+        >
+        <option *ngFor="let language of languages" value={{language}}>{{language}}</option>
       </select>
 
       <div class="text-error" *ngIf="form.get('language')?.touched && form.get('language')?.invalid">
@@ -71,10 +70,9 @@
       <select
         class="input input-bordered"
         name="publisher"
-        formControlName="publisher">
-        <option value="English">English</option>
-        <option value="French">French</option>
-        <option value="Spanish">Spanish</option>
+        formControlName="publisher"
+        >
+        <option *ngFor="let publisher of publishers" value={{publisher.name}}>{{publisher.name}}</option>
       </select>
       <div class="text-error" *ngIf="form.get('publisher')?.touched && form.get('publisher')?.invalid">
         <div *ngIf="form.get('publisher')?.errors?.['required']">Publisher is required</div>
@@ -118,7 +116,7 @@
       </div>
       <div class="flex flex-row mt-6 justify-between">
         <a routerLink="/" class="btn btn-accent w-5/12">Go Back</a>
-        <input type="submit" value="Sign Up" class="btn btn-primary w-5/12" [disabled]="form.invalid"/>
+        <input type="submit" value="Add Book" class="btn btn-primary w-5/12" [disabled]="form.invalid" (click)="onSubmit()"/>
       </div>
 
     </div>

@@ -1,12 +1,24 @@
 from rest_framework import viewsets
-from ..models import CustomUser, Book, Review, Rating
+from ..models import CustomUser, Book, Review
 from ..serializers import CustomUserSerializer, BookSerializer, ReviewSerializer
+from django_filters import rest_framework as filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
+
+class UserFilter(filters.FilterSet):
+    avg_rating_gte = filters.NumberFilter(field_name='avg_rating', lookup_expr='gte')
+
+    class Meta:
+        model = CustomUser
+        fields = {
+            "avg_rating": ["gte"],
+        }
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+    filter_backends = [filters.DjangoFilterBackend]
+    filterset_fields = UserFilter.Meta.fields
 
     @action(detail=True, methods=['get'], name='Get user books')
     def get_user_books(self, request, pk=None):
@@ -28,19 +40,3 @@ class CustomUserViewSet(viewsets.ModelViewSet):
             reviews_info.append(info)
 
         return Response(reviews_info)
-
-    @action(detail=True, methods=['get'], name='Average Rating of user books')
-    def get_user_average_rating(self, request, pk=None):
-        books = Book.objects.filter(author=pk)
-        ratings = Rating.objects.filter(book__in=books)
-
-        if len(ratings) == 0:
-            return Response(0)
-        
-        avg_rating_per_book = []
-        for rating in ratings:
-            avg_rating_per_book.append(rating.rating)
-        avg_rating = sum(avg_rating_per_book) / len(avg_rating_per_book)
-
-        return Response(avg_rating)
-

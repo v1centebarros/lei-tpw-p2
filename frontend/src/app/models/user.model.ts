@@ -7,7 +7,6 @@ export class User {
     birth_date: string;
     image: string;
     description: string;
-
     constructor(id: number, username: string, email: string, first_name: string, last_name: string, birth_date: string, image: string, description: string) {
         this.id = id;
         this.username = username;
@@ -23,4 +22,6 @@ export class User {
     static getNullUser(): User {
         return new User(0,"","","","","","","");
     }
+
+    avg_rating: number;
 }
