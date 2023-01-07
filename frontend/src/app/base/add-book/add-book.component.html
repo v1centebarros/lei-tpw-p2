@@ -51,14 +51,13 @@
       <label class="label">
         <span class="label-text">Language</span>
       </label>
-      <select
+      <input
+        type="text"
+        placeholder="Language"
         class="input input-bordered"
         name="language"
         formControlName="language"
-        >
-        <option *ngFor="let language of languages" value={{language}}>{{language}}</option>
-      </select>
-
+      />
       <div class="text-error" *ngIf="form.get('language')?.touched && form.get('language')?.invalid">
         <div *ngIf="form.get('language')?.errors?.['required']">Language is required</div>
       </div>
@@ -106,14 +105,6 @@
         <div *ngIf="form.get('description')?.errors?.['required']">Publish Date is required</div>
       </div>
 
-      <label class="label">
-        <span class="label-text">Image</span>
-      </label>
-      <input type="file" class="file-input file-input-bordered file-input-primary" formControlName="image" (change)="onImageChange($event)"/>
-
-      <div class="text-error" *ngIf="form.get('image')?.touched && form.get('image')?.invalid">
-        <div *ngIf="form.get('image')?.errors?.['required']">Image is required</div>
-      </div>
       <div class="flex flex-row mt-6 justify-between">
         <a routerLink="/" class="btn btn-accent w-5/12">Go Back</a>
         <input type="submit" value="Add Book" class="btn btn-primary w-5/12" [disabled]="form.invalid" (click)="onSubmit()"/>

@@ -1,19 +1,19 @@
 <div class="navbar bg-base-100 rounded-xl">
   <div class="flex-1">
-    <a class="btn btn-ghost normal-case text-xl" routerLink="/">Bookify</a>
+    <a class="btn btn-ghost normal-case text-xl" href="/home" >Bookify</a>
   </div>
   <div class="flex-none gap-2">
     <ul class="menu menu-horizontal px-1">
-      <li><a routerLink="/authors">Authors</a></li>
+      <li><a href="/authors">Authors</a></li>
       <li><a>Stats</a></li>
-      <li *ngIf="!loggedIn()"><a routerLink="/login">login</a></li>
+      <li *ngIf="!loggedIn()" ><a href="/login"  >login</a></li>
     </ul>
 
 
     <div class="dropdown dropdown-end" *ngIf="loggedIn()">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <img src="https://placeimg.com/80/80/people"  alt=""/>
+          <img src={{userProfile.image}}  alt=""/>
         </div>
       </label>
       <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">

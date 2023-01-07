@@ -17,7 +17,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'last_name',
             'birth_date',
             'description',
-            'favourites',
             'image',
             'password',
             'avg_rating'
@@ -66,6 +65,7 @@ class BookSerializer(serializers.ModelSerializer):
     author = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all(), write_only=True)
     author_info = PublicCustomUserSerializer(source='author', read_only=True)
     avg_rating = serializers.FloatField(read_only=True)
+    image = serializers.ImageField(read_only=True)
     class Meta:
         model = Book
         fields = [

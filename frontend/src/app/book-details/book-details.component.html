@@ -34,7 +34,7 @@
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
     <div class="flex flex-row justify-between p-4 w-full">
       <p class="text-3xl font-bold my-auto">Reviews</p>
-      <button class="btn btn-primary" (click)="showReviewsToggle()">Add Review</button>
+      <button class="btn btn-primary" (click)="showReviewsToggle()">{{text_button}}</button>
     </div>
   </div>
 
@@ -55,10 +55,6 @@
         <p class="font-bold">{{review.user_info.username}}</p>
         <p>{{review.date}}</p>
       </div>
-      <div class="my-auto">
-        <p>{{review.review}}</p>
-      </div>
-
       <div class="my-auto">
         <p>{{review.review}}</p>
       </div>
