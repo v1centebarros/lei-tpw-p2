@@ -21,6 +21,7 @@ export class BookDetailsComponent implements OnInit{
   userReview: string = '';
   session!: Session | null;
   userProfile!: User;
+  text_button: string = "Add Reviews";
 
   constructor(
     private route: ActivatedRoute,
@@ -61,6 +62,11 @@ export class BookDetailsComponent implements OnInit{
   }
 
   showReviewsToggle(): void {
+    if (this.showReviews) {
+      this.text_button = "Add Reviews"
+    } else {
+      this.text_button = "Cancel Review"
+    }
     this.showReviews = !this.showReviews;
   }
 
@@ -69,6 +75,7 @@ export class BookDetailsComponent implements OnInit{
     this.reviewService.submitReview(id, this.userReview, this.userProfile.id)
       .subscribe(() => this.getBookReviews());
 
+    this.userReview = '';
   }
 }
 
