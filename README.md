@@ -44,6 +44,8 @@ Se você é um amante de livros e está procurando uma maneira de compartilhar s
       - [Genres](#genres)
   - [Base de dados](#base-de-dados)
 - [Autenticação](#autenticação)
+- [Execute](#execute)
+- [Informações de login](#informações-de-login)
 - [Referências](#referências)
 - [Créditos](#créditos)
 
@@ -530,6 +532,19 @@ export class AuthService {
 ```
 
 A informação de cada login foi guardada num interceptador de autenticação, de forma a garantir que o token fosse enviado com cada requisitação para acessar os recursos protegidos da Api.
+
+
+# Execute 
+
+Para executar a aplicação, é necessário correr em dois terminais:
+
+- `python manage.py runserver` no diretório `backend`
+- `ng serve` no diretório `frontend`
+
+# Informações de login
+
+- username: ``
+- password:
 
 
 # Referências
