@@ -376,7 +376,7 @@ O backend é a camada de negócio do Bookify e é responsável por gerir a infor
 ### API
 
 O projeto Bookify inclui uma API que permite aos desenvolvedores criar aplicativos que se integram com a plataforma. A sua construção foi possiveis com a combinação de serializers e ModelViewSets, uma opção comum para criar endpoints de API RESTful no Django.
-Os _ModelViewSets_ tratam- se de classes que fornecem uma camada de abstração para o gerenciamento de modelos em uma API RESTful. Eles fornecem funcionalidade padrão para operações comuns, como listar, criar, atualizar e excluir objetos de um modelo, e podem ser facilmente personalizados para atender às necessidades específicas da aplicação. Enquanto que os _serializers_  são usados no Django REST framework para convertar dados de modelos de banco de dados em formatos de dados mais simples, como JSON, e vice-versa. Eles permitem que os dados dos modelos sejam facilmente transferidos entre o backend e o frontend da aplicação e também facilitam a validação dos mesmos.
+Os _ModelViewSets_ tratam- se de classes que fornecem uma camada de abstração para o gerenciamento de modelos em uma API RESTful. Eles fornecem funcionalidade padrão para operações comuns, como listar, criar, atualizar e excluir objetos de um modelo, e podem ser facilmente personalizados para atender às necessidades específicas da aplicação. Enquanto que os _serializers_  são usados no Django REST framework para convertar dados de modelos de banco de dados em formatos de dados mais simples, como JSON, e vice-versa. Eles permitem que os dados dos modelos sejam facilmente transferidos entre o backend e o frontend da aplicação e também facilitam a validação dos mesmos. Para complementar os métodos base dos _ModelViewSets_ também foram criadas ações extra em determinadas entidades, através do decorator _@action_, o que nos permitiu efetuar determinados queries mais complexos. Por fim, também foram usados os django filters em conjunto com um pacote externo [Django REST framework filters package](https://github.com/philipn/django-rest-framework-filters) de modo a facilitar as queries de filtragem. Através dos django filters foi possível criar as próprias classes filterset, que definem qual os filtros possíveis de aplicar a um determinado modelo.
 
 Os endpoints apresentados pela _Api_, são o seguintes:
 
@@ -389,6 +389,7 @@ Os endpoints apresentados pela _Api_, são o seguintes:
 | GET    | /user/:id | Retorna um utilizador específico |
 | PUT    | /user/:id | Atualiza um utilizador específico |
 | DELETE | /user/:id | Remove um utilizador específico |
+| GET    | users/?avg_rating__gte= | Retorna a lista de utilizadores com bases no seu rating médio |
 
 ####  Publisher
 
@@ -399,6 +400,7 @@ Os endpoints apresentados pela _Api_, são o seguintes:
 | GET    | /publisher/:id | Retorna uma editora específica |
 | PUT    | /publisher/:id | Atualiza uma editora específica |
 | DELETE | /publisher/:id | Remove uma editora específica |
+| GET    | publishers/?name=&city=&country= | retorna a lista de editoras com base no nome, cidade ou país |
 
 ####  Book
 
@@ -409,6 +411,9 @@ Os endpoints apresentados pela _Api_, são o seguintes:
 | GET    | /book/:id | Retorna um livro específico |
 | PUT    | /book/:id | Atualiza um livro específico |
 | DELETE | /book/:id | Remove um livro específico |
+| GET    | books/get_all_authors/ | retorna todos os autores de livros |
+| GET    | books/get_available_years/ | retorna a lista de anos onde se publicaram livros
+| GET    | /books/?name__icontains=&language=&publish_date__year=&publisher=&avg_rating__gte= | retorna a lista de livros com base no nome, lingua, data de publicação, ano ou rating médio
 
 ####  login
 
@@ -435,6 +440,7 @@ Os endpoints apresentados pela _Api_, são o seguintes:
 | GET    | /review/:id | Retorna uma review específica |
 | PUT    | /review/:id | Atualiza uma review específica |
 | DELETE | /review/:id | Remove uma review específica |
+| GET    | /reviews/?book=&user= | retorna a lista de reviews com base no livro ou no utilizador |
 
 ####  Genres
 
@@ -538,13 +544,27 @@ A informação de cada login foi guardada num interceptador de autenticação, d
 
 Para executar a aplicação, é necessário correr em dois terminais:
 
-- `python manage.py runserver` no diretório `backend`
-- `ng serve` no diretório `frontend`
+- Primeiro Terminal
+```
+cd backend
+pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
+```
+
+- Segundo Terminal
+```
+cd frontend
+npm install
+ng serve
+```
+
+
 
 # Informações de login
 
-- username: ``
-- password:
+- username: wednesday
+- password: 1234
 
 
 # Referências
