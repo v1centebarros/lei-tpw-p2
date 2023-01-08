@@ -1,5 +1,8 @@
 # Bookify - TPW_Project2
-Se você é um amante de livros e está procurando uma maneira de compartilhar suas opiniões e descobrir novos títulos, o Bookify é a plataforma perfeita para você. Com o Bookify, os utilizadores podem pesquisar e adicionar livros à sua biblioteca pessoal, adicionar os seus próprios livros à plataforma como autores e avaliar e classificar os livros que já leram.
+Se é um amante de livros e está à procura de uma maneira de partilhar as suas opiniões e descobrir novos títulos, o Bookify é a plataforma perfeita.
+Com o Bookify, os utilizadores podem pesquisar e adicionar livros à sua biblioteca pessoal, 
+adicionar os seus próprios livros à plataforma como autores e avaliar e classificar os livros
+que já leram.
 
 
 ## Conteúdo
@@ -51,26 +54,24 @@ Se você é um amante de livros e está procurando uma maneira de compartilhar s
 
 ## Visão do projeto 
 
-O Bookify é um projeto de software que visa fornecer uma plataforma online inovadora para os amantes de livros. Esta aplicação web permite aos utilizadores procurar e adicionar livros à sua biblioteca pessoal, bem como partilhar suas opiniões sobre os títulos que já leram através de reviews e ratings. Além disso, os utilizadores agora têm a opção de adicionar os seus próprios livros à plataforma, permitindo uma maior interação e colaboração entre os utilizadores.
+O Bookify é um projeto de software que visa fornecer uma plataforma online inovadora para os amantes de livros, permitindo a procura e a adição de livros à sua biblioteca pessoal, bem como a partilha de opiniões sobre os títulos lidos através de **reviews** e **ratings**. Além disso, os utilizadores agora têm a opção de adicionar os seus próprios livros à plataforma, permitindo uma maior interação e colaboração entre os utilizadores.
 
-O Bookify foi desenvolvido utilizando as tecnologias Angular e Django, garantindo assim alta performance e escalabilidade. A plataforma oferece uma ampla gama de recursos e funcionalidades que permitem aos utilizadores encontrar novos títulos interessantes, organizar sua própria coleção de livros e colaborar com outros amantes de livros de todo o mundo.
-
-Em suma, o Bookify é uma ferramenta valiosa para qualquer pessoa que aprecie a leitura e que esteja interessada em manter uma biblioteca pessoal organizada e em compartilhar suas opiniões sobre os livros que já leu com outros utilizadores. A plataforma oferece uma ampla gama de recursos e funcionalidades que permitem aos utilizadores encontrar novos títulos interessantes, organizar sua própria coleção de livros e colaborar com outros amantes de livros de todo o mundo.
+O Bookify foi desenvolvido utilizando as tecnologias **Angular** e **Django Rest Framework**, juntanmente com outras ferramentas adicionar funcionaliades às tecnologias descritas anteriormente, garantindo alta performance e escalabilidade. 
 
 # Persona
 
 Uma _Persona_ é uma personagem criada para representar o público-alvo de um sistema ou produto. Para o nosso sistema, criamos três personas para ilustrar as possíveis utilizações: **Wednesday**, **William Shakespeare** e **Júlia**.
 
-## **Wednesday**
+## Wednesday
 
-_Wednesday_ é uma estudante universitária de 21 anos que adora ler. Ela passa a maior parte de seu tempo livre lendo livros de ficção científica e fantasia. ELa procura um sistema que lhe permite encontrar novas recomendaações de livros e organizar sua biblioteca pessoal.  Além disso, ela gostaria de ter a opção de adicionar reviews e ratings aos livros que já leu, para poder compartilhar suas opiniões com leitores.
+_Wednesday_ é uma estudante universitária de 21 anos que adora ler livros de ficção cientifica e fantasia. Ela procura um sistema que lhe permita encontrar novas recomendações de livros e organizar sua biblioteca pessoal. Além disso, ela gostaria de ter a opção de adicionar reviews e ratings aos livros que já leu, para poder compartilhar suas opiniões.
 
-## **William**
+## William
 
-_William_ é um escritor de 35 anos que está sempre à procura de novas fontes de inspiração. Ele utiliza o Bookify para encontrar recomendações de livros que possam lhe fornecer ideias para suas próximas obras literárias. Ele também adiciona os seus próprios livros à plataforma, permitindo que outros utilizadores possam descobrir e ler suas obras. Permitindo-lhe expandir as suas oportunidades de marketing e alcançar um público mais amplo.
+_William_ é um escritor de 35 anos que está sempre à procura de novas fontes de inspiração. Ele utiliza o Bookify para encontrar recomendações de livros que lhe possam fornecer ideias para os seus próximos projetos. Ele também adiciona os seus próprios livros à plataforma, permitindo que outros utilizadores possam descobrir e ler suas obras. Permitindo-lhe expandir as suas oportunidades de marketing e alcançar um público mais amplo.
 
-## **Júlia**
-Júlia é uma advogada de 30 anos que utiliza o Bookify para encontrar livros de não-ficção relacionados com o seu trabalho. Ela gosta de manter uma biblioteca pessoal organizada e valoriza a opção de poder adicionar tags e categorias aos seus livros para facilitar a sua pesquisa.
+## Júlia
+Júlia é uma advogada de 30 anos que utiliza o Bookify para encontrar livros de criminologia e direito penal. Ela gosta de manter uma biblioteca pessoal organizada e valoriza a opção de poder adicionar tags e categorias aos seus livros para facilitar a sua pesquisa.
 
 # Cenários
 O projeto Bookify inclui quatro cenários que descrevem como as personas mencionadas acima podem usar a plataforma. Os cenários são:
@@ -81,11 +82,11 @@ O projeto Bookify inclui quatro cenários que descrevem como as personas mencion
 
 ## Cenário 2
 
-**William** acabou de publicar um novo livro e gostaria de adicionar o livro à plataforma. Ele abre o Bookify e inicia sessão. Ele clica no botão "Add Book" e preenche os campos necessários. O livro é adicionado à plataforma e é visível para outros utilizadores.
+**William** acabou de publicar um novo livro e gostaria de adicioná-lo à plataforma. Para isso, ele abre o Bookify e inicia sessão. Clica no botão "Add Book" e preenche os campos necessários. O livro é adicionado à plataforma e é visível para outros utilizadores.
 
 ## Cenário 3
 
-**Júlia** está procurando por livros de direito para ler durante o seu tempo livre. Ela abre o Bookify e inicia sessão. Ela utiliza a funcionalidade de busca para procurar por livros de direito.
+**Júlia** está à procura por livros de direito para ler durante o seu tempo livre. Ela abre o Bookify e inicia sessão. Ela utiliza a funcionalidade de pesquisa para procurar por livros de direito.
 
 ## Cenário 4
 
@@ -115,17 +116,17 @@ Permitindo desta forma uma uma maior flexibilidade e escalabilidade do Bookify, 
 
 O frontend é a camada mais visível do Bookify e é responsável por fornecer a interface gráfica para os utilizadores interagirem com a plataforma. Ela é desenvolvida usando Angular, um framework JavaScript de código aberto, e é responsável por exibir as páginas da web, receber os input dos utilizadores e enviar solicitações para a camada de aplicativo.
 
-### **Componentes**
+### Componentes
 
 No frontend do Bookify, a interface é construída com componentes reutilizáveis que são compostos por um template HTML, um arquivo de estilo CSS e uma classe TypeScript. Cada componente é responsável por uma parte específica da funcionalidade da plataforma e pode ser facilmente adicionado, removido ou modificado sem afetar o funcionamento geral da aplicação.
 
 Alguns componentes utilizados:
 
-- **Navbar**: responsável por exibir a barra de navegação no topo da página e permite aos usuários acessar as principais áreas da plataforma.
+- **Navbar**: responsável por exibir a barra de navegação no topo da página e permite aos utilizadores aceder as principais áreas da plataforma.
 
-- **Login**: responsável por exibir o formulário de login e enviar as credenciais para a camada de aplicativo.
+- **Login**: responsável por exibir o formulário de login e enviar as credênciais para a camada de aplicativo.
 
-- **Signup**: responsável por exibir o formulário de registro e enviar as informações do usuário para a camada de aplicativo.
+- **Signup**: responsável por exibir o formulário de registo e enviar as informações do utilizador para a camada de aplicativo.
 
 - **Book-details**: responsável por exibir os detalhes de um livro.
 
@@ -140,7 +141,7 @@ Estes são apenas alguns exemplos de componentes que podem ser encontrados na ap
 #### Comunicação entre componentes
 
 A comunicação entre componentes é essencial para a partilha de informação ou de alteração de dados. 
-Em angular existem diferentes maneiras de comnuicar entre os componentes, as que foram utilizadas foi:
+Em angular existem diferentes maneiras de comunicar entre os componentes, as que foram utilizadas foi:
 
 - **Input**: permite que um componente filho receba dados de um componente pai.
   ```html
@@ -178,19 +179,19 @@ Em angular existem diferentes maneiras de comnuicar entre os componentes, as que
 
 ### **Serviços**
 
-No frontend do Bookify, os serviços são usados para gerenciar tarefas comuns e fornecer funcionalidade específica que pode ser compartilhada por vários componentes da aplicação. Eles são criados como classes no Angular e podem ser injetados em qualquer componente que precise de sua funcionalidade.
+No frontend do Bookify, os serviços são usados para gerir tarefas comuns e fornecer funcionalidade específica que pode ser compartilhada por vários componentes da aplicação. Eles são criados como classes no Angular e podem ser injetados em qualquer componente que precise da sua funcionalidade.
 
 Alguns exemplos de serviços utilizados no Bookify incluem:
 
-- **BookService**: responsável por gerenciar a comunicação com a API RESTful do Bookify, permitindo que os componentes obtenham informações sobre livros e enviem dados para o back-end.
+- **BookService**: responsável por gerir a comunicação com a API RESTful do Bookify, permitindo que os componentes obtenham informações sobre livros e enviem dados para o back-end.
 
-- **authService**: responsável por gerenciar a autenticação do usuário, incluindo o login e o registro.
+- **authService**: responsável por gerir a autenticação do utilizador, incluindo o login e o registo.
   
-- **userService**: responsável por gerenciar a comunicação com a API RESTful do Bookify relacionada ao usuário, incluindo a obtenção e atualização de informações do perfil.
+- **userService**: responsável por gerir a comunicação com a API RESTful do Bookify relacionada ao utilizador, incluindo a obtenção e atualização de informações do perfil.
 
-- **reviewService**: responsável por gerenciar a comunicação com a API RESTful do Bookify relacionada aos reviews, incluindo a adição e remoção de reviews.
+- **reviewService**: responsável por gerir a comunicação com a API RESTful do Bookify relacionada aos reviews, incluindo a adição e remoção de reviews.
 
-Esses são apenas alguns exemplos de serviços que podem ser encontrados no Bookify. Eles são úteis para centralizar lógicas específicas e permitir que vários componentes da aplicação possam compartilhar essas funcionalidades sem precisar duplicá-las. Além disso, os serviços são úteis para realizar chamadas de API e gerenciar o fluxo de dados entre o front-end e o back-end da aplicação.
+Estes são apenas alguns exemplos de serviços que podem ser encontrados no Bookify. Eles são úteis para centralizar lógicas específicas e permitir que vários componentes da aplicação possam compartilhar essas funcionalidades sem precisar duplicá-las. Além disso, os serviços são úteis para realizar chamadas de API e gerir o fluxo de dados entre o front-end e o back-end da aplicação.
 
 </br>
 
@@ -200,13 +201,13 @@ Os modelos são classes que representam os dados e a estrutura de uma aplicaçã
 
 #### User
 
-O _user_ inclui informações sobre os utilizadores da plataforma, como nome de usuário, senha, nome, endereço de e-mail e data de nascimento.
+O _user_ inclui informações sobre os utilizadores da plataforma, como nome de utilizador, senha, nome, endereço de e-mail e data de nascimento.
 
 | Campo       | Tipo   | Descrição                             |
 |-------------|--------|---------------------------------------|
 | id          | Number | Identificador único do utilizador     |
 | username    | String | Nome de utilizador                    |
-| passwor     | String | Password do utilizador                |
+| password    | String | Password do utilizador                |
 | email       | String | Email do utilizador                   |
 | first_name  | String | Primeiro nome do utilizador           |
 | last_name   | String | Último nome do utilizador             |
@@ -218,7 +219,7 @@ O _user_ inclui informações sobre os utilizadores da plataforma, como nome de 
 
 #### Publisher 
 
-O _publisher_ nclui informações sobre as editoras que publicam os livros na plataforma.
+O _publisher_ inclui informações sobre as editoras que publicam os livros na plataforma.
 
 | Campo       | Tipo   | Descrição                             |
 |-------------|--------|---------------------------------------|
@@ -280,9 +281,9 @@ A _Language_ guarada as diferentes Idiomas de livros existentes na plataforma.
 | language    | String | Nome do idioma                        |
 
 
-####  Genero
+####  Género
 
-A _Language_ guarada as diferentes Generos de livros existentes na plataforma.
+O _Género_ guarda os diferentes Géneros de livros existentes na plataforma.
 
 | Campo       | Tipo   | Descrição                             |
 |-------------|--------|---------------------------------------|
@@ -291,7 +292,7 @@ A _Language_ guarada as diferentes Generos de livros existentes na plataforma.
 
 ####  Year 
 
-A _Year_ guarada as diferentes Anos de publicação de livros existentes na plataforma.
+A _Year_ guarda os diferentes Anos de publicação de livros existentes na plataforma.
 
 | Campo       | Tipo   | Descrição                             |
 |-------------|--------|---------------------------------------|
@@ -324,12 +325,11 @@ A _Rating_ guarda os ratings dos livros feitas pelos utilizadores.
 | rating      | Number | Rating do livro                       |
 | date        | Date   | Data do rating                        |
 
-</br>
 
 ### **Forms**
-No Angular, os forms são usados para coletar e validar dados de entrada do usuário. Eles podem ser implementados de várias maneiras, mas a maneira mais comum é usar o módulo FormsModule e os componentes de formulário do Angular. O Angular fornece várias diretivas, como required, minlength e pattern, que podem ser adicionadas aos elementos de formulário para definir as regras de validação. É também possível criar regras de validação personalizadas usando expressões regulares ou escrevendo uma função de validação personalizada.
+No Angular, os forms são usados para coletar e validar dados de entrada do utilizador. Eles podem ser implementados de várias maneiras, mas a maneira mais comum é usar o módulo FormsModule e os componentes de formulário do Angular. O Angular fornece várias diretivas, como required, minlength e pattern, que podem ser adicionadas aos elementos de formulário para definir as regras de validação. É também possível criar regras de validação personalizadas usando expressões regulares ou escrevendo uma função de validação personalizada.
 
-O botão de submit não funcionarà enquanto o formulário estiver inválido, o que permite garantir ue os dados de entrada do usuário estejam em um formato válido antes de enviá-los para o back-end ou armazená-los em um banco de dados, o que ajuda a garantir a integridade dos dados e a evitar problemas de validação no futuro.
+O botão de submit não funcionar enquanto o formulário estiver inválido, o que permite garantir ue os dados de entrada do utilizador estejam em um formato válido antes de enviá-los para o back-end ou armazená-los em um banco de dados, o que ajuda a garantir a integridade dos dados e a evitar problemas de validação no futuro.
 
 Um exemplo de formulario utilizado no Bookify:
 
@@ -456,15 +456,15 @@ Os endpoints apresentados pela _Api_, são o seguintes:
 
 ## Base de dados
 
-A Base de dados é  camada de persistência, responsável por armazenar e gerenciar os dados da plataforma. Ela é implementada usando um banco de dados relacional e inclui tabelas para armazenar informações sobre utilizadores, livros, avaliações e outros dados relevantes. A camada de aplicativo acessa os dados através de consultas SQL e utiliza as informações para fornecer os recursos e funcionalidades da plataforma para os utilizadores.
+A Base de dados é camada de persistência, responsável por armazenar e gerir os dados da plataforma. Ela é implementada usando um banco de dados relacional e inclui tabelas para armazenar informações sobre utilizadores, livros, avaliações e outros dados relevantes. A camada de aplicativo acessa os dados por consultas SQL e utiliza as informações para fornecer os recursos e funcionalidades da plataforma para os utilizadores.
 
 
 
 # Autenticação 
-A autenticação é uma parte importante de qualquer aplicação, pois garante que apenas usuários autorizados tenham acesso aos recursos da aplicação. No Bookify, a autenticação é implementada usando o pacote django-rest-framework-simplejwt. Ele permite que os usuários se autentiquem através de tokens JWT, que são gerados quando um usuário faz login e enviados para o cliente. O cliente deve enviar o token em todas as requisições subsequentes para acessar os recursos protegidos. O token expira após um período de tempo configurável e o usuário precisará fazer login novamente para obter um novo token. Isso garante que apenas os usuários autorizados tenham acesso aos recursos da aplicação.
+A autenticação é uma parte essencial da aplicação, pois garante que apenas utilizadors autorizados tenham acesso aos recursos da aplicação. No Bookify, a autenticação é implementada usando o pacote django-rest-framework-simplejwt. Ele permite que os utilizadors se autentiquem por tokens JWT, gerados quando um utilizador faz login e enviados para o cliente. O cliente deve enviar o token em todas as requisições subsequentes para acessar os recursos protegidos. O token expira após um período configurável e o utilizador precisará fazer login novamente para obter um novo token. Isso garante que apenas os utilizadors autorizados tenham acesso aos recursos da aplicação.
 
 
-Para a implementação da autenticação no lado do Django foram criados os endpoints de login e registro na API RESTful do Django para permitir que os usuários façam login e criem novas contas, e ainda de logout para apermitir que os utilizadores terminem a sessão.
+Para a implementação da autenticação no lado do Django foram criados os endpoints de login e registo na API RESTful do Django para permitir que os utilizadors façam login e criem contas, e ainda de logout para apermitir que os utilizadores terminem a sessão.
 
 [ver ficheiro](./backend/core/views/auth.py)
 ```py 
@@ -507,7 +507,7 @@ def login(request):
 
 ```
 
-Para implementar a autenticação no lado do Angular, criou-se um serviço de autenticação para gerenciar o login e o logout do usuário. Esse serviço deve fazer chamadas HTTP para os endpoints de login e logout da API RESTful do Django e armazenar o token JWT recebido na resposta.
+Para implementar a autenticação no lado do Angular, criou-se um serviço de autenticação para gerir o login e o logout do utilizador. Esse serviço deve fazer chamadas HTTP para os endpoints de login e logout da API RESTful do Django e armazenar o token JWT recebido na resposta.
 
 [ver ficheiro](./frontend/src/app/services/auth.service.ts)
 ```ts
