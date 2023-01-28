@@ -20,7 +20,22 @@ from django.conf.urls.static import static
 from django.conf.urls import include
 from rest_framework import routers
 from core.views.auth import login, register_author, register_user
+from core.views.genre import GenreViewSet
+from core.views.publisher import PublisherViewSet
+from core.views.author import AuthorViewSet
+from core.views.book import BookViewSet
+from core.views.user import UserViewSet
+from core.views.comment import CommentViewSet
+from core.views.rating import RatingViewSet
 
+router = routers.DefaultRouter()
+router.register(r'genre', GenreViewSet)
+router.register(r'publisher', PublisherViewSet)
+router.register(r'author', AuthorViewSet)
+router.register(r'book', BookViewSet)
+router.register(r'user', UserViewSet)
+router.register(r'comment', CommentViewSet)
+router.register(r'rating', RatingViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +44,7 @@ urlpatterns = [
     path('api/login/', login),
     path("api/user/register/", register_user),
     path("api/author/register/", register_author), 
+    path('api/', include(router.urls)),
 
 ]
 

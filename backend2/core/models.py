@@ -55,7 +55,7 @@ class Book(models.Model):
     language = models.CharField(max_length=100, choices=Language.choices)
     isbn = models.CharField(max_length=13)
     description = models.TextField()
-    image = models.ImageField(upload_to='books', blank=True, null=True, default='books/default.jpg')
+    image = models.ImageField(upload_to='books', blank=True, null=True, default='default.jpg')
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     genres = models.ManyToManyField(Genre, related_name='genres', blank=True)
@@ -73,15 +73,13 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     birth_date = models.DateField(null=True, blank=True)
     description = models.TextField(max_length=500, default='', blank=True, null=True)
-    image = models.ImageField(upload_to='users', blank=True, null=True, default='users/default.jpg')
-    fav_blooks = models.ManyToManyField(Book, db_table="app_user_fav_blooks")
-    fav_authors = models.ManyToManyField(Author, db_table= "app_user_fav_authors")
-    fav_publishers =  models.ManyToManyField(Publisher, db_table= "app_user_fav_publishers")
+    image = models.ImageField(upload_to='users', blank=True, null=True, default='default.jpg')
+    fav_blooks = models.ManyToManyField(Book, db_table="app_user_fav_blooks", blank=True)
+    fav_authors = models.ManyToManyField(Author, db_table= "app_user_fav_authors", blank=True)
+    fav_publishers =  models.ManyToManyField(Publisher, db_table= "app_user_fav_publishers", blank=True)
 
     def __str__(self):
         return self.username
-
-
 
 class Comment(models.Model):
     id = models.AutoField(primary_key=True)
