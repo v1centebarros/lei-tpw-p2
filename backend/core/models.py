@@ -1,4 +1,3 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -29,7 +28,13 @@ class Publisher(models.Model):
     def __str__(self):
         return self.name
 
-class Author(AbstractUser):
+class Author(models.Model):
+    name = models.CharField(max_length=40)
+    email = models.EmailField()
+    password = models.CharField(max_length=200) # hash + salt
+    nationality = models.CharField(max_length=200)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     birth_date = models.DateField(null=True, blank=True)
     death_date = models.DateField(null=True, blank=True)
     description = models.TextField(max_length=500, default='', blank=True, null=True)
@@ -49,7 +54,7 @@ class Book(models.Model):
     title = models.CharField(max_length=255)
     pages = models.IntegerField()
     publish_date = models.DateField()
-    language = models.CharField(choices=Language.choices)
+    language = models.CharField(max_length=100, choices=Language.choices)
     isbn = models.CharField(max_length=13)
     description = models.TextField()
     image = models.ImageField(upload_to='books', blank=True, null=True, default='books/default.jpg')
@@ -62,7 +67,12 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
-class User(AbstractUser):
+class User(models.Model):
+    username = models.CharField(max_length=255)
+    email = models.EmailField()
+    password = models.CharField(max_length=200) # hash + salt
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     birth_date = models.DateField(null=True, blank=True)
     description = models.TextField(max_length=500, default='', blank=True, null=True)
     image = models.ImageField(upload_to='users', blank=True, null=True, default='users/default.jpg')
@@ -73,13 +83,6 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-
-# def upload_location_users(instance, filename):
-#     return '/'.join(['users', filename])
-
-
-# def upload_location_books(instance, filename):
-#     return '/'.join(['books', filename])
 
 
 class Comment(models.Model):

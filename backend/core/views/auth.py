@@ -1,138 +1,159 @@
-from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework_simplejwt.tokens import AccessToken
-from ..models import CustomUser
-
-all_tokens = {}
-
-def get_username(request):
-    token = request.headers['Authorization'].split(' ')[1]
-    username = [key for key, value in all_tokens.items() if value == token]
-    if len(username) == 0:
-        return None
-
-    return username[0]
-
-
-def get_tokens_for_user(user):
-    global all_tokens
-
-    username = user.username
-    if username in all_tokens and all_tokens[username] is not None:
-        return all_tokens[username]
-
-    token = str(AccessToken.for_user(user))
-
-    all_tokens[username] = token
-    return token
-
-
-def check_token(request):
-
-    # Check headers
-    if "Authorization" not in request.headers or len(request.headers["Authorization"].split()) != 2:
-        return False
-
-    # Get user
-    username = get_username(request)
-    if not username:
-        return False
-
-    user = CustomUser.objects.get(username=username)
-    if not user:
-        return False
-
-    return True
+from ..models import User as MyUser, Token, Author
+from django.contrib.auth.hashers import make_password, check_password
+from ..serializers import UserSerializer, AuthorSerializer
+from django.contrib.auth.models import User as API_User
 
 
 @api_view(['POST'])
-def register(request):
-    if "email" not in request.data or "username" not in request.data \
-            or "password" not in request.data:
+def login(request):
+    try:
+        username = request.data['username'] 
+        password = request.data['password']
+
+        try : 
+            api_user = API_User.objects.get(username=username)
+            user = MyUser.objects.get(user = api_user)
+            if check_password(password, api_user.password):
+                print("user")
+                userSerializer = UserSerializer(user)
+                token = Token.objects.get(user=user)
+                response = userSerializer.data
+                response["token"] = token.key
+                response["type"] = "user"
+                return Response(response, status=status.HTTP_200_OK)
+            else:
+                return Response({
+                    "Message": "Invalid password",
+                    "Code": "HTTP_400_BAD_REQUEST",
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+        except MyUser.DoesNotExist:
+            pass
+
+        try :
+            api_user = Author.objects.get(username=username)
+            author = Author.objects.get(user = api_user)
+            if check_password(password, api_user.password):
+                print("author")
+                authorSerializer = AuthorSerializer(author)
+                token = Token.objects.get(user=author)
+                response = authorSerializer.data
+                response["token"] = token.key
+                response["type"] = "author"
+                return Response(response, status=status.HTTP_200_OK)
+            else:
+                return Response({
+                    "Message": "Invalid password",
+                    "Code": "HTTP_400_BAD_REQUEST",
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+        except Author.DoesNotExist:
+            return Response({
+                    "Message": "User does not exist",
+                    "Code": "HTTP_400_BAD_REQUEST",
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+    except KeyError:
         return Response({
             "Message": "Please provide all required fields",
             "Code": "HTTP_400_BAD_REQUEST",
         }, status=status.HTTP_400_BAD_REQUEST)
 
-    email = request.data['email']
-    username = request.data['username']
-    password = request.data['password']
-    first_name = request.data['first_name']
-    last_name = request.data['last_name']
-    birth_date = request.data['birth_date']
-    description = request.data['description']
-    image = request.data['image']
-
-
-    # Authenticate user
-    user = authenticate(username=username, password=password)
-
-    if not user:
-
-        # Save user
-        user = CustomUser.objects.create_user(username, email, password, first_name, last_name,birth_date,description,image)
-        user.set_password(password)
-        user.save()
-
-
-        token = get_tokens_for_user(user)
-
-        return Response({
-            "Message": "Register Successful",
-            "Code": "HTTP_200_OK",
-            "Authorization": "Bearer " + token
-        }, status=status.HTTP_200_OK)
-
-    return Response({
-        "Message": "User already exists",
-        "Code": "HTTP_400_BAD_REQUEST",
-    }, status=status.HTTP_400_BAD_REQUEST)
-
-
 @api_view(['POST'])
-def login(request):
-    username = request.data['username']
-    password = request.data['password']
+def register_user(request):
+    try:
+        new_username = request.data['username']
+        new_email = request.data['email']
 
-    user = authenticate(request, username=username, password=password)
-    
-    if user:
-        # Get token
-        token = get_tokens_for_user(user)
-        user_data = CustomUser.objects.all().filter(username=username).values()
+        try:
+            API_User.objects.get(username=new_username)
+            API_User.objects.get(email=new_email)
+            return Response({
+                "Message": "Username or Email already exists",
+                "Code": "HTTP_400_BAD_REQUEST",
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except API_User.DoesNotExist:
+            pass
 
+        new_password = make_password(request.data['password'])
+        userSerializer = UserSerializer(data=request.data)
+        if userSerializer.is_valid():
+            new_user = API_User.objects.create_user(
+                username=new_username,
+                email=new_email,
+                password=new_password,
+                first_name = request.data['first_name'],
+                last_name = request.data['last_name']
+            )    
+            new_user.save()
+            user = userSerializer.save()
+            user = MyUser.objects.get(user=new_user)
+            return Response(user, status=status.HTTP_201_CREATED)
+
+        else:
+            return Response({
+                "Message": "Invalid data",
+                "Code": "HTTP_400_BAD_REQUEST",
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    except KeyError:
         return Response({
-            "Message": "Login Successful",
-            "Code": "HTTP_200_OK",
-            "Authorization": "Bearer " + token,
-            "user_id": user_data.first()["id"],
-            "username": user_data.first()["username"]
-        }, status=status.HTTP_200_OK)
-
-    return Response({
-        "Message": "User doesn't exist",
-        "Code": "HTTP_400_BAD_REQUEST",
-    }, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['POST'])
-def logout(request):
-    global all_tokens
-
-    check_token(request)
-    if not check_token(request):
-        return Response({
-            "Message": "Invalid token",
+            "Message": "Please provide all required fields",
             "Code": "HTTP_400_BAD_REQUEST",
         }, status=status.HTTP_400_BAD_REQUEST)
 
-    username = get_username(request)
+# !NAO 
+@api_view(['POST'])
+def register_author(request):
+    try:
+        new_username = request.data['username']
+        new_email = request.data['email']
 
-    all_tokens[username] = None
+        try:
+            MyUser.objects.get(username=new_username)
+            MyUser.objects.get(email=new_email)
+            return Response({
+                "Message": "Username or Email already exists",
+                "Code": "HTTP_400_BAD_REQUEST",
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except MyUser.DoesNotExist:
+            pass
 
-    return Response({
-        "Message": "Logout Successful",
-        "Code": "HTTP_200_OK",
-    }, status=status.HTTP_200_OK)
+        try:
+            Author.objects.get(username=new_username)
+            Author.objects.get(email=new_email)
+            return Response({
+                "Message": "Username or Email already exists",
+                "Code": "HTTP_400_BAD_REQUEST",
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        except Author.DoesNotExist:
+            pass
+
+        new_password = request.data['password']
+        userSerializer = UserSerializer(data=request.data)
+        if UserSerializer.is_valid():
+            userSerializer.save()
+            user = Author.objects.get(username=new_username)
+            user.password = make_password(new_password)
+            user.save()
+            token = Token.objects.create(user=user)
+            response = userSerializer.data
+            response["token"] = token.key
+            response["type"] = "author"
+            return Response(response, status=status.HTTP_201_CREATED)
+
+        else:
+            return Response({
+                "Message": "Invalid data",
+                "Code": "HTTP_400_BAD_REQUEST",
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+    except KeyError:
+        return Response({
+            "Message": "Please provide all required fields",
+            "Code": "HTTP_400_BAD_REQUEST",
+        }, status=status.HTTP_400_BAD_REQUEST)

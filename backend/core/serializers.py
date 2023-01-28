@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from core.models import Book, Publisher, Comment, Rating, User, Genre, Author, Reply
+from core.models import Book, Publisher, Comment, Rating, User , Genre, Author, Reply
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,7 +22,7 @@ class ReplySerializer(serializers.ModelSerializer):
         model = Reply
         fields = '__all__'
 
-class User(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     class Meta:
         model = User
@@ -52,6 +52,7 @@ class AuthorSerializer(serializers.ModelSerializer):
             'username',
             'password',
             'email',
+            'nationality',
             'first_name',
             'last_name',
             'birth_date',
