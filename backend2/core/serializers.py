@@ -26,45 +26,14 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     class Meta:
         model = User
-        fields = [
-            'id',
-            'username',
-            'password',
-            'email',
-            'first_name',
-            'last_name',
-            'birth_date',
-            'description',
-            'image'
-        ]
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
+        fields = '__all__'
 
 class AuthorSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     class Meta:
         model = Author
-        fields = [
-            'id',
-            'username',
-            'password',
-            'email',
-            'nationality',
-            'first_name',
-            'last_name',
-            'birth_date',
-            'death_date',
-            'description',
-            'image'
-        ]
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = '__all__'
 
-    def create(self, validated_data):
-        user = Author.objects.create_user(**validated_data)
-        return user
 
 ### !!EXPLICAR A MARIANA
 class PublicCustomUserSerializer(serializers.Serializer):

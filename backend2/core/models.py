@@ -33,15 +33,13 @@ class Author(models.Model):
     email = models.EmailField()
     password = models.CharField(max_length=200) # hash + salt
     nationality = models.CharField(max_length=200)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
     birth_date = models.DateField(null=True, blank=True)
     death_date = models.DateField(null=True, blank=True)
     description = models.TextField(max_length=500, default='', blank=True, null=True)
     image = models.ImageField(upload_to='authors', blank=True, null=True, default='authors/default.jpg')
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.name}"
 
 class Book(models.Model):
 
