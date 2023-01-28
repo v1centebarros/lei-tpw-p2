@@ -1,10 +1,11 @@
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes
 from rest_framework.response import Response
-from ..models import User as MyUser, Token, Author
+from ..models import User as MyUser, Author, Token
 from django.contrib.auth.hashers import make_password, check_password
 from ..serializers import UserSerializer, AuthorSerializer
 from django.contrib.auth.models import User as API_User
+
 
 
 @api_view(['POST'])
@@ -15,13 +16,11 @@ def login(request):
 
         try:
             user = MyUser.objects.get(email=email)
-            api_user = API_User.objects.get(username=user.email)
+            api_user = API_User.objects.get(email=email)
             if check_password(password, user.password):
-                print("user")
                 serializer = UserSerializer(user)
-                token = Token.objects.get(user=api_user)
+                token, _ = Token.objects.get_or_create(user=api_user)
                 response = serializer.data
-                del response['password']
                 response['token'] = token.key
                 response["type"] = "user"
                 return Response(response, status=status.HTTP_200_OK)
@@ -31,12 +30,11 @@ def login(request):
 
         try:
             author = Author.objects.get(email=email)
-            api_user = API_User.objects.get(username=author.email)
+            api_user = API_User.objects.get(email=email)
             if check_password(password, author.password):
                 serializer = AuthorSerializer(author)
-                token = Token.objects.get(user=api_user)
+                token, _ = Token.objects.get_or_create(user=api_user)
                 response = serializer.data
-                del response['password']
                 response['token'] = token.key
                 response["type"] = "company"
                 return Response(response, status=status.HTTP_200_OK)
@@ -72,7 +70,7 @@ def register_user(request):
             try:
                 api_user = API_User.objects.get(email=user.email)
             except API_User.DoesNotExist:
-                api_user = API_User.objects.create_user(email=user.email, password=user.password)
+                api_user = API_User.objects.create_user(email=user.email, password=user.password, username = user.username)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:
@@ -81,7 +79,6 @@ def register_user(request):
 
 @api_view(['POST'])
 def register_author(request):
-    print(request.data["email"])
     try:
         email_ = request.data['email']
 
@@ -102,9 +99,9 @@ def register_author(request):
         if serializer.is_valid():
             author = serializer.save()
             try:
-                api_user = API_User.objects.get(username=author.email)
+                api_user = API_User.objects.get(email=author.email)
             except API_User.DoesNotExist:
-                api_user = API_User.objects.create_user(username=author.email, password=author.password)
+                api_user = API_User.objects.create_user(email=author.email, password=author.password, username=author.name)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Exception as e:

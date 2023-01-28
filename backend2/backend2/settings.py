@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "core",
     'rest_framework_simplejwt',
+    "rest_framework.authtoken",
     'django_filters',
 ]
 
@@ -134,7 +135,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        'rest_framework.authentication.TokenAuthentication',
 
     ],
 }
