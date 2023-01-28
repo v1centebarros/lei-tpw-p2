@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { Publisher } from 'src/app/models/publisher.model';
-import { Language } from 'src/app/models/language.model';
 import { PublisherService } from 'src/app/services/publisher.service';
 import { BookService } from 'src/app/services/book.service';
 import { Session } from 'src/app/models/session.model';
@@ -14,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AddBookComponent {
   publishers: Publisher[];
-  languages: Language[];
+  languages: String[];
   session!: Session | null;
 
   form: FormGroup;
@@ -39,13 +38,7 @@ export class AddBookComponent {
   }
 
   ngOnInit() {
-    this.getLanguages();
     this.getPublishers();
-  }
-
-  getLanguages(): void {
-    this.bookService.getAvailableLanguages()
-      .subscribe(languages => this.languages = languages);
   }
 
   getPublishers(): void {

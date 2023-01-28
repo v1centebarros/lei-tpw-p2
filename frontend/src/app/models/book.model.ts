@@ -1,15 +1,15 @@
-import { User } from './user.model';
-import { Publisher } from './publisher.model';
-
 export class Book {
   id: number;
-  name: string;
+  title: string;
   pages: number;
-  publish_date: Date;
-  author_info: User;
+  publish_date: string;
   language: string;
-  publisher: Publisher;
-  isbn: string;
+  isbn: number;
   description: string;
   image: string;
+  avg_rating: number;
+  num_ratings: number;
+  author: number;
+  publisher: number;
+  genres: string[];
 }

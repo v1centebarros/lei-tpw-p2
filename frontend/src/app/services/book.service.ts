@@ -4,12 +4,11 @@ import {Observable} from "rxjs";
 import {Book} from "../models/book.model";
 import { User } from '../models/user.model';
 import { Year } from '../models/year.model';
-import { Language } from '../models/language.model';
 import { Search } from '../models/search.model';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 }
 
 
@@ -17,11 +16,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class BookService {
-  private baseUrl = 'http://localhost:8000/';
+  private baseUrl = 'http://localhost:8000/api/';
   constructor(private http: HttpClient) { }
 
   getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.baseUrl + 'books/');
+    return this.http.get<Book[]>(this.baseUrl + 'books', httpOptions);
   }
 
   getBook(id: number): Observable<Book> {
@@ -52,12 +51,8 @@ export class BookService {
     return this.http.get<Book[]>(this.baseUrl + 'books/', {params: params});
   }
 
-  getAvailableLanguages(): Observable<Language[]> {
-    return this.http.get<Language[]>(this.baseUrl + 'books/get_available_languages/');
-  }
-
   getAvailableYears(): Observable<Year[]> {
-    return this.http.get<Year[]>(this.baseUrl + 'books/get_available_years/');
+    return this.http.get<Year[]>(this.baseUrl + 'books/years/');
   }
 
   addBook(name: String, Pages: Number, publish_date: String, Language: String, Author: Number, Publisher: String, Isbn: Number, Description: String): Observable<Book> {

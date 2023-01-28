@@ -3,7 +3,6 @@ import {PublisherService} from "../../../services/publisher.service";
 import {Publisher} from "../../../models/publisher.model";
 import {BookService} from "../../../services/book.service";
 import { Year } from '../../../models/year.model';
-import { Language } from '../../../models/language.model';
 import { Search } from '../../../models/search.model';
 import { OutletContext } from '@angular/router';
 
@@ -16,7 +15,7 @@ export class SearchFiltersContainersComponent implements OnInit {
   @Output() searchChanged = new EventEmitter<Search>();
   years: Year[] = [];
   ratings: number[] = [1, 2, 3, 4, 5];
-  languages: Language[] = [];
+  languages: string[] = ['English', 'Spanish', 'Portuguese'];
   query: string;
   avg_rating: number;
   year: number;
@@ -39,7 +38,6 @@ export class SearchFiltersContainersComponent implements OnInit {
   ngOnInit() {
     this.getPublishers();
     this.getBooksYearsAvailable();
-    this.getBookLanguagesAvailable();
   }
 
   getPublishers(): void {
@@ -48,10 +46,6 @@ export class SearchFiltersContainersComponent implements OnInit {
 
   getBooksYearsAvailable(): void {
     this.bookService.getAvailableYears().subscribe(years => this.years = years);
-  }
-
-  getBookLanguagesAvailable(): void {
-    this.bookService.getAvailableLanguages().subscribe(languages => this.languages = languages);
   }
 
   onSearchChanged(): void {
