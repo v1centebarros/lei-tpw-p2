@@ -13,13 +13,13 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: BaseComponent },
   { path: 'book/:id', component: BookDetailsComponent },
-  {path: 'addbook', component:AddBookComponent },
+  { path: 'addbook', component:AddBookComponent },
   { path: 'authors', component: AuthorsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'publisher/:id', component: PublisherComponent },
-  {path:'signup',component:SignupComponent},
+  { path:'signup',component:SignupComponent},
   { path: '**', redirectTo: 'home' }
 ];
 
