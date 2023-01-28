@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "core",
     'rest_framework_simplejwt',
     'django_filters',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -127,7 +128,14 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL="/media/"
 
+STATICFILES_DIRS = [
+    
+]
+
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
 
@@ -149,3 +157,5 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
