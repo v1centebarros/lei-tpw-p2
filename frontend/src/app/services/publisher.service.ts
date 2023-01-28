@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Publisher} from "../models/publisher.model";
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+}
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +16,7 @@ export class PublisherService {
   constructor(private http: HttpClient) { }
 
   getPublishers(): Observable<Publisher[]> {
-    return this.http.get<Publisher[]>(this.baseUrl + 'publishers');
+    return this.http.get<Publisher[]>(this.baseUrl + 'publishers/', httpOptions);
   }
 
 }

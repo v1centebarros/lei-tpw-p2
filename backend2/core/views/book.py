@@ -11,6 +11,5 @@ class BookViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'])
     def years(self, request):
         publish_date = Book.objects.values('publish_date').distinct()
-        years = [date['publish_date'].year for date in publish_date]
+        years = list(set([str(date['publish_date'].year) for date in publish_date if date['publish_date']]))
         return Response(years)
-        

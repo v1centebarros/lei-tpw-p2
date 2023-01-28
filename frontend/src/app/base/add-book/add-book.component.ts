@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AddBookComponent {
   publishers: Publisher[];
-  languages: String[];
+  languages: String[] = ['English', 'Spanish', 'Portuguese'];
   session!: Session | null;
 
   form: FormGroup;
@@ -24,17 +24,24 @@ export class AddBookComponent {
     private router: Router,
   ) {
     this.form = new FormGroup({
-      'name': new FormControl('', [Validators.required]),
-      'pages': new FormControl('', [Validators.required,
-        Validators.pattern('^[0-9]*$')]),
-      'publishDate': new FormControl('', [Validators.required]),
-      'language': new FormControl('', [Validators.required]),
-      'publisher': new FormControl('', [Validators.required]),
-      'isbn': new FormControl('', [Validators.required]),
-      'description': new FormControl('', [Validators.required]),
+      title: new FormControl('', [Validators.required]),
+      pages: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
+      publishDate: new FormControl('', [Validators.required]),
+      language: new FormControl('', [Validators.required]),
+      publisher: new FormControl('', [Validators.required]),
+      isbn: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      image: new FormControl(null),
     }),
     this.session = Session.getCurrentSession();
 
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.form.get('image')?.setValue(file);
+    }
   }
 
   ngOnInit() {
@@ -47,20 +54,24 @@ export class AddBookComponent {
   }
 
   onSubmit(): void {
-    const form_data = this.form.value;
-
-    this.bookService.addBook(
-      form_data.name,
-      form_data.pages,
-      form_data.publishDate,
-      form_data.language,
-      this.session?.get_user_id() as number,
-      form_data.publisher,
-      form_data.isbn,
-      form_data.description,
-    ).subscribe();
-
-    this.router.navigate(['/profile']);
+    if (this.form.valid) {
+      const formData = new FormData();
+      formData.append('title', this.form.value.title);
+      formData.append('pages', this.form.value.pages);
+      formData.append('publish_date', this.form.value.publishDate);
+      formData.append('language', this.form.value.language);
+      formData.append('publisher', this.form.value.publisher);
+      formData.append('isbn', this.form.value.isbn);
+      formData.append('description', this.form.value.description);
+      formData.append('image', this.form.get('image')?.value);
+      formData.append('author', '1');
+      
+      this.bookService.addBook(formData).subscribe(
+        (response: any) => {
+          console.log(response);
+        }
+      );
+    }
 
   }
 

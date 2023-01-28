@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {ConnectableObservable, Observable} from "rxjs";
 import {Book} from "../models/book.model";
 import { User } from '../models/user.model';
-import { Year } from '../models/year.model';
 import { Search } from '../models/search.model';
 
 
@@ -20,7 +19,7 @@ export class BookService {
   constructor(private http: HttpClient) { }
 
   getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.baseUrl + 'books', httpOptions);
+    return this.http.get<Book[]>(this.baseUrl + 'books/', httpOptions);
   }
 
   getBook(id: number): Observable<Book> {
@@ -51,23 +50,12 @@ export class BookService {
     return this.http.get<Book[]>(this.baseUrl + 'books/', {params: params});
   }
 
-  getAvailableYears(): Observable<Year[]> {
-    return this.http.get<Year[]>(this.baseUrl + 'books/years/');
+  getAvailableYears(): Observable<string[]> {
+    return this.http.get<string[]>(this.baseUrl + 'books/years/');
   }
 
-  addBook(name: String, Pages: Number, publish_date: String, Language: String, Author: Number, Publisher: String, Isbn: Number, Description: String): Observable<Book> {
-
-    return this.http.post<Book>(this.baseUrl + 'books/', {
-      name: name,
-      pages: Pages,
-      publish_date: publish_date,
-      language: Language,
-      author: Author,
-      publisher: Publisher,
-      isbn: Isbn,
-      description: Description
-    }, httpOptions);
-
+  addBook(book: any): Observable<any> {
+    return this.http.post(this.baseUrl + 'books/', book);
   }
 
 }

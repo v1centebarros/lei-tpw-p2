@@ -5,18 +5,18 @@
   >
     <div class="form-control">
       <label class="label">
-        <span class="label-text">Name</span>
+        <span class="label-text">Title</span>
       </label>
       <input
         type="text"
-        placeholder="Name"
+        placeholder="Title"
         class="input input-bordered"
-        name="name"
-        formControlName="name"
+        name="title"
+        formControlName="title"
 
       />
-      <div class="text-error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
-        <div *ngIf="form.get('name')?.errors?.['required']">Name is required</div>
+      <div class="text-error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+        <div *ngIf="form.get('title')?.errors?.['required']">Name is required</div>
       </div>
 
 
@@ -51,13 +51,14 @@
       <label class="label">
         <span class="label-text">Language</span>
       </label>
-      <input
-        type="text"
-        placeholder="Language"
+      <select
         class="input input-bordered"
         name="language"
         formControlName="language"
-      />
+        >
+        <option selected value="">Language</option>
+        <option *ngFor="let language of languages" value={{language}}>{{language}}</option>
+      </select>
       <div class="text-error" *ngIf="form.get('language')?.touched && form.get('language')?.invalid">
         <div *ngIf="form.get('language')?.errors?.['required']">Language is required</div>
       </div>
@@ -71,7 +72,8 @@
         name="publisher"
         formControlName="publisher"
         >
-        <option *ngFor="let publisher of publishers" value={{publisher.name}}>{{publisher.name}}</option>
+        <option selected value="">Publisher</option>
+        <option *ngFor="let publisher of publishers" value={{publisher.id}}>{{publisher.name}}</option>
       </select>
       <div class="text-error" *ngIf="form.get('publisher')?.touched && form.get('publisher')?.invalid">
         <div *ngIf="form.get('publisher')?.errors?.['required']">Publisher is required</div>
@@ -92,6 +94,12 @@
       <div class="text-error" *ngIf="form.get('isbn')?.touched && form.get('isbn')?.invalid">
         <div *ngIf="form.get('isbn')?.errors?.['required']">Publish Date is required</div>
       </div>
+
+
+      <label class="label">
+        <span class="label-text">Book Cover</span>
+      </label>
+      <input (change)="onFileChange($event)" type="file" class="input input-bordered" name="image"/>
 
 
       <label class="label">

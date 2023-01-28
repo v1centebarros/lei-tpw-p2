@@ -2,9 +2,7 @@ import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {PublisherService} from "../../../services/publisher.service";
 import {Publisher} from "../../../models/publisher.model";
 import {BookService} from "../../../services/book.service";
-import { Year } from '../../../models/year.model';
 import { Search } from '../../../models/search.model';
-import { OutletContext } from '@angular/router';
 
 @Component({
   selector: 'app-search-filters-containers',
@@ -13,9 +11,10 @@ import { OutletContext } from '@angular/router';
 })
 export class SearchFiltersContainersComponent implements OnInit {
   @Output() searchChanged = new EventEmitter<Search>();
-  years: Year[] = [];
+  years: string[] = [];
   ratings: number[] = [1, 2, 3, 4, 5];
   languages: string[] = ['English', 'Spanish', 'Portuguese'];
+  publishers: Publisher[] = [];
   query: string;
   avg_rating: number;
   year: number;
@@ -23,7 +22,6 @@ export class SearchFiltersContainersComponent implements OnInit {
   language: string;
 
 
-  publishers: Publisher[] = [];
   constructor(
     private publisherService: PublisherService,
     private bookService: BookService
