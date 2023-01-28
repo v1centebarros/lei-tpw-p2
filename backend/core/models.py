@@ -31,6 +31,7 @@ class Publisher(models.Model):
 
 class Author(AbstractUser):
     birth_date = models.DateField(null=True, blank=True)
+    death_date = models.DateField(null=True, blank=True)
     description = models.TextField(max_length=500, default='', blank=True, null=True)
     image = models.ImageField(upload_to='authors', blank=True, null=True, default='authors/default.jpg')
 

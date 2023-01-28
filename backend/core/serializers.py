@@ -1,13 +1,31 @@
 
 from rest_framework import serializers
-from django.contrib.auth.models import User
-from .models import Book, Publisher, Review, Rating, CustomUser, Genre
+from core.models import Book, Publisher, Comment, Rating, User, Genre, Author, Reply
 
+class GenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = '__all__'
 
-class CustomUserSerializer(serializers.ModelSerializer):
+class PublisherSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Publisher
+        fields = '__all__'
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'
+
+class ReplySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reply
+        fields = '__all__'
+
+class User(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     class Meta:
-        model = CustomUser
+        model = User
         fields = [
             'id',
             'username',
@@ -17,16 +35,37 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'last_name',
             'birth_date',
             'description',
-            'image',
-            'password',
-            'avg_rating'
+            'image'
         ]
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        user = CustomUser.objects.create_user(**validated_data)
+        user = User.objects.create_user(**validated_data)
         return user
 
+class AuthorSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+    class Meta:
+        model = Author
+        fields = [
+            'id',
+            'username',
+            'password',
+            'email',
+            'first_name',
+            'last_name',
+            'birth_date',
+            'death_date',
+            'description',
+            'image'
+        ]
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = Author.objects.create_user(**validated_data)
+        return user
+
+### !!EXPLICAR A MARIANA
 class PublicCustomUserSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     username = serializers.CharField()
@@ -38,31 +77,18 @@ class PublicCustomUserSerializer(serializers.Serializer):
     image = serializers.ImageField()
     description = serializers.CharField()
 
-
-class PublisherSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Publisher
-        fields = [
-            'id',
-            'name',
-            'address',
-            'city',
-            'country',
-            'website',
-        ]
-
 class PublicPublisherSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
+    email = serializers.EmailField()
     address = serializers.CharField()
     city = serializers.CharField()
     country = serializers.CharField()
     website = serializers.URLField()
 
-
 class BookSerializer(serializers.ModelSerializer):
     publisher = serializers.SlugRelatedField(queryset=Publisher.objects.all(), slug_field='name')
-    author = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all(), write_only=True)
+    author = serializers.PrimaryKeyRelatedField(queryset=Author.objects.all(), write_only=True)
     author_info = PublicCustomUserSerializer(source='author', read_only=True)
     avg_rating = serializers.FloatField(read_only=True)
     image = serializers.ImageField(read_only=True)
@@ -83,7 +109,6 @@ class BookSerializer(serializers.ModelSerializer):
             'avg_rating'
         ]
 
-
 class PublicBookSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
@@ -96,36 +121,16 @@ class PublicBookSerializer(serializers.Serializer):
     image = serializers.ImageField(use_url=True)
     author = PublicCustomUserSerializer()
 
-
-class ReviewSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all(), write_only=True)
-    user_info = PublicCustomUserSerializer(source='user', read_only=True)
-    book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all(), write_only=True)
-    book_info = PublicBookSerializer(source='book', read_only=True)
-    date = serializers.DateTimeField(format="%d/%m/%Y %H:%M:%S")
-    class Meta:
-        model = Review
-        fields = [
-            'id',
-            'book',
-            'book_info',
-            'user',
-            'user_info',
-            'review',
-            'date',
-        ]
-
-
-class PublicReviewSerializer(serializers.Serializer):
+class PublicCommentSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all())
     user = PublicCustomUserSerializer()
-    review = serializers.CharField()
-    date = serializers.DateTimeField(format="%d/%m/%Y %H:%M:%S")
+    comment = serializers.CharField()
+    time = serializers.TimeField()
 
 
 class RatingSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all(), write_only=True)
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), write_only=True)
     user_info = PublicCustomUserSerializer(source='user', read_only=True)
     book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all(), write_only=True)
     book_info = PublicBookSerializer(source='book', read_only=True)
@@ -138,14 +143,4 @@ class RatingSerializer(serializers.ModelSerializer):
             'user',
             'user_info',
             'rating',
-        ]
-
-
-
-class GenreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Genre
-        fields = [
-            'id',
-            'name',
         ]
