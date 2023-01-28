@@ -32,7 +32,16 @@ class AuthorSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     class Meta:
         model = Author
-        fields = '__all__'
+        fields = [
+            'id',
+            'name',
+            'email',
+            'password',
+            'nationality',
+            'birth_date',
+            'description',
+            'image',
+        ]
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:

@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from ..serializers import UserSerializer, AuthorSerializer
 from django.contrib.auth.models import User as API_User
 
-
+# !!TODO ALERAR ERROS E DADOS DE RESPOSTA
 
 @api_view(['POST'])
 def login(request):
