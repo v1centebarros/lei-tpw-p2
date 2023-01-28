@@ -64,7 +64,7 @@ export class AddBookComponent {
       formData.append('isbn', this.form.value.isbn);
       formData.append('description', this.form.value.description);
       formData.append('image', this.form.get('image')?.value);
-      formData.append('author', '1');
+      formData.append('author', '1'); //Change this to the current user
       
       this.bookService.addBook(formData).subscribe(
         (response: any) => {

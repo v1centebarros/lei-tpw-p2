@@ -31,7 +31,7 @@ from core.views.rating import RatingViewSet
 router = routers.DefaultRouter()
 router.register(r'genre', GenreViewSet)
 router.register(r'publishers', PublisherViewSet)
-router.register(r'author', AuthorViewSet)
+router.register(r'authors', AuthorViewSet)
 router.register(r'books', BookViewSet)
 router.register(r'user', UserViewSet)
 router.register(r'comment', CommentViewSet)

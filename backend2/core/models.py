@@ -37,6 +37,7 @@ class Author(models.Model):
     death_date = models.DateField(null=True, blank=True)
     description = models.TextField(max_length=500, default='', blank=True, null=True)
     image = models.ImageField(upload_to='authors', blank=True, null=True, default='authors/default.jpg')
+    avg_rating = models.FloatField(default=0.0, blank=True, null=True)
 
     def __str__(self):
         return f"{self.name}"
