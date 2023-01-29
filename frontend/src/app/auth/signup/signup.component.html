@@ -108,7 +108,7 @@
                 formControlName="description"></textarea>
 
       <div class="text-error" *ngIf="form.get('description')?.touched && form.get('description')?.invalid">
-        <div *ngIf="form.get('description')?.errors?.['required']">Birth Date is required</div>
+        <div *ngIf="form.get('description')?.errors?.['required']">Description is required</div>
       </div>
 
 
@@ -116,6 +116,10 @@
         <span class="label-text">Image</span>
       </label>
       <input (change)="onFileChange($event)" type="file" class="input input-bordered" name="image"/>
+
+      <div *ngIf="registerFail" style="text-align: center;">
+        <p style="color: rgb(187, 0, 0)">Este email já está a ser utilizado</p>
+      </div>
 
       <input type="submit" value="Register" class="btn btn-primary mt-6" [disabled]="form.invalid"/>
     </div>

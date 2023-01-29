@@ -4,10 +4,10 @@ import { BaseComponent } from './base/base/base.component';
 import {AuthorsComponent} from "./authors/authors.component";
 import {BookDetailsComponent} from "./book-details/book-details.component";
 import {LoginComponent} from "./auth/login/login.component";
-import {SignupComponent} from "./auth/signup/signup.component";
 import {AddBookComponent} from "./base/add-book/add-book.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {PublisherComponent} from "./publisher/publisher.component";
+import {SignupComponent} from "./auth/signup/signup.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
