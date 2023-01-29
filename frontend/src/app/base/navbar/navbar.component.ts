@@ -1,45 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Session } from '../../models/session.model';
 import {Router} from "@angular/router";
 import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
+export class NavbarComponent  implements OnInit{
 
-    session!: Session | null;
-    userProfile!: User;
+  userProfile!: User;
+  loggedIn: boolean;
 
-    constructor(private router: Router,private usersService: UserService) {
-        this.session = Session.getCurrentSession();
-        this.userProfile = User.getNullUser();
+  constructor(
+    private router: Router, 
+    private authenticationService: AuthService 
+    ) {}
+
+  ngOnInit(): void {
+    this.loggedIn = this.authenticationService.loggedIn();
+    if (this.loggedIn) {
+      console.log("Logged in");
     }
-
-    ngOnInit(): void {
-        if (this.session === null) return;
-
-        let user_id = this.session?._user_id;
-        //console.log(user_id)
-
-        this.usersService.getUser(user_id).subscribe(
-            (user: User) => {
-                this.userProfile = user;
-            }
-        );
-
-    }
-
-  // Check if current user is logged in
-  loggedIn() {
-    return (Session.getCurrentSession() !== null);
   }
 
-
   logout() {
-    localStorage.removeItem('user');
+    sessionStorage.clear();
+    this.authenticationService.logout();
+    this.loggedIn = false;
+    this.router.navigate(['/login']);
   }
 }

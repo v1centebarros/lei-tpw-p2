@@ -6,11 +6,11 @@
     <ul class="menu menu-horizontal px-1">
       <li><a href="/authors">Authors</a></li>
       <li><a>Stats</a></li>
-      <li *ngIf="!loggedIn()" ><a href="/login"  >login</a></li>
+      <li *ngIf="!loggedIn" ><a href="/login" >login</a></li>
     </ul>
 
 
-    <div class="dropdown dropdown-end" *ngIf="loggedIn()">
+    <div class="dropdown dropdown-end" *ngIf="loggedIn">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
           <img src={{userProfile.image}}  alt=""/>
@@ -22,8 +22,5 @@
         <li><a routerLink="/login"  (click)="logout()">Logout</a></li>
       </ul>
     </div>
-
-    
-
   </div>
 </div>
