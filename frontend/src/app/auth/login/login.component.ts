@@ -52,13 +52,18 @@ export class LoginComponent  implements OnInit {
             sessionStorage.setItem('email', response.email);
             sessionStorage.setItem('type', response.type);
             sessionStorage.setItem('token', response.token);
+            sessionStorage.setItem('description', response.description);
+            sessionStorage.setItem('birth_date', response.birth_date);
+            sessionStorage.setItem('image', response.image)
             this.authService.setToken(response.token);
 
             if (response.type == 'user') {
               sessionStorage.setItem('first_name', response.first_name);
               sessionStorage.setItem('last_name', response.last_name);
+
             } else{
               sessionStorage.setItem('name', response.name);
+              sessionStorage.setItem('nationality', response.nationality)
             }
             this.loginFail = false;
             this.router.navigate(['/']);

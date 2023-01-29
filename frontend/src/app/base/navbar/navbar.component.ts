@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class NavbarComponent  implements OnInit{
 
-  userProfile!: User;
+  user!: any;
   loggedIn: boolean;
 
   constructor(
@@ -21,6 +21,8 @@ export class NavbarComponent  implements OnInit{
   ngOnInit(): void {
     console.log(this.authenticationService.loggedIn())
     this.loggedIn = this.authenticationService.loggedIn();
+    this.user = this.authenticationService.getUserInfo();
+    this.getImage()
   }
 
   logout() {
@@ -29,5 +31,14 @@ export class NavbarComponent  implements OnInit{
     this.authenticationService.logout();
     this.loggedIn = this.authenticationService.loggedIn();
     this.router.navigate(['/login']);
+  }
+
+  getImage(){
+    console.log("get image")
+    if(this.user.image != null){
+      this.user.image = "http://localhost:8000/" + this.user.image;
+    }
+    else
+      this.user.image = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,4 +43,33 @@ export class AuthService {
         localStorage.removeItem('token');
     }
 
+    getUserInfo(){
+        let type = sessionStorage.getItem("type")
+
+        if (type == 'user') {
+            return{
+                id: sessionStorage.getItem("id"),
+                email: sessionStorage.getItem("email"),
+                first_name: sessionStorage.getItem("first_name"),
+                last_name: sessionStorage.getItem("last_name"),
+                type: sessionStorage.getItem("type"),
+                token: sessionStorage.getItem("token"),
+                description: sessionStorage.getItem("description"),
+                birth_date: sessionStorage.getItem("birth_date"),
+                image: sessionStorage.getItem("image"),
+            }
+        } else {
+            return {
+                id: sessionStorage.getItem("id"),
+                email: sessionStorage.getItem("email"),
+                name: sessionStorage.getItem("name"),
+                date_birth: sessionStorage.getItem("date_birth"),
+                type: sessionStorage.getItem("type"),
+                token: sessionStorage.getItem("token"),
+                description: sessionStorage.getItem("description"),
+                birth_date: sessionStorage.getItem("birth_date"),
+                image: sessionStorage.getItem("image")
+            }
+        }
+    }
 }
