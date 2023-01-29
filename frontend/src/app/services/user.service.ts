@@ -10,7 +10,7 @@ import { Review } from '../models/review.model';
 })
 export class UserService {
 
-  private baseUrl = 'http://localhost:8000/';
+  private baseUrl = 'http://localhost:8000/api/';
   constructor(private http: HttpClient) { }
 
   getUser(id: Number): Observable<User> {

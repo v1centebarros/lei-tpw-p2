@@ -4,8 +4,8 @@ import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Review } from '../models/review.model';
-import { Session } from '../models/session.model';
 import { Book } from '../models/book.model';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,38 +15,36 @@ import { Book } from '../models/book.model';
 export class ProfileComponent implements OnInit{
   user: User;
   user_id: number;
-  session!: Session | null;
   user_age: number;
   reviews: Review[];
   avg_rating: number;
   books: Book[];
+  image:any;
 
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private location: Location,
+    private authService: AuthService
+
   ) {
     this.user = User.getNullUser();
     this.user_age = 0;
     this.avg_rating = 0;
-    this.session = Session.getCurrentSession();
-
   }
 
   ngOnInit() {
-    if (this.session === null) return;
-
-    const url_id = +Number(this.route.snapshot.paramMap.get('id')!);
-    if ( url_id !== 0) {
-      this.user_id = url_id;
-    } else {
-      this.user_id = this.session.get_user_id();
+    if(!this.authService.loggedIn()){
+      window.location.href = '/login';
     }
 
+    this.user_id = +Number(this.authService.getUserInfo().id);
+
     this.getUser(this.user_id);
-    this.getUserReviews();
-    this.getUserBooks();
+    this.getImage()
+    // this.getUserReviews();
+    // this.getUserBooks();
   }
 
   getUser(id:number) {
@@ -72,6 +70,17 @@ export class ProfileComponent implements OnInit{
   getUserBooks() {
     this.userService.getBooksFromUser(this.user_id)
       .subscribe(books => this.books = books);
+  }
+
+  getImage(){
+    console.log("get image")
+    // let image = this.user.image
+    let image = null
+    if(image != null){
+      this.image = "http://localhost:8000/" + this.user.image;
+    }
+    else
+      this.image = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
   }
 
 }
