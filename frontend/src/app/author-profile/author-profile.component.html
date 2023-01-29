@@ -28,7 +28,7 @@
             <p class="font-light text-lg text-justify">{{author.description}}</p>
         </div>
     </div>
-    <div class="w-full flex bg-base-100 rounded-lg mt-4">
+    <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="author">
         <p class="text-3xl font-bold p-4">{{author.name}}'s Books</p>
     </div>
     <app-books-container [books]="books"></app-books-container>

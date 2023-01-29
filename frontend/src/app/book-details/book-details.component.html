@@ -18,8 +18,9 @@
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating >= 4 && book.avg_rating < 5"/>
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating === 5"/>
           </div>
-          <p class="text-xl font-bold mb-4" routerLink="/author/{{book.author}}">Author: <span
-              class="font-light text-lg">{{book.author_name}}</span></p>
+          <p class="text-xl font-bold mb-4" >Author: 
+            <a routerLink="/author/{{book.author}}" class="font-light text-lg underline">{{book.author_name}}</a>
+          </p>
           <p class="text-xl font-bold mb-4">Number of Pages <span class="font-light text-lg">{{book.pages}}</span></p>
           <p class="text-xl font-bold mb-4">Language <span class="font-light text-lg">{{book.language}}</span></p>
           <p class="text-xl font-bold mb-4">Publish Date: <span class="font-light text-lg">{{book.publish_date}}</span>
