@@ -33,13 +33,13 @@ export class BookService {
   getBooksWithFilters(search: Search): Observable<Book[]> {
     let params = new HttpParams();
     if (search.query) {
-      params = params.append('name__icontains', search.query);
+      params = params.append('title', search.query);
     }
     if (search.avg_rating) {
-      params = params.append('avg_rating__gte', search.avg_rating.toString());
+      params = params.append('rating', search.avg_rating.toString());
     }
-    if (search.year) {
-      params = params.append('publish_date_year', search.year.toString());
+    if (search.year != 0) {
+      params = params.append('year', search.year.toString());
     }
     if (search.publisher) {
       params = params.append('publisher', search.publisher);
