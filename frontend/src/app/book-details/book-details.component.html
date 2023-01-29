@@ -11,11 +11,12 @@
         <div class="flex-1">
           <p class="text-6xl font-bold mb-4">{{book.title}}</p>
           <div class="rating rating-lg mb-5">
-            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
-            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" checked />
-            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
-            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
-            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" />
+            <input type="radio" name="rating-9" class="rating-hidden" [checked]="book.avg_rating >= 0 && book.avg_rating < 1"/>
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating >= 1 && book.avg_rating < 2"/>
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating >= 2 && book.avg_rating < 3"/>
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating >= 3 && book.avg_rating < 4"/>
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating >= 4 && book.avg_rating < 5"/>
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating === 5"/>
           </div>
           <p class="text-xl font-bold mb-4" routerLink="/profile/{{book.author}}">Author: <span
               class="font-light text-lg">{{book.author_name}}</span></p>
