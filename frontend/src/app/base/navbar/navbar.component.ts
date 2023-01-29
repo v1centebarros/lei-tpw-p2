@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import { User } from 'src/app/models/user.model';
+
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -35,7 +35,9 @@ export class NavbarComponent  implements OnInit{
 
   getImage(){
     console.log("get image")
-    if(this.user.image != null){
+    // let image = this.user.image
+    let image = null
+    if(image != null){
       this.user.image = "http://localhost:8000/" + this.user.image;
     }
     else
