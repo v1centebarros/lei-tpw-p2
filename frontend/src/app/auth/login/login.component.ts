@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { lastValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,42 +11,59 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent  implements OnInit {
 
-  form: FormGroup;
+  loginForm: FormGroup;
+  loginFail: boolean = false;
 
   constructor( private authService: AuthService ) {
-    this.form = new FormGroup({
-      'username': new FormControl('', [Validators.required]),
-      'password': new FormControl('', [Validators.required])
+  }
+
+  ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required)
     });
   }
 
   onSubmit() {
-    // @ts-ignore
-    let username = this.form.get("username").value;
-    // @ts-ignore
-    let password = this.form.get("password").value;
+    sessionStorage.clear();
+    console.log(this.loginForm.value.email)
+    console.log(this.loginForm.value.password)
 
-    console.log(password)
+    let header = {
+      "email": this.loginForm.value.email,
+      "password": this.loginForm.value.password
+    }
+    
+  
 
-    this.authService.login(username, password).subscribe({
-      next: session =>{
-        localStorage.setItem('user', JSON.stringify(session));
+    if (this.loginForm.valid){
+      this.authService.authenticate(header).subscribe(
+        response => {
+          console.log(response)
+          if ('error' in response) {
+            // ! COLOCAR MENSAGES ERROR IGUAIS AO DO RESPONSE
+            console.log(response.error)
+            this.loginFail = true;
+          }
+          else {
+            sessionStorage.setItem('id', response.id);
+            sessionStorage.setItem('email', response.email);
+            sessionStorage.setItem('type', response.type);
+            sessionStorage.setItem('token', response.token);
 
-        setTimeout(() => {
-          window.location.replace("/home");
-      }, 1000);
-      
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
+            if (response.type == 'user') {
+              sessionStorage.setItem('first_name', response.first_name);
+              sessionStorage.setItem('last_name', response.last_name);
+            } else{
+              sessionStorage.setItem('name', response.name);
+            }
+            this.loginFail = false;
+            window.location.href = '';
 
-
-    this.form.reset();
-
+          }
+        });
+    }
   }
-
 }

@@ -1,13 +1,13 @@
 <div class="max-w-xl mx-auto mt-64 p-6 bg-base-100 rounded-xl shadow-xl" id="login-container">
   <h1 class="text-5xl font-bold mb-6 tracking-wider">Login</h1>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-control mb-4 space-y-4">
 
       <label class="input-group w-full input-group-lg">
-        <span class="w-1/4">Username</span>
-        <input type="text" name="username" class="w-3/4 input input-primary input-bordered input-lg"
-               placeholder="Username"
-               formControlName="username">
+        <span class="w-1/4">Email</span>
+        <input type="email" name="email" class="w-3/4 input input-primary input-bordered input-lg"
+               placeholder="email"
+               formControlName="email">
       </label>
 
 
@@ -17,9 +17,13 @@
                placeholder="Password" formControlName="password">
       </label>
 
+      <div *ngIf="loginFail" style="text-align: center;">
+        <p style="color: rgb(187, 0, 0)">Email ou password incorretas</p>
+      </div>
+
 
       <div class="mb-4">
-        <button class="btn btn-active btn-primary btn-wide w-full" type="submit" [disabled]="form.invalid">Submit
+        <button class="btn btn-active btn-primary btn-wide w-full" type="submit" [disabled]="loginForm.invalid">Submit
         </button>
       </div>
 

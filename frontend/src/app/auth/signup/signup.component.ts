@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +11,7 @@ export class SignupComponent implements OnInit{
 
     form: FormGroup;
 
-    constructor(private authService: AuthService,) {
+    constructor() {
       this.form = new FormGroup({
         'username': new FormControl('', [Validators.required]),
         'email': new FormControl('', [Validators.required, Validators.email]),
@@ -63,21 +62,6 @@ export class SignupComponent implements OnInit{
               alert("Passwords don't match");
               return;
           }
-              
-          this.authService.register( email,username, password, firstName, lastName, description, birthDate).subscribe({
-              next: items =>
-              {
-                  console.log("User registered");
-          
-                setTimeout(() => {
-                  window.location.replace("/login");
-              });
-
-              },
-              error: err => {
-                  console.log(err);
-              }
-          });
 
         }
     }
