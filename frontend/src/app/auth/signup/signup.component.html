@@ -117,9 +117,6 @@
       </label>
       <input type="file" class="file-input file-input-bordered file-input-primary" formControlName="image"/>
 
-      <div class="text-error" *ngIf="form.get('image')?.touched && form.get('image')?.invalid">
-        <div *ngIf="form.get('image')?.errors?.['required']">Birth Date is required</div>
-      </div>
       <input type="submit" value="Register" class="btn btn-primary mt-6" [disabled]="form.invalid"/>
     </div>
 

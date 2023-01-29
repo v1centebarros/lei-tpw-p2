@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./signup.component.css']
 })
 
-export class SignupComponent implements OnInit{
+export class SignupComponent{
 
     form: FormGroup;
 
@@ -22,11 +22,15 @@ export class SignupComponent implements OnInit{
         'firstName': new FormControl('', [Validators.required]),
         'lastName': new FormControl('', [Validators.required]),
         'description': new FormControl('', [Validators.required]),
-        'image': new FormControl('', [Validators.required]),
+        'image': new FormControl(null),
       });
     }
-
-    ngOnInit(): void {
+    
+    onFileChange(event: any) {
+      if (event.target.files.length > 0) {
+        const file = event.target.files[0];
+        this.form.get('image')?.setValue(file);
+      }
     }
 
     onSubmit() {
@@ -63,8 +67,18 @@ export class SignupComponent implements OnInit{
               alert("Passwords don't match");
               return;
           }
+
+          const formData = new FormData();
+          formData.append('username', username);
+          formData.append('email', email);
+          formData.append('password', password);
+          formData.append('birthDate', birthDate);
+          formData.append('firstName', firstName);
+          formData.append('lastName', lastName);
+          formData.append('description', description);
+          formData.append('image', image);
               
-          this.authService.register( email,username, password, firstName, lastName, description, birthDate).subscribe({
+          this.authService.register(formData).subscribe({
               next: items =>
               {
                   console.log("User registered");
