@@ -115,7 +115,7 @@
       <label class="label">
         <span class="label-text">Image</span>
       </label>
-      <input type="file" class="file-input file-input-bordered file-input-primary" formControlName="image"/>
+      <input (change)="onFileChange($event)" type="file" class="input input-bordered" name="image"/>
 
       <input type="submit" value="Register" class="btn btn-primary mt-6" [disabled]="form.invalid"/>
     </div>
