@@ -27,14 +27,19 @@ export class AuthService {
     }
 
     loggedIn(){
-        return !localStorage.getItem('token');
+        return !!localStorage.getItem('token');
     }
 
     getToken(){
         return localStorage.getItem('token');
     }
 
+    setToken(token:any){
+        localStorage.setItem('token',token);
+    }
+
     logout(){
         localStorage.removeItem('token');
     }
+
 }

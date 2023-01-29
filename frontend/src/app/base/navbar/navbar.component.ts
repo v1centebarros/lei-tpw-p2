@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Session } from '../../models/session.model';
 import {Router} from "@angular/router";
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -20,16 +19,15 @@ export class NavbarComponent  implements OnInit{
     ) {}
 
   ngOnInit(): void {
+    console.log(this.authenticationService.loggedIn())
     this.loggedIn = this.authenticationService.loggedIn();
-    if (this.loggedIn) {
-      console.log("Logged in");
-    }
   }
 
   logout() {
+    console.log("logout")
     sessionStorage.clear();
     this.authenticationService.logout();
-    this.loggedIn = false;
+    this.loggedIn = this.authenticationService.loggedIn();
     this.router.navigate(['/login']);
   }
 }

@@ -19,6 +19,13 @@ export class SignupAuthorComponent implements OnInit{
     private authService: AuthService,
     private router: Router
   ) {
+  }
+
+  ngOnInit(): void {
+    if (this.authService.loggedIn()) {
+      this.router.navigate(['/']);
+    }
+    
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -29,9 +36,6 @@ export class SignupAuthorComponent implements OnInit{
       description: new FormControl('', [Validators.required]),
       image: new FormControl(null)
     });
-  }
-
-  ngOnInit(): void {
   }
   
   onFileChange(event: any) {

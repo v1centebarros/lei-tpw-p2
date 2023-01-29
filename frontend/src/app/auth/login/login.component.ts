@@ -21,10 +21,8 @@ export class LoginComponent  implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.authService.loggedIn())
     if (this.authService.loggedIn()) {
       this.router.navigate(['/']);
-
     }
 
     this.loginForm = new FormGroup({
@@ -34,17 +32,12 @@ export class LoginComponent  implements OnInit {
   }
 
   onSubmit() {
-    sessionStorage.clear();
-    console.log(this.loginForm.value.email)
-    console.log(this.loginForm.value.password)
 
     let header = {
       "email": this.loginForm.value.email,
       "password": this.loginForm.value.password
     }
-    
   
-
     if (this.loginForm.valid){
       this.authService.authenticate(header).subscribe(
         response => {
@@ -59,6 +52,7 @@ export class LoginComponent  implements OnInit {
             sessionStorage.setItem('email', response.email);
             sessionStorage.setItem('type', response.type);
             sessionStorage.setItem('token', response.token);
+            this.authService.setToken(response.token);
 
             if (response.type == 'user') {
               sessionStorage.setItem('first_name', response.first_name);
@@ -67,7 +61,7 @@ export class LoginComponent  implements OnInit {
               sessionStorage.setItem('name', response.name);
             }
             this.loginFail = false;
-            window.location.href = '';
+            this.router.navigate(['/']);
 
           }
         });
