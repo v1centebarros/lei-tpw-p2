@@ -19,4 +19,8 @@ export class ReviewService {
     return this.http.post<Review>(this.baseUrl + 'reviews/', {book: id, text: userReview, user: user});
 
   }
+
+  getReviewByUser(id: number): Observable<Review[]> {
+    return this.http.get<Review[]>(this.baseUrl + 'reviews/?user=' + id);
+  }
 }

@@ -7,4 +7,4 @@ class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
     filter_backends = [django_filters.DjangoFilterBackend]
-    filterset_fields = ['book']
+    filterset_fields = ['book', 'user']

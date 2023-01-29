@@ -18,8 +18,9 @@
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating >= 4 && book.avg_rating < 5"/>
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating === 5"/>
           </div>
-          <p class="text-xl font-bold mb-4" routerLink="/profile/{{book.author}}">Author: <span
-              class="font-light text-lg">{{book.author_name}}</span></p>
+          <p class="text-xl font-bold mb-4" >Author: 
+            <a routerLink="/author/{{book.author}}" class="font-light text-lg underline">{{book.author_name}}</a>
+          </p>
           <p class="text-xl font-bold mb-4">Number of Pages <span class="font-light text-lg">{{book.pages}}</span></p>
           <p class="text-xl font-bold mb-4">Language <span class="font-light text-lg">{{book.language}}</span></p>
           <p class="text-xl font-bold mb-4">Publish Date: <span class="font-light text-lg">{{book.publish_date}}</span>
@@ -47,19 +48,37 @@
     <button class="btn btn-primary my-auto mr-3" (click)="submitReview()">Submit</button>
   </div>
 
-  <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews">
-    <div class="card-body flex flex-row">
+  <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngIf="myReview">
+    <p class="text-3xl font-bold my-auto">Your Review</p>
+    <div class="card-body flex flex-row" *ngIf="myReview.user == 1">
       <div class="avatar my-auto">
         <div class="mask mask-squircle w-16 h-16">
-          <img src="{{review.user_info.image}}" alt="" />
+          <img src="{{myReview.user_image}}" alt="" />
         </div>
       </div>
       <div class="my-auto">
-        <p class="font-bold">{{review.user_info.username}}</p>
-        <p>{{review.date}}</p>
+        <p class="font-bold">{{myReview.user_name}}</p>
+        <p>{{myReview.datetime}}</p>
       </div>
       <div class="my-auto">
-        <p>{{review.review}}</p>
+        <p>{{myReview.text}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews">
+    <div class="card-body flex flex-row" *ngIf="review.user != 0">
+      <div class="avatar my-auto">
+        <div class="mask mask-squircle w-16 h-16">
+          <img src="{{review.user_image}}" alt="" />
+        </div>
+      </div>
+      <div class="my-auto">
+        <p class="font-bold">{{review.user_name}}</p>
+        <p>{{review.datetime}}</p>
+      </div>
+      <div class="my-auto">
+        <p>{{review.text}}</p>
       </div>
     </div>
   </div>

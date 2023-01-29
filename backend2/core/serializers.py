@@ -13,6 +13,8 @@ class PublisherSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
+    user_name = serializers.CharField(source='user.username', read_only=True)
+    user_image = serializers.CharField(source='user.image', read_only=True)
     class Meta:
         model = Review
         fields = '__all__'
@@ -51,6 +53,7 @@ class AuthorSerializer(serializers.ModelSerializer):
                 'birth_date',
                 'description',
                 'image',
+                'avg_rating'
             ]
 
 

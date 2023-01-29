@@ -3,10 +3,10 @@ import { Book } from "./book.model";
 
 export class Review {
     id: number;
+    text: string;
+    datetime: string;
     user: number;
-    user_info: User;
     book: number;
-    book_info: Book;
-    review: string;
-    date: string;
+    user_name: string;
+    user_image: string;
 }

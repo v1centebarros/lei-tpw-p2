@@ -1,0 +1,35 @@
+<div class="flex flex-col space-y-4 m-4 h-screen xl:container xl:mx-auto">
+    <app-navbar></app-navbar>
+    <div class="w-full flex card bg-base-100 rounded-lg" *ngIf="author">
+        <div class="card-body">
+            <div class="flex flex-row">
+              <div class="mr-3">
+                <img src="{{author.image}}" alt="" class="rounded">
+              </div>
+              <div class="flex-1">
+                <p class="text-6xl font-bold mb-4">{{author.name}}</p>
+                <p class="text-xl font-bold mb-4">Birthday: 
+                  <span class="font-light text-lg">{{author.birth_date}}</span>
+                  <span class="font-extralight text-lg ml-1">({{get_age(author.birth_date)}} years)</span>
+                </p>
+                <p class="text-xl font-bold mb-4">Email: 
+                  <span class="font-light text-lg">{{author.email}}</span>
+                </p>
+                <p class="text-xl font-bold mb-4">Nationality: 
+                  <span class="font-light text-lg">{{author.nationality}}</span>
+                </p>
+                <!-- Mostrar só quando tem livros-->
+                <p class="text-xl font-bold mb-4">Average Rating: 
+                  <span class="font-light text-lg">{{author.avg_rating}}</span>
+                </p>
+              </div>
+            </div>
+            <p class="text-xl font-bold ">Description:</p>
+            <p class="font-light text-lg text-justify">{{author.description}}</p>
+        </div>
+    </div>
+    <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="author">
+        <p class="text-3xl font-bold p-4">{{author.name}}'s Books</p>
+    </div>
+    <app-books-container [books]="books"></app-books-container>
+</div>
