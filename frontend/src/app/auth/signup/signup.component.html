@@ -1,5 +1,5 @@
 <div class="max-w-xl mx-auto p-6 my-6 bg-base-100 rounded-xl shadow-xl" id="login-container">
-  <h1 class="text-5xl font-bold mb-6 tracking-wider">Sign Up</h1>
+  <h1 class="text-5xl font-bold mb-6 tracking-wider">Sign Up Reader</h1>
 
   <form
     [formGroup]="form"
@@ -112,6 +112,7 @@
       </div>
 
 
+      <!--IMAGE-->
       <label class="label">
         <span class="label-text">Image</span>
       </label>
@@ -121,12 +122,18 @@
         <p style="color: rgb(187, 0, 0)">Este email já está a ser utilizado</p>
       </div>
 
+      <!-- SUBMIT -->
       <input type="submit" value="Register" class="btn btn-primary mt-6" [disabled]="form.invalid"/>
     </div>
 
     <div class="text-center mt-5 space-x-2">
       <p class="text-base"> Already have an account? <a class="text-primary font-bold" routerLinkActive="active"
                                                         routerLink="/login">Login Page</a></p>
+    </div>
+
+    <div class="text-center mt-5 space-x-2">
+      <p class="text-base"> Are a Writer? <a class="text-primary font-bold" routerLinkActive="active"
+                                                        routerLink="/signupAuthor">Please SignUp here</a></p>
     </div>
   </form>
 </div>

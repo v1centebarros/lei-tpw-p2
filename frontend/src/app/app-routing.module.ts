@@ -8,6 +8,8 @@ import {AddBookComponent} from "./base/add-book/add-book.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {PublisherComponent} from "./publisher/publisher.component";
 import {SignupComponent} from "./auth/signup/signup.component";
+import {SignupAuthorComponent } from './auth/signup-author/signup-author.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,7 +21,8 @@ const routes: Routes = [
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'publisher/:id', component: PublisherComponent },
-  { path:'signup',component:SignupComponent},
+  { path:'signupReader',component:SignupComponent},
+  { path:'signupAuthor',component:SignupAuthorComponent},
   { path: '**', redirectTo: 'home' }
 ];
 

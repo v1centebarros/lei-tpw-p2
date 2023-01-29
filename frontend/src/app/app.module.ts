@@ -17,6 +17,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AddBookComponent } from './base/add-book/add-book.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PublisherComponent } from './publisher/publisher.component';
+import { SignupAuthorComponent } from './auth/signup-author/signup-author.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { PublisherComponent } from './publisher/publisher.component';
     AddBookComponent,
     ProfileComponent,
     PublisherComponent,
+    SignupAuthorComponent,
   ],
   imports: [
     BrowserModule,

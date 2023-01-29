@@ -9,6 +9,9 @@
                placeholder="email"
                formControlName="email">
       </label>
+      <div class="text-error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+        <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</div>
+      </div>
 
 
       <label class="input-group w-full input-group-lg">
@@ -16,6 +19,10 @@
         <input type="password" name="password" class="w-3/4 input input-bordered input-primary input-lg"
                placeholder="Password" formControlName="password">
       </label>
+
+      <div class="text-error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+        <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</div>
+      </div>
 
       <div *ngIf="loginFail" style="text-align: center;">
         <p style="color: rgb(187, 0, 0)">Email ou password incorretas</p>
@@ -28,9 +35,10 @@
       </div>
 
       <div class="text-center mt-5 space-x-2">
-        <p class="text-base"> Don't have an account? <a class="text-primary font-bold" routerLinkActive="active"
-                                                        routerLink="/signup"> Create a
-          account</a></p>
+        <p class="text-base"> Don't have an account as a reader? <a class="text-primary font-bold" routerLinkActive="active"
+                                                        routerLink="/signupReader"> Create a account</a></p>
+        <p class="text-base"> Don't have an account as a writer? <a class="text-primary font-bold" routerLinkActive="active"
+                                                          routerLink="/signupAuthor"> Create a account</a></p>
       </div>
     </div>
 

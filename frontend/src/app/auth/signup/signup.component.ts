@@ -10,7 +10,7 @@ import { lastValueFrom } from 'rxjs';
   styleUrls: ['./signup.component.css']
 })
 
-export class SignupComponent{
+export class SignupComponent implements OnInit{
     response: any;
     form: FormGroup;
     image: boolean = false;
