@@ -36,7 +36,7 @@ def login(request):
                 token, _ = Token.objects.get_or_create(user=api_user)
                 response = serializer.data
                 response['token'] = token.key
-                response["type"] = "company"
+                response["type"] = "author"
                 return Response(response, status=status.HTTP_200_OK)
             return Response({"error": "wrong email or password"},status=status.HTTP_200_OK)
         except Author.DoesNotExist:
