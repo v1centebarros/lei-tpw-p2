@@ -12,7 +12,9 @@ export class SignupComponent{
 
     form: FormGroup;
 
-    constructor(private authService: AuthService,) {
+    constructor(
+      private authService: AuthService,
+    ) {
       this.form = new FormGroup({
         'username': new FormControl('', [Validators.required]),
         'email': new FormControl('', [Validators.required, Validators.email]),
@@ -92,6 +94,5 @@ export class SignupComponent{
                   console.log(err);
               }
           });
-
         }
     }
