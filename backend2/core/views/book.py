@@ -1,7 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework as django_filters
 from ..models import Book
 from ..serializers import BookSerializer
@@ -18,7 +17,7 @@ class BookFilter(django_filters.FilterSet):
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [django_filters.DjangoFilterBackend]
     filterset_class = BookFilter
 
     @action(detail=False, methods=['get'])

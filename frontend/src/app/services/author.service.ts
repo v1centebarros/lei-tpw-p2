@@ -19,4 +19,10 @@ export class AuthorService {
   getAuthor(id: number): Observable<Author> {
     return this.http.get<Author>(this.baseUrl + 'authors/' + id + '/');
   }
+
+  getAuthorByRating(rating: number): Observable<Author[]> {
+    let params = new HttpParams();
+    params = params.append('rating', rating.toString());
+    return this.http.get<Author[]>(this.baseUrl + 'authors/', {params: params});
+  }
 }

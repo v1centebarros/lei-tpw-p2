@@ -8,7 +8,7 @@ import {Review} from "../models/review.model";
 })
 export class ReviewService {
 
-  private baseUrl = 'http://localhost:8000/';
+  private baseUrl = 'http://localhost:8000/api/';
   constructor(private http: HttpClient) { }
 
   getBookReviews(id: Number): Observable<Review[]> {

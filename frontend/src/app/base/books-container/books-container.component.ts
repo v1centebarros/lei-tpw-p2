@@ -13,7 +13,7 @@ export class BooksContainerComponent implements OnChanges{
   @Input()user_id: number;
   @Input()query: string;
   @Input()avg_rating: number;
-  @Input()year: number;
+  @Input()year: string;
   @Input()publisher: string;
   @Input()language: string;
   previousSearch: any;

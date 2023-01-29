@@ -38,7 +38,7 @@ export class BookService {
     if (search.avg_rating) {
       params = params.append('rating', search.avg_rating.toString());
     }
-    if (search.year != 0) {
+    if (search.year) {
       params = params.append('year', search.year.toString());
     }
     if (search.publisher) {

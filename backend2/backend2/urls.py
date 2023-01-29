@@ -27,15 +27,17 @@ from core.views.book import BookViewSet
 from core.views.user import UserViewSet
 from core.views.comment import CommentViewSet
 from core.views.rating import RatingViewSet
+from core.views.review import ReviewViewSet
 
 router = routers.DefaultRouter()
-router.register(r'genre', GenreViewSet)
+router.register(r'genres', GenreViewSet)
 router.register(r'publishers', PublisherViewSet)
 router.register(r'authors', AuthorViewSet)
 router.register(r'books', BookViewSet)
-router.register(r'user', UserViewSet)
-router.register(r'comment', CommentViewSet)
-router.register(r'rating', RatingViewSet)
+router.register(r'users', UserViewSet)
+router.register(r'reviews', ReviewViewSet)
+router.register(r'comments', CommentViewSet)
+router.register(r'ratings', RatingViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

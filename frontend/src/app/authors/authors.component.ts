@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from "../services/book.service";
-import { User } from '../models/user.model';
-import { UserService } from '../services/user.service';
+import { Author } from "../models/author.model";
+import { AuthorService } from "../services/author.service";
 
 @Component({
   selector: 'app-authors',
@@ -9,12 +9,12 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./authors.component.css']
 })
 export class AuthorsComponent implements OnInit{
-  authors: User[];
+  authors: Author[];
   rating: number;
 
   constructor(
     private bookService: BookService,
-    private userService: UserService
+    private authorService: AuthorService
   ) { }
 
   ngOnInit() {
@@ -22,11 +22,11 @@ export class AuthorsComponent implements OnInit{
   }
 
   getAuthors(): void {
-    this.userService.getAuthorByRating(1).subscribe(authors => this.authors = authors);
+    this.authorService.getAuthorByRating(0).subscribe(authors => this.authors = authors);
   }
 
   onRatingChange(): void {
-    this.userService.getAuthorByRating(this.rating).subscribe(authors => this.authors = authors);
+    this.authorService.getAuthorByRating(this.rating).subscribe(authors => this.authors = authors);
   }
 
 }

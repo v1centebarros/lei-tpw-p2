@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from core.models import Book, Publisher, Comment, Rating, User , Genre, Author, Reply
+from core.models import Book, Publisher, Comment, Rating, User , Genre, Author, Review
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,14 +12,14 @@ class PublisherSerializer(serializers.ModelSerializer):
         model = Publisher
         fields = '__all__'
 
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = '__all__'
+
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = '__all__'
-
-class ReplySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Reply
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):

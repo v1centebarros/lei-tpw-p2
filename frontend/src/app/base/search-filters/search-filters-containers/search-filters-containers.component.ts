@@ -15,23 +15,17 @@ export class SearchFiltersContainersComponent implements OnInit {
   ratings: number[] = [1, 2, 3, 4, 5];
   languages: string[] = ['English', 'Spanish', 'Portuguese'];
   publishers: Publisher[] = [];
-  query: string;
-  avg_rating: number;
-  year: number;
-  publisher: string;
-  language: string;
+  query: string = '';
+  avg_rating: number = 0;
+  year: string = '';
+  publisher: string = '';
+  language: string = '';
 
 
   constructor(
     private publisherService: PublisherService,
     private bookService: BookService
-  ){
-    this.query = '';
-    this.avg_rating = 0;
-    this.year = 0;
-    this.publisher = '';
-    this.language = '';
-   }
+  ){}
 
   ngOnInit() {
     this.getPublishers();

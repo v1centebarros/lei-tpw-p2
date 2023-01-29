@@ -7,7 +7,7 @@
     </select>
 
     <select class="select" [(ngModel)]="year" (ngModelChange)="onSearchChanged()">
-      <option selected value=0>Year</option>
+      <option selected value="">Year</option>
       <option *ngFor="let year of years" [value]="year">{{year}}</option>
     </select>
 

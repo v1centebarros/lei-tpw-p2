@@ -13,7 +13,7 @@ import {Search} from "../../models/search.model";
 export class BaseComponent {
   query: string;
   avg_rating: number;
-  year: number;
+  year: string;
   publisher: string;
   language: string;
 
