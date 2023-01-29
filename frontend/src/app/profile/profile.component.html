@@ -36,11 +36,11 @@
   <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews">
     <div class="pt-4 pl-4 pr-4">
       <div class="">
-        <a routerLink="/book/{{review.book_info.id}}" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">
+        <a routerLink="/book/{{review.book}}" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">
         </a>
-        <span class="font-light">{{review.date}}</span>
+        <span class="font-light">{{review.time}}</span>
         <p>
-          {{review.review}}
+          {{review.text}}
         </p>
         <div class="divider"></div>
       </div>

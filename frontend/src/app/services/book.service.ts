@@ -50,6 +50,10 @@ export class BookService {
     return this.http.get<Book[]>(this.baseUrl + 'books/', {params: params});
   }
 
+  getAuthorBooks(id: number): Observable<Book[]> {
+    return this.http.get<Book[]>(this.baseUrl + 'books/?author=' + id );
+  }
+
   getAvailableYears(): Observable<string[]> {
     return this.http.get<string[]>(this.baseUrl + 'books/years/');
   }

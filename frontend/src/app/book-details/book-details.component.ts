@@ -17,6 +17,7 @@ import { UserService } from '../services/user.service';
 export class BookDetailsComponent implements OnInit{
   book: Book;
   reviews: Review[];
+  myReview: Review | null;
   showReviews: boolean = false;
   userReview: string = '';
   session!: Session | null;
@@ -37,6 +38,7 @@ export class BookDetailsComponent implements OnInit{
   ngOnInit() {
     this.getBook()
     this.getBookReviews();
+    this.getReviewByUser();
 
     if (this.session === null) return;
     let user_id = this.session?._user_id;
@@ -60,7 +62,12 @@ export class BookDetailsComponent implements OnInit{
   getBookReviews(): void {
     const id = +Number(this.route.snapshot.paramMap.get('id'));
     this.reviewService.getBookReviews(id)
-      .subscribe(book => this.reviews = book);
+      .subscribe(reviews => this.reviews = reviews);
+  }
+
+  getReviewByUser(): void {
+    this.reviewService.getReviewByUser(1)
+      .subscribe(review => this.myReview = review[0]);
   }
 
   showReviewsToggle(): void {
@@ -74,7 +81,7 @@ export class BookDetailsComponent implements OnInit{
 
   submitReview(): void {
     const id = +Number(this.route.snapshot.paramMap.get('id'));
-    this.reviewService.submitReview(id, this.userReview, this.userProfile.id)
+    this.reviewService.submitReview(id, this.userReview, 1)
       .subscribe(() => this.getBookReviews());
 
     this.userReview = '';
