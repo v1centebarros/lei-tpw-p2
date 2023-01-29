@@ -10,6 +10,7 @@ export class Book {
   avg_rating: number;
   num_ratings: number;
   author: number;
+  author_name: string;
   publisher: number;
   genres: string[];
 }
