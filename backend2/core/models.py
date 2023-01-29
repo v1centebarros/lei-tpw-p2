@@ -87,7 +87,7 @@ class Review(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     text = models.TextField()
-    time = models.TimeField(auto_now=datetime.now())
+    datetime = models.DateTimeField(auto_now=datetime.now())
 
 class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -113,5 +113,5 @@ class Comment(models.Model):
     id = models.AutoField(primary_key=True)
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    time = models.TimeField(auto_now=datetime.now())
+    datetime = models.DateTimeField(auto_now=datetime.now())
     text = models.TextField()

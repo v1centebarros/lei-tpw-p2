@@ -4,7 +4,7 @@ import { Book } from "./book.model";
 export class Review {
     id: number;
     text: string;
-    time: string;
+    datetime: string;
     user: number;
     book: number;
     user_name: string;
