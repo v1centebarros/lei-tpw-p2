@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Session } from '../../models/session.model';
 import {Search} from "../../models/search.model";
+import { Book } from '../../models/book.model';
+import { BookService } from '../../services/book.service';
 
 
 @Component({
@@ -10,15 +12,17 @@ import {Search} from "../../models/search.model";
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.css']
 })
-export class BaseComponent {
+export class BaseComponent implements OnInit{
   query: string;
   avg_rating: number;
   year: string;
   publisher: string;
   language: string;
+  books: Book[];
 
-
-
+  ngOnInit() {
+    this.getBooks();
+  }
 
   onSearchChanged(search: Search): void {
     this.query = search.query;
@@ -26,10 +30,11 @@ export class BaseComponent {
     this.year = search.year;
     this.publisher = search.publisher;
     this.language = search.language;
+    this.getBooksWithFilters();
   }
 
 
-  constructor(public router: Router, public location: Location) {
+  constructor(public router: Router, public location: Location, private bookService: BookService) {
     router.events.subscribe(
       () => {
         if (!this.loggedIn() && (location.path() !== '/login' && location.path() != '/register')) {
@@ -40,9 +45,24 @@ export class BaseComponent {
     )
   }
 
-
   // Check if current user is logged in
   loggedIn() {
     return (Session.getCurrentSession() !== null);
   }
+
+  // Get all books
+  getBooks() {
+    this.bookService.getBooks().subscribe(books => this.books = books);
+  }
+
+  // Get books with search parameters
+  getBooksWithFilters() {
+    this.bookService.getBooksWithFilters({
+      query: this.query,
+      avg_rating: this.avg_rating,
+      year: this.year,
+      publisher: this.publisher,
+      language: this.language
+    }).subscribe(books => this.books = books);
+  }   
 }

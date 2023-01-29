@@ -3,7 +3,6 @@ import {Book} from "../models/book.model";
 import {BookService} from "../services/book.service";
 import {Review} from "../models/review.model";
 import {ReviewService} from "../services/review.service";
-import { AuthorService } from '../services/author.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Session } from '../models/session.model';
@@ -30,7 +29,6 @@ export class BookDetailsComponent implements OnInit{
     private bookService: BookService,
     private reviewService: ReviewService,
     private usersService: UserService,
-    private authorService: AuthorService
   ) {
     this.session = Session.getCurrentSession();
     this.userProfile = User.getNullUser();
@@ -57,10 +55,6 @@ export class BookDetailsComponent implements OnInit{
       .subscribe(book => this.book = book);
 
     return this.book;
-  }
-
-  getAuthor(): void {
-    this.authorService.getAuthor(this.book.author);
   }
 
   getBookReviews(): void {

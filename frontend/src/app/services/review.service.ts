@@ -16,7 +16,7 @@ export class ReviewService {
   }
 
   submitReview(id: number, userReview: string, user: number) {
-    return this.http.post<Review>(this.baseUrl + 'reviews/', {book: id, review: userReview, user: user, date : new Date()});
+    return this.http.post<Review>(this.baseUrl + 'reviews/', {book: id, text: userReview, user: user});
 
   }
 }
