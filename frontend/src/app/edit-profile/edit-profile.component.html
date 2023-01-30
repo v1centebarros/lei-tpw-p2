@@ -1,0 +1,124 @@
+<div class="max-w-xl mx-auto p-6 my-6 bg-base-100 rounded-xl shadow-xl" id="login-container">
+  <h1 class="text-5xl font-bold mb-6 tracking-wider">Sign Up Reader</h1>
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Username</span>
+      </label>
+      <input
+        type="text"
+        placeholder="Username"
+        class="input input-bordered"
+        name="username"
+        formControlName="username"
+
+      />
+      <div class="text-error" *ngIf="form.get('username')?.touched && form.get('username')?.invalid">
+        <div *ngIf="form.get('username')?.errors?.['required']">Username is required</div>
+      </div>
+
+      <label class="label">
+        <span class="label-text">First Name</span>
+      </label>
+      <input
+        type="text"
+        placeholder="First Name"
+        class="input input-bordered"
+        name="firstName"
+        formControlName="firstName"
+
+      />
+
+      <div class="text-error" *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid">
+        <div *ngIf="form.get('firstName')?.errors?.['required']">First Name is required</div>
+      </div>
+
+      <label class="label">
+        <span class="label-text">Last Name</span>
+      </label>
+      <input
+        type="text"
+        placeholder="Last Name"
+        class="input input-bordered"
+        name="lastName"
+        formControlName="lastName"
+      />
+
+      <div class="text-error" *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid">
+        <div *ngIf="form.get('lastName')?.errors?.['required']">Last Name is required</div>
+      </div>
+
+
+      <label class="label">
+        <span class="label-text">Old Password</span>
+      </label>
+      <input
+        type="password"
+        placeholder="Old Password"
+        class="input input-bordered"
+        name="oldpassword"
+        formControlName="oldpassword"
+        required
+      />
+
+      <div class="text-error" *ngIf="form.get('oldpassword')?.touched && form.get('oldpassword')?.invalid">
+        <div *ngIf="form.get('oldpassword')?.errors?.['required']">Old Password is required</div>
+      </div>
+
+
+      <label class="label">
+        <span class="label-text"> New Password</span>
+      </label>
+      <input type="password" placeholder="New Password" class="input input-bordered" name="newpassword"
+             formControlName="newpassword"/>
+
+      <label class="label">
+        <span class="label-text">Confirm Password</span>
+      </label>
+      <input type="password" placeholder="Confirm New Password" class="input input-bordered" name="confirmnewpassword"
+           formControlName="confirmnewpassword"/>
+
+      <label class="label">
+        <span class="label-text">Birth Date</span>
+      </label>
+      <input type="date" placeholder="Birth Date" class="input input-bordered" name="birthDate"
+             formControlName="birthDate"/>
+
+      <div class="text-error" *ngIf="form.get('birth_date')?.touched && form.get('birth_date')?.invalid">
+        <div *ngIf="form.get('birth_date')?.errors?.['required']">Birth Date is required</div>
+      </div>
+
+      <label class="label">
+        <span class="label-text">Description</span>
+      </label>
+      <textarea class="textarea h-24 textarea-bordered" placeholder="Tell us a bit about you" name="description"
+                required
+                formControlName="description"></textarea>
+
+      <div class="text-error" *ngIf="form.get('description')?.touched && form.get('description')?.invalid">
+        <div *ngIf="form.get('description')?.errors?.['required']">Description is required</div>
+      </div>
+
+
+      <!--IMAGE-->
+      <label class="label">
+        <span class="label-text">Image</span>
+      </label>
+      <input (change)="onFileChange($event)" type="file" class="input input-bordered" name="image"/>
+
+      <div *ngIf="registerFail" style="text-align: center;">
+        <p style="color: rgb(187, 0, 0)">{{message}}</p>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="flex flex-row mt-6 justify-between">
+        <input type="submit" value="Edit" class="btn btn-primary w-5/12" [disabled]="form.invalid"/>
+        <a routerLink="/profile" class="btn btn-accent w-5/12" (click)="cancelar()">Canelar</a>
+      </div>
+    </div> 
+  </form>
+</div>

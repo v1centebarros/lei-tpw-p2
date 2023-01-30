@@ -20,6 +20,7 @@ import { PublisherComponent } from './publisher/publisher.component';
 import { SignupAuthorComponent } from './auth/signup-author/signup-author.component';
 import { AuthorProfileComponent } from './author-profile/author-profile.component';
 import { PublishersComponent } from './publishers/publishers.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { PublishersComponent } from './publishers/publishers.component';
     SignupAuthorComponent,
     AuthorProfileComponent,
     PublishersComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

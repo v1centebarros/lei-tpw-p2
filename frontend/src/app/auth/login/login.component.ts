@@ -49,12 +49,13 @@ export class LoginComponent  implements OnInit {
           }
           else {
             sessionStorage.setItem('id', response.id);
+            sessionStorage.setItem('username', response.username);
             sessionStorage.setItem('email', response.email);
             sessionStorage.setItem('type', response.type);
             sessionStorage.setItem('token', response.token);
             sessionStorage.setItem('description', response.description);
             sessionStorage.setItem('birth_date', response.birth_date);
-            sessionStorage.setItem('image', response.image)
+            sessionStorage.setItem('image', response.image);
             this.authService.setToken(response.token);
 
             if (response.type == 'user') {

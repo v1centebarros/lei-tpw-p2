@@ -43,12 +43,15 @@ export class AuthService {
         localStorage.removeItem('token');
     }
 
+
+
     getUserInfo(){
         let type = sessionStorage.getItem("type")
 
         if (type == 'user') {
             return{
                 id: sessionStorage.getItem("id"),
+                username: sessionStorage.getItem("username"),
                 email: sessionStorage.getItem("email"),
                 first_name: sessionStorage.getItem("first_name"),
                 last_name: sessionStorage.getItem("last_name"),

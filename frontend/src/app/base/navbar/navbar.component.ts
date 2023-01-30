@@ -52,4 +52,13 @@ export class NavbarComponent  implements OnInit{
     else
       this.user.image = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
   }
+
+  settings(){
+    if (this.user.type == "user"){
+      window.location.href = '/settings';
+    }
+    if (this.user.type == "author"){
+      window.location.href = '/author/'+ this.user.id;
+    }
+  }
 }
