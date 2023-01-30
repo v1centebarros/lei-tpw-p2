@@ -25,8 +25,21 @@ export class ReviewService {
     return this.http.get<Review[]>(this.baseUrl + 'reviews/?user=' + id);
   }
 
+  getReviewByUserAndBook(id: number, book: number): Observable<Review[]> {
+    return this.http.get<Review[]>(this.baseUrl + 'reviews/?user=' + id + '&book=' + book);
+  }
+
   deleteReview(id: number) {
     return this.http.delete(this.baseUrl + 'reviews/' + id + '/');
+  }
+
+  editReview(review: Review) {
+    const httpParams = {
+      text: review.text,
+      user: review.user,
+      book: review.book
+    }
+    return this.http.put(this.baseUrl + 'reviews/' + review.id + '/', httpParams);
   }
 
   getComments(id: number): Observable<Comment[]> {

@@ -27,6 +27,7 @@ export class BookDetailsComponent implements OnInit{
   userComment: string[] = [];
   comments: Comment[][] = [];
   rating: Rating;
+  editMyReview: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +42,7 @@ export class BookDetailsComponent implements OnInit{
     this.user = this.authenticationService.getUserInfo();
     this.getBook();
     this.getBookReviews();
-    this.getReviewByUser();
+    this.getReviewByUserAndBook();
     this.verifyFav();
   }
 
@@ -65,13 +66,10 @@ export class BookDetailsComponent implements OnInit{
       });
   }
 
-  getReviewByUser(): void {
-    if (this.user !== null) {
-      this.reviewService.getReviewByUser(this.user.id)
-        .subscribe(review => this.myReview = review[0]);
-    } else {
-      this.myReview = null;
-    }
+  getReviewByUserAndBook(): void {
+    const id = +Number(this.route.snapshot.paramMap.get('id'));
+    this.reviewService.getReviewByUserAndBook(this.user.id, id)
+      .subscribe(review => this.myReview = review[0]);
   }
 
   showReviewsToggle(): void {
@@ -127,6 +125,18 @@ export class BookDetailsComponent implements OnInit{
   deleteReview(review: number): void {
     this.reviewService.deleteReview(review)
       .subscribe(() => this.getBookReviews());
+  }
+
+  showEditReview(): void {
+    this.editMyReview = !this.editMyReview;
+  }
+
+  editReview(text: string): void {
+    if (this.myReview !== null) {
+      this.myReview.text = text;
+      this.reviewService.editReview(this.myReview)
+        .subscribe(() => this.getBookReviews());
+    }
   }
 
   getComments(review: number, index: number): void {
