@@ -18,7 +18,7 @@
 
           <!-- Mostrar só quando tem livros-->
           <p class="text-xl font-bold mb-4"  *ngIf="books.length>0" >Total Books: <span class="font-light text-lg">{{books.length}}</span></p>
-          <p class="text-xl font-bold mb-4" *ngIf="books.length>0">Average Reviews per Book: <span class="font-light text-lg">5</span></p>
+          <p class="text-xl font-bold mb-4" *ngIf="books.length>0">Average Ratings per Book: <span class="font-light text-lg">{{avgRating/books.length}}</span></p>
         </div>
       </div>
     </div>

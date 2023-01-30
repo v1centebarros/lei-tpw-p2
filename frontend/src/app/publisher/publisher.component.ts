@@ -20,7 +20,7 @@ export class PublisherComponent {
   logged: boolean = false;
   text_fav: string = "Add Fav";
   state_fav: boolean = false;
-  numberbooks : number = 0;
+  avgRating:number = 0;
 
   constructor(
     private publisherService: PublisherService,
@@ -47,7 +47,13 @@ export class PublisherComponent {
 
   getPublisherBooks(): void {
     const id = +Number(this.route.snapshot.paramMap.get('id')!);
-    this.publisherService.getPublisherBooks(id).subscribe(books => this.books = books);
+    this.publisherService.getPublisherBooks(id).subscribe(books =>
+       this.books = books,
+        error => console.log(error),
+        () =>
+          this.books.forEach(book =>
+            this.avgRating += book.avg_rating),
+    );
   }
 
   getLogo() {
