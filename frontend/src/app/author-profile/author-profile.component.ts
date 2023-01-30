@@ -38,7 +38,6 @@ export class AuthorProfileComponent implements OnInit {
       this.user = this.authenticationService.getUserInfo();
       this.verifyFav();
       this.logged = true;
-      console.log("!ola")
     }
    
   }
@@ -65,7 +64,6 @@ export class AuthorProfileComponent implements OnInit {
   }
 
   getImage(){
-    console.log("get image")
     // let image = this.user.image
     let image = null
     if(image != null){

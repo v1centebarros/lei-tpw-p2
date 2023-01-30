@@ -7,15 +7,14 @@
     <div class="card-body">
       <div class="flex flex-row">
         <div class="flex-1">
-          <p class="text-6xl font-bold mb-4">Saída de Emergência</p>
-          <p class="text-xl font-bold mb-4">Endereço: <span class="font-light text-lg">Rua de cima, 69</span></p>
-          <p class="text-xl font-bold mb-4">Cidade: <span class="font-light text-lg">Porto</span></p>
-          <p class="text-xl font-bold mb-4">Website: <a class="font-light text-lg"
-                                                        href="https://sde.pt">https://sde.pt</a><span
-            class="font-extralight text-lg ml-1">(21)</span></p>
+          <p class="text-6xl font-bold mb-4">{{publisher.name}}</p>
+          <p class="text-xl font-bold mb-4">Adress: <span class="font-light text-lg">{{publisher.address}}</span></p>
+          <p class="text-xl font-bold mb-4">City: <span class="font-light text-lg">{{publisher.city}}</span></p>
+          <p class="text-xl font-bold mb-4">Country: <span class="font-light text-lg">{{publisher.country}}</span></p>
+          <p class="text-xl font-bold mb-4">Website: <a class="font-light text-lg" href="{{publisher.website}}">{{publisher.website}}</a></p>
 
           <!-- Mostrar só quando tem livros-->
-          <p class="text-xl font-bold mb-4">Total Books: <span class="font-light text-lg">5</span></p>
+          <p class="text-xl font-bold mb-4">Total Books: <span class="font-light text-lg">{{numberbooks}}</span></p>
           <p class="text-xl font-bold mb-4">Average Reviews per Book: <span class="font-light text-lg">5</span></p>
         </div>
       </div>
@@ -24,6 +23,5 @@
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
     <p class="text-3xl font-bold p-4">Books</p>
   </div>
-
   <app-books-container></app-books-container>
 </div>
