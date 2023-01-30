@@ -28,6 +28,14 @@
             <p class="font-light text-lg text-justify">{{author.description}}</p>
         </div>
     </div>
+
+    <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="logged">
+      <div class="flex flex-row justify-between p-4 w-full">
+        <p class="text-3xl font-bold my-auto">Favoritos</p>
+        <button class="btn btn-primary" (click)="addFav()">{{text_fav}}</button>
+      </div>
+    </div>
+
     <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="author">
         <p class="text-3xl font-bold p-4">{{author.name}}'s Books</p>
     </div>
