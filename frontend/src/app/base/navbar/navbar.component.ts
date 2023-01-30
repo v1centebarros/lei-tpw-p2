@@ -43,8 +43,7 @@ export class NavbarComponent  implements OnInit{
   }
   getImage(){
     console.log("get image")
-    // let image = this.user.image
-    let image = null
+    let image = this.user.image
     if(image != null){
       this.user.image = "http://localhost:8000/" + this.user.image;
     }
