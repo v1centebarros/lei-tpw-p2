@@ -20,7 +20,7 @@ export class PublisherComponent {
   logged: boolean = false;
   text_fav: string = "Add Fav";
   state_fav: boolean = false;
-  numberbooks: number;
+  numberbooks : number = 0;
 
   constructor(
     private publisherService: PublisherService,
@@ -87,5 +87,6 @@ export class PublisherComponent {
       alert("You must be logged in to add a favorite");
     }
   }
+
 
 }

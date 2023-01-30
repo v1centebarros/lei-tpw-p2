@@ -6,6 +6,9 @@
 
     <div class="card-body">
       <div class="flex flex-row">
+        <div class="mr-3">
+          <img src="{{logo}}" alt="" class="rounded">
+        </div>
         <div class="flex-1">
           <p class="text-6xl font-bold mb-4">{{publisher.name}}</p>
           <p class="text-xl font-bold mb-4">Adress: <span class="font-light text-lg">{{publisher.address}}</span></p>
@@ -14,14 +17,21 @@
           <p class="text-xl font-bold mb-4">Website: <a class="font-light text-lg" href="{{publisher.website}}">{{publisher.website}}</a></p>
 
           <!-- Mostrar só quando tem livros-->
-          <p class="text-xl font-bold mb-4">Total Books: <span class="font-light text-lg">{{numberbooks}}</span></p>
-          <p class="text-xl font-bold mb-4">Average Reviews per Book: <span class="font-light text-lg">5</span></p>
+          <p class="text-xl font-bold mb-4"  *ngIf="books.length>0" >Total Books: <span class="font-light text-lg">{{books.length}}</span></p>
+          <p class="text-xl font-bold mb-4" *ngIf="books.length>0">Average Reviews per Book: <span class="font-light text-lg">5</span></p>
         </div>
       </div>
     </div>
   </div>
-  <div class="w-full flex bg-base-100 rounded-lg mt-4">
-    <p class="text-3xl font-bold p-4">Books</p>
+  <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="logged">
+    <div class="flex flex-row justify-between p-4 w-full">
+      <p class="text-3xl font-bold my-auto">Favoritos</p>
+      <button class="btn btn-primary" (click)="addFav()">{{text_fav}}</button>
+    </div>
   </div>
-  <app-books-container></app-books-container>
+
+  <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="publisher && books.length>0">
+      <p class="text-3xl font-bold p-4">{{publisher.name}}'s Books</p>
+  </div>
+  <app-books-container [books]="books" *ngIf="books.length>0"></app-books-container>
 </div>
