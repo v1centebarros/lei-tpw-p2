@@ -104,12 +104,13 @@
           [(ngModel)]="userComment[i]" />
         <button class="btn btn-primary my-auto mr-3" (click)="submitComment(review.id, i)">Submit</button>
       </div>
-      <div tabindex="0" class="collapse" *ngIf="review.number_of_comments !== 0" (click)="getComments(review.id)">
+      <div class="collapse" *ngIf="review.number_of_comments !== 0" (click)="getComments(review.id, i)">
+        <input type="checkbox" />
         <div class="collapse-title font-medium divider">
           Click To Show Comments
         </div>
         <div class="collapse-content">
-          <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngFor="let comment of comments">
+          <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngFor="let comment of comments[i]">
             <div class="card-body flex flex-row">
               <div class="avatar my-auto">
                 <div class="mask mask-squircle w-16 h-16">
@@ -125,11 +126,12 @@
                 <p>{{comment.text}}</p>
               </div>
               <div class="my-auto mx-auto" *ngIf="comment.user == user.id">
-                <!-- DONT CHANGE TO BUTTON -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="red"
-                  (click)="deleteComment(comment.id)">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <button class="btn btn-circle btn-outline" (click)="deleteComment(comment.id)">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>

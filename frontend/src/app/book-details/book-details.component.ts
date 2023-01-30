@@ -24,7 +24,7 @@ export class BookDetailsComponent implements OnInit{
   state_fav: boolean = false;
   user: any;
   userComment: string[] = [];
-  comments: Comment[];
+  comments: Comment[][] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -123,10 +123,10 @@ export class BookDetailsComponent implements OnInit{
     }
   }
 
-  getComments(review: number): void {
+  getComments(review: number, index: number): void {
     console.log("getComments")
     this.reviewService.getComments(review)
-      .subscribe(comments => this.comments = comments);
+      .subscribe(comments => this.comments[index] = comments);
   }
 
   submitComment(review: number, index: number): void {
