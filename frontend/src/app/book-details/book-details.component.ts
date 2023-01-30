@@ -114,7 +114,10 @@ export class BookDetailsComponent implements OnInit{
   submitReview(): void {
     if (this.user !== null) {
       this.reviewService.submitReview(this.book.id, this.userReview, this.user.id)
-        .subscribe(() => this.getBookReviews());
+        .subscribe(() => {
+          this.getBookReviews();
+          this.getReviewByUserAndBook();
+        });
 
       this.userReview = '';
     } else {
