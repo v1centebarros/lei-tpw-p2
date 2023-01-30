@@ -6,7 +6,7 @@ from django_filters import rest_framework as filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password,check_password
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -16,9 +16,17 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def update(self, request, pk=None):
         user = User.objects.get(pk=pk)
-        print(user)
+        if 'oldpassword' in request.data and 'newpassword' in request.data:
+            if check_password(user.password,request.data['oldpassword']):
+                request.data['password'] = make_password(request.data['newpassword'])
+            else:
+                return Response({"error": "Old password is incorrect"}, status=status.HTTP_200_OK)
         if 'password' in request.data:
-            request.data['password'] = make_password(request.data['password'])
+            print("ola")
+            if check_password(user.password,request.data['password']):
+                request.data['password'] = make_password(request.data['password'])
+            else:
+                return Response({"error": "Password is incorrect"}, status=status.HTTP_200_OK)
         serializer = UserSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()

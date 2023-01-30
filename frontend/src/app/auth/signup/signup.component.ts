@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit{
     form: FormGroup;
     image: boolean = false;
     registerFail: boolean = false;
+    message: string;
 
     constructor(
       private authService: AuthService,
@@ -96,11 +97,12 @@ export class SignupComponent implements OnInit{
             if ('error' in response) {
               this.registerFail = true;
               this.form.reset();
+              this.message = response.error;
             }
-            else
+            else{
               this.router.navigate(['/login']);
-    
-
+            }
+              
         });
       }
     }

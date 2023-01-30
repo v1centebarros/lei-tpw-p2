@@ -93,6 +93,12 @@ export class EditProfileComponent implements OnInit{
       this.userService.updateUser(this.user.id, formData).subscribe(
 
         (response) => {
+          if ("error" in response) {
+            this.registerFail = true;
+            this.message = response.error;
+            return;
+          }
+          this.registerFail = false;
           this.response = response;
           sessionStorage.setItem('username', this.response.username);
           sessionStorage.setItem('email', this.response.email);
@@ -103,9 +109,10 @@ export class EditProfileComponent implements OnInit{
           sessionStorage.setItem('description', this.response.description);
           sessionStorage.setItem('image', this.response.image);
           sessionStorage.setItem('id', this.response.id);
+
+          this.router.navigate(['/profile']);
         }
       );
-      this.router.navigate(['/profile']);
     }
     else if(this.form.get('newpassword')?.value != null && this.form.get('oldpassword')?.value != null && this.form.get('confirmnewpassword')?.value != null ){
       if(this.form.get('newpassword')?.value != this.form.get('confirmnewpassword')?.value){
@@ -138,6 +145,12 @@ export class EditProfileComponent implements OnInit{
       }
       this.userService.updateUser(this.user.id, formData).subscribe(
         (response) => {
+          if ("error" in response) {
+            this.registerFail = true;
+            this.message = response.error;
+            return;
+          }
+          this.registerFail = false;
           this.response = response;
           sessionStorage.setItem('username', this.response.username);
           sessionStorage.setItem('email', this.response.email);
@@ -148,9 +161,9 @@ export class EditProfileComponent implements OnInit{
           sessionStorage.setItem('description', this.response.description);
           sessionStorage.setItem('image', this.response.image);
           sessionStorage.setItem('id', this.response.id);
+          this.router.navigate(['/profile']);
         }
       );
-      this.router.navigate(['/profile']);
     }
     else{
       this.registerFail = true;

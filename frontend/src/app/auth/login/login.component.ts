@@ -15,6 +15,7 @@ export class LoginComponent  implements OnInit {
 
   loginForm: FormGroup;
   loginFail: boolean = false;
+  message: string;
 
   constructor( private authService: AuthService,
                private router: Router ) {
@@ -43,7 +44,7 @@ export class LoginComponent  implements OnInit {
         response => {
           console.log(response)
           if ('error' in response) {
-            // ! COLOCAR MENSAGES ERROR IGUAIS AO DO RESPONSE
+            this.message = response.error;
             console.log(response.error)
             this.loginFail = true;
           }
