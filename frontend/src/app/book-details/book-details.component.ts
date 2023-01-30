@@ -6,6 +6,7 @@ import {ReviewService} from "../services/review.service";
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 import {UserService} from "../services/user.service";
+import { Comment } from '../models/comment.model';
 
 @Component({
   selector: 'app-book-details',
@@ -22,6 +23,8 @@ export class BookDetailsComponent implements OnInit{
   text_fav: string = "Add Fav";
   state_fav: boolean = false;
   user: any;
+  userComment: string[] = [];
+  comments: Comment[];
 
   constructor(
     private route: ActivatedRoute,
@@ -52,7 +55,12 @@ export class BookDetailsComponent implements OnInit{
   getBookReviews(): void {
     const id = +Number(this.route.snapshot.paramMap.get('id'));
     this.reviewService.getBookReviews(id)
-      .subscribe(reviews => this.reviews = reviews);
+      .subscribe(reviews => {
+        this.reviews = reviews;
+        for (let i = 0; i < this.reviews.length; i++) {
+          this.userComment[i] = '';
+        }
+      });
   }
 
   getReviewByUser(): void {
@@ -114,5 +122,44 @@ export class BookDetailsComponent implements OnInit{
       alert("You must be logged in to submit a review");
     }
   }
+
+  getComments(review: number): void {
+    console.log("getComments")
+    this.reviewService.getComments(review)
+      .subscribe(comments => this.comments = comments);
+  }
+
+  submitComment(review: number, index: number): void {
+    if (this.user !== null) {
+      this.reviewService.submitComment(review, this.userComment[index], this.user.id)
+        .subscribe(() => this.getBookReviews());
+
+      this.userComment[index] = '';
+    } else {
+      alert("You must be logged in to submit a comment");
+    }
+  }
+
+  calculateDate(date: string): string {
+    let currentDate = new Date();
+    let reviewDate = new Date(date);
+    let difference = currentDate.getTime() - reviewDate.getTime();
+    let days = Math.floor(difference / (1000 * 3600 * 24));
+    let hours = Math.floor((difference % (1000 * 3600 * 24)) / (1000 * 3600));
+    let minutes = Math.floor((difference % (1000 * 3600)) / (1000 * 60));
+    let seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    if (days > 0) {
+      return days + " days ago";
+    } else if (hours > 0) {
+      return hours + " hours ago";
+    } else if (minutes > 0) {
+      return minutes + " minutes ago";
+    } else {
+      return seconds + " seconds ago";
+    }
+  }
+    
+    
 }
 

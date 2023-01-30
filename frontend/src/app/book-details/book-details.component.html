@@ -38,15 +38,15 @@
 
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
     <div class="flex flex-row justify-between p-4 w-full">
-      <p class="text-3xl font-bold my-auto">Reviews</p>
-      <button class="btn btn-primary" (click)="showReviewsToggle()">{{text_button}}</button>
+      <p class="text-3xl font-bold my-auto">Favoritos</p>
+      <button class="btn btn-primary" (click)="addFav()">{{text_fav}}</button>
     </div>
   </div>
 
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
     <div class="flex flex-row justify-between p-4 w-full">
-      <p class="text-3xl font-bold my-auto">Favoritos</p>
-      <button class="btn btn-primary" (click)="addFav()">{{text_fav}}</button>
+      <p class="text-3xl font-bold my-auto">Reviews</p>
+      <button class="btn btn-primary" (click)="showReviewsToggle()">{{text_button}}</button>
     </div>
   </div>
 
@@ -57,7 +57,7 @@
   </div>
 
   <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngIf="myReview">
-    <p class="text-3xl font-bold my-auto">Your Review</p>
+    <p class="text-3xl font-bold my-auto mx-auto">Your Review</p>
     <div class="card-body flex flex-row" *ngIf="myReview.user == user.id">
       <div class="avatar my-auto">
         <div class="mask mask-squircle w-16 h-16">
@@ -66,27 +66,59 @@
       </div>
       <div class="my-auto">
         <p class="font-bold">{{myReview.user_name}}</p>
-        <p>{{myReview.datetime}}</p>
+        <p>{{calculateDate(myReview.datetime)}}</p>
       </div>
+      <div class="divider divider-horizontal"></div>
       <div class="my-auto">
         <p>{{myReview.text}}</p>
       </div>
     </div>
   </div>
 
-  <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews">
-    <div class="card-body flex flex-row" *ngIf="review.user != user.id">
-      <div class="avatar my-auto">
-        <div class="mask mask-squircle w-16 h-16">
-          <img src="{{review.user_image}}" alt="" />
+  <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews; let i = index">
+    <div *ngIf="review.user != user.id">
+      <div class="card-body flex flex-row">
+        <div class="avatar my-auto">
+          <div class="mask mask-squircle w-16 h-16">
+            <img src="{{review.user_image}}" alt="" />
+          </div>
+        </div>
+        <div class="my-auto">
+          <p class="font-bold">{{review.user_name}}</p>
+          <p>{{calculateDate(review.datetime)}}</p>
+        </div>
+        <div class="divider divider-horizontal"></div>
+        <div class="my-auto">
+          <p>{{review.text}}</p>
         </div>
       </div>
-      <div class="my-auto">
-        <p class="font-bold">{{review.user_name}}</p>
-        <p>{{review.datetime}}</p>
+      <div class="w-full flex bg-base-100 rounded-lg mt-4">
+        <input type="text" class="input input-bordered flex-1 m-4 in" placeholder="Comment this review"
+          [(ngModel)]="userComment[i]" />
+        <button class="btn btn-primary my-auto mr-3" (click)="submitComment(review.id, i)">Submit</button>
       </div>
-      <div class="my-auto">
-        <p>{{review.text}}</p>
+      <div tabindex="0" class="collapse" *ngIf="review.number_of_comments !== 0" (click)="getComments(review.id)">
+        <div class="collapse-title font-medium divider">
+          Click To Show Comments
+        </div>
+        <div class="collapse-content">
+          <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngFor="let comment of comments">
+            <div class="card-body flex flex-row">
+              <div class="avatar my-auto">
+                <div class="mask mask-squircle w-16 h-16">
+                  <img src="{{comment.user_image}}" alt="" />
+                </div>
+              </div>
+              <div class="my-auto">
+                <p class="font-bold">{{comment.user_name}}</p>
+                <p>{{calculateDate(comment.datetime)}}</p>
+              </div>
+              <div class="divider divider-horizontal"></div>
+              <div class="my-auto">
+                <p>{{comment.text}}</p>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>

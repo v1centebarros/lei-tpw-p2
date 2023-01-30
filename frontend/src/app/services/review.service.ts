@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Review} from "../models/review.model";
+import {Comment} from "../models/comment.model";
 
 @Injectable({
   providedIn: 'root'
@@ -23,4 +24,14 @@ export class ReviewService {
   getReviewByUser(id: number): Observable<Review[]> {
     return this.http.get<Review[]>(this.baseUrl + 'reviews/?user=' + id);
   }
+
+  getComments(id: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(this.baseUrl + 'comments/?review=' + id);
+  }
+
+  submitComment(id: number, userReply: string, user: number) {
+    return this.http.post<Review>(this.baseUrl + 'comments/', {text: userReply, user: user, review: id});
+  }
+
+
 }

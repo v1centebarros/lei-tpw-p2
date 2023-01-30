@@ -15,11 +15,24 @@ class PublisherSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.username', read_only=True)
     user_image = serializers.CharField(source='user.image', read_only=True)
+    number_of_comments = serializers.IntegerField(source='comment_set.count', read_only=True)
+
     class Meta:
         model = Review
-        fields = '__all__'
+        fields = [
+            'id',
+            'user',
+            'user_name',
+            'user_image',
+            'book',
+            'text',
+            'datetime',
+            'number_of_comments'
+        ]
 
 class CommentSerializer(serializers.ModelSerializer):
+    user_name = serializers.CharField(source='user.username', read_only=True)
+    user_image = serializers.CharField(source='user.image', read_only=True)
     class Meta:
         model = Comment
         fields = '__all__'
