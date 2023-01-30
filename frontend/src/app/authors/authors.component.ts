@@ -10,7 +10,7 @@ import { AuthorService } from "../services/author.service";
 })
 export class AuthorsComponent implements OnInit{
   authors: Author[];
-  rating: number;
+  rating: number = 0;
 
   constructor(
     private bookService: BookService,
