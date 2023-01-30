@@ -19,6 +19,12 @@ export class UserService {
     return this.http.get<User>(this.baseUrl + 'users/' + id + '/');
   }
 
+  getAuthorByRating(rating: number): Observable<User[]> {
+    let params = new HttpParams();
+    params = params.append('avg_rating__gte', rating.toString());
+    return this.http.get<User[]>(this.baseUrl + 'users/', {params: params});
+  }
+
 
   getUserReviews(id: number): Observable<Review[]> {
     return this.http.get<Review[]>(this.baseUrl + 'users/' + id + '/get_user_reviews/');
@@ -36,10 +42,35 @@ export class UserService {
     return this.http.get<Publisher[]>(this.baseUrl + 'users/' + id + '/get_fav_publisher/');
   }
 
-  getAuthorByRating(rating: number): Observable<User[]> {
-    let params = new HttpParams();
-    params = params.append('avg_rating__gte', rating.toString());
-    return this.http.get<User[]>(this.baseUrl + 'users/', {params: params});
+  // Adicionar um book ao favoritos
+  addFavBook(id: number, book_id: number): Observable<Book[]>{
+    return this.http.post<Book[]>(this.baseUrl + 'users/' + id + '/add_fav_book/' + book_id + '/', {});
   }
+
+  // Adicionar um author ao favoritos
+  addFavAuthor(id: number, author_id: number): Observable<Author[]>{
+    return this.http.post<Author[]>(this.baseUrl + 'users/' + id + '/add_fav_author/' + author_id + '/', {});
+  }
+
+  // Adicionar um publisher ao favoritos
+  addFavPublisher(id: number, publisher_id: number): Observable<Publisher[]>{
+    return this.http.post<Publisher[]>(this.baseUrl + 'users/' + id + '/add_fav_publisher/' + publisher_id + '/', {});
+  }
+
+  // Remover um book dos favoritos
+  removeFavBook(id: number, book_id: number): Observable<Book[]>{
+    return this.http.delete<Book[]>(this.baseUrl + 'users/' + id + '/remove_fav_book/' + book_id + '/');
+  }
+  
+  // Remover um author dos favoritos
+  removeFavAuthor(id: number, author_id: number): Observable<Author[]>{
+    return this.http.delete<Author[]>(this.baseUrl + 'users/' + id + '/remove_fav_author/' + author_id + '/');
+  }
+
+  // Remover um publisher dos favoritos
+  removeFavPublisher(id: number, publisher_id: number): Observable<Publisher[]>{
+    return this.http.delete<Publisher[]>(this.baseUrl + 'users/' + id + '/remove_fav_publisher/' + publisher_id + '/');
+  }
+
 
 }

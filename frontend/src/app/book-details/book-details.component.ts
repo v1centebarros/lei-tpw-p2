@@ -5,6 +5,7 @@ import {Review} from "../models/review.model";
 import {ReviewService} from "../services/review.service";
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-book-details',
@@ -18,13 +19,16 @@ export class BookDetailsComponent implements OnInit{
   showReviews: boolean = false;
   userReview: string = '';
   text_button: string = "Add Reviews";
+  text_fav: string = "Add Fav";
+  state_fav: boolean = false;
   user: any;
 
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
     private reviewService: ReviewService,
-    private authenticationService: AuthService
+    private authenticationService: AuthService,
+    private userService: UserService
   ) {
   }
 
@@ -33,6 +37,7 @@ export class BookDetailsComponent implements OnInit{
     this.getBook();
     this.getBookReviews();
     this.getReviewByUser();
+    this.verifyFav();
   }
 
   getBook(): Book {
@@ -42,6 +47,7 @@ export class BookDetailsComponent implements OnInit{
 
     return this.book;
   }
+
 
   getBookReviews(): void {
     const id = +Number(this.route.snapshot.paramMap.get('id'));
@@ -65,6 +71,36 @@ export class BookDetailsComponent implements OnInit{
       this.text_button = "Cancel Review"
     }
     this.showReviews = !this.showReviews;
+  }
+
+  addFav(): void {
+    if (this.user !== null && this.user.type == "user") {
+      if (this.state_fav) {
+        this.text_fav = "Add Fav";
+        this.userService.removeFavBook(this.user.id, this.book.id)
+          .subscribe(() => this.state_fav = false);
+      } else {
+        this.text_fav = "Remove Fav";
+        this.userService.addFavBook(this.user.id, this.book.id)
+          .subscribe(() => this.state_fav = true);
+      }
+    } else {
+      alert("You must be logged in to add a favorite");
+    }
+  }
+
+  verifyFav(): void {
+    if (this.user !== null) {
+      this.userService.getUserFavBook(this.user.id)
+        .subscribe(books => {
+          for (let book of books) {
+            if (book.id === this.book.id) {
+              this.state_fav = true;
+              this.text_fav = "Remove Fav";
+            }
+          }
+        });
+    }
   }
 
   submitReview(): void {

@@ -1,5 +1,6 @@
 from rest_framework import viewsets
-from ..models import User,Book, Review
+from django.shortcuts import get_object_or_404
+from ..models import User,Book, Review, Author, Publisher
 from ..serializers import UserSerializer, BookSerializer, ReviewSerializer,PublisherSerializer, AuthorSerializer
 from django_filters import rest_framework as filters
 from rest_framework.decorators import action
@@ -50,3 +51,53 @@ class UserViewSet(viewsets.ModelViewSet):
             reviews_info.append(info)
 
         return Response(reviews_info)
+
+    # adicionar um book no favoritos
+    @action(detail=True, methods=['post'], url_path='add_fav_book/(?P<book_id>[0-9]+)')
+    def add_fav_book(self, request, pk=None, book_id=None):
+        user = get_object_or_404(User, pk=pk)
+        book = get_object_or_404(Book, pk=book_id)
+        user.fav_books.add(book)
+        return Response("Book added to fav")
+
+    # remover um book dos favoritos
+    @action(detail=True, methods=['delete'], url_path='remove_fav_book/(?P<book_id>[0-9]+)')
+    def remove_fav_book(self, request, pk=None, book_id=None):
+        user = get_object_or_404(User, pk=pk)
+        book = get_object_or_404(Book, pk=book_id)
+        user.fav_books.remove(book)
+        return Response("Book removed from fav")
+
+    # adicionar um author no favoritos
+    @action(detail=True, methods=['post'], url_path='add_fav_author/(?P<author_id>[0-9]+)')
+    def add_fav_author(self, request, pk=None, author_id=None):
+        user = get_object_or_404(User, pk=pk)
+        author = get_object_or_404(Author, pk=author_id)
+        user.fav_authors.add(author)
+        return Response("Author added to fav")
+
+    # remover um author dos favoritos
+    @action(detail=True, methods=['delete'], url_path='remove_fav_author/(?P<author_id>[0-9]+)')
+    def remove_fav_author(self, request, pk=None, author_id=None):
+        user = get_object_or_404(User, pk=pk)
+        author = get_object_or_404(Author, pk=author_id)
+        user.fav_authors.remove(author)
+        return Response("Author removed from fav")
+
+    # adicionar um publisher no favoritos
+    @action(detail=True, methods=['post'], url_path='add_fav_publisher/(?P<publisher_id>[0-9]+)')
+    def add_fav_publisher(self, request, pk=None, publisher_id=None):
+        user = get_object_or_404(User, pk=pk)
+        publisher = get_object_or_404(Publisher, pk=publisher_id)
+        user.fav_publishers.add(publisher)
+        return Response("Publisher added to fav")
+
+    # remover um publisher dos favoritos
+    @action(detail=True, methods=['delete'], url_path='remove_fav_publisher/(?P<publisher_id>[0-9]+)')
+    def remove_fav_publisher(self, request, pk=None, publisher_id=None):
+        user = get_object_or_404(User, pk=pk)
+        publisher = get_object_or_404(Publisher, pk=publisher_id)
+        user.fav_publishers.remove(publisher)
+        return Response("Publisher removed from fav")
+
+

@@ -43,6 +43,13 @@
     </div>
   </div>
 
+  <div class="w-full flex bg-base-100 rounded-lg mt-4">
+    <div class="flex flex-row justify-between p-4 w-full">
+      <p class="text-3xl font-bold my-auto">Favoritos</p>
+      <button class="btn btn-primary" (click)="addFav()">{{text_fav}}</button>
+    </div>
+  </div>
+
   <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="showReviews">
     <input type="text" class="input input-bordered flex-1 m-4 in" placeholder="Insert your Review Here"
       [(ngModel)]="userReview" />
