@@ -140,6 +140,11 @@ export class BookDetailsComponent implements OnInit{
     }
   }
 
+  deleteComment(comment: number): void {
+    this.reviewService.deleteComment(comment)
+      .subscribe(() => this.getBookReviews());
+  }
+
   calculateDate(date: string): string {
     let currentDate = new Date();
     let reviewDate = new Date(date);

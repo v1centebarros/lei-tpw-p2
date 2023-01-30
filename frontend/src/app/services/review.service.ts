@@ -33,5 +33,9 @@ export class ReviewService {
     return this.http.post<Review>(this.baseUrl + 'comments/', {text: userReply, user: user, review: id});
   }
 
+  deleteComment(id: number) {
+    return this.http.delete(this.baseUrl + 'comments/' + id + '/');
+  }
+
 
 }

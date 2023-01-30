@@ -11,19 +11,26 @@
         <div class="flex-1">
           <p class="text-6xl font-bold mb-4">{{book.title}}</p>
           <div class="rating rating-lg mb-5">
-            <input type="radio" name="rating-9" class="rating-hidden" [checked]="book.avg_rating >= 0 && book.avg_rating < 1"/>
-            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating >= 1 && book.avg_rating < 2"/>
-            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating >= 2 && book.avg_rating < 3"/>
-            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating >= 3 && book.avg_rating < 4"/>
-            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating >= 4 && book.avg_rating < 5"/>
-            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400" [checked]="book.avg_rating === 5"/>
+            <input type="radio" name="rating-9" class="rating-hidden"
+              [checked]="book.avg_rating >= 0 && book.avg_rating < 1" />
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400"
+              [checked]="book.avg_rating >= 1 && book.avg_rating < 2" />
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400"
+              [checked]="book.avg_rating >= 2 && book.avg_rating < 3" />
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400"
+              [checked]="book.avg_rating >= 3 && book.avg_rating < 4" />
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400"
+              [checked]="book.avg_rating >= 4 && book.avg_rating < 5" />
+            <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400"
+              [checked]="book.avg_rating === 5" />
           </div>
-          <p class="text-xl font-bold mb-4" >Author: 
+          <p class="text-xl font-bold mb-4">Author:
             <a routerLink="/author/{{book.author}}" class="font-light text-lg underline">{{book.author_name}}</a>
           </p>
           <p class="text-xl font-bold mb-4">Number of Pages: <span class="font-light text-lg">{{book.pages}}</span></p>
           <p class="text-xl font-bold mb-4">Language:
-             <span class="font-light text-lg">{{book.language}}</span></p>
+            <span class="font-light text-lg">{{book.language}}</span>
+          </p>
           <p class="text-xl font-bold mb-4">Publish Date: <span class="font-light text-lg">{{book.publish_date}}</span>
           </p>
           <p class="text-xl font-bold mb-4">ISBN: <span class="font-light text-lg">{{book.isbn}}</span></p>
@@ -117,9 +124,16 @@
               <div class="my-auto">
                 <p>{{comment.text}}</p>
               </div>
+              <div class="my-auto mx-auto" *ngIf="comment.user == user.id">
+                <!-- DONT CHANGE TO BUTTON -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="red"
+                  (click)="deleteComment(comment.id)">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
