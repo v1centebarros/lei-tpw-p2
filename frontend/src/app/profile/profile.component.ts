@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Review } from '../models/review.model';
 import { Book } from '../models/book.model';
+import { Author } from '../models/author.model';
+import { Publisher } from '../models/publisher.model';
 import { AuthService } from '../services/auth/auth.service';
 
 @Component({
@@ -19,6 +21,8 @@ export class ProfileComponent implements OnInit{
   reviews: Review[];
   avg_rating: number;
   books: Book[];
+  authors : Author[];
+  publishers : Publisher[];
   image:any;
 
 
@@ -43,8 +47,10 @@ export class ProfileComponent implements OnInit{
 
     this.getUser(this.user_id);
     this.getImage()
-    // this.getUserReviews();
-    // this.getUserBooks();
+    this.getUserReviews();
+    this.getUserBooks();
+    this.getUserAuthors();
+    this.getUserPublishers();
   }
 
   getUser(id:number) {
@@ -68,8 +74,18 @@ export class ProfileComponent implements OnInit{
   }
 
   getUserBooks() {
-    this.userService.getBooksFromUser(this.user_id)
+    this.userService.getUserFavBook(this.user_id)
       .subscribe(books => this.books = books);
+  }
+
+  getUserAuthors() {
+    this.userService.getUserFavAuthor(this.user_id)
+      .subscribe(authors => this.authors = authors);
+  }
+
+  getUserPublishers() {
+    this.userService.getUserFavPublisher(this.user_id)
+      .subscribe(publishers => this.publishers = publishers);
   }
 
   getImage(){

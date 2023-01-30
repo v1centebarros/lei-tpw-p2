@@ -34,6 +34,7 @@
     <p class="text-3xl font-bold p-4">Reviews</p>
   </div>
   <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews">
+    <!-- !ALTERAR -->
     <div class="pt-4 pl-4 pr-4">
       <div class="">
         <a routerLink="/book/{{review.book}}" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">
@@ -48,7 +49,49 @@
   </div>
 
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
-    <p class="text-3xl font-bold p-4">My Books</p>
+    <p class="text-3xl font-bold p-4">My Fav Books</p>
+    <!-- !CARD DOS BOOKS -->
+    <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngFor="let book of books">
+      <div class="pt-4 pl-4 pr-4">
+        <div class="">
+          <a routerLink="/book/{{book.id}}" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">
+            {{book.title}}
+          </a>
+          <span class="font-light">{{book.author}}</span>
+          <p>
+            {{book.description}}
+          </p>
+          <div class="divider"></div>
+        </div>
+      </div>
+    </div>
+  
+
+  </div>
+
+  <div class="w-full flex bg-base-100 rounded-lg mt-4">
+    <p class="text-3xl font-bold p-4">My Fav Authors</p>
+    <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngFor="let author of authors">
+      <!-- !CARD THE AUTHORS -->
+      <div class="pt-4 pl-4 pr-4">
+        <div class="">
+          <a routerLink="/author/{{author.id}}" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">
+            {{author.name}}
+          </a>
+        </div>
+      </div>
+    </div>
+  
+
+  </div>
+
+  <div class="w-full flex bg-base-100 rounded-lg mt-4">
+    <p class="text-3xl font-bold p-4">My Fav Publishers</p>
+    <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngFor="let publisher of publishers">
+      <!-- !CARD DE PUBLISHERS -->
+    </div>
+  
+
   </div>
   <app-books-container></app-books-container>
 </div>
