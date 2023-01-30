@@ -80,6 +80,14 @@
         <div class="my-auto">
           <p>{{review.text}}</p>
         </div>
+        <div class="my-auto mx-auto" *ngIf="review.user == user.id">
+          <button class="btn btn-circle btn-outline" (click)="deleteReview(review.id)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </div>
       <div class="w-full flex bg-base-100 rounded-lg mt-4">
         <input type="text" class="input input-bordered flex-1 m-4 in" placeholder="Comment this review"

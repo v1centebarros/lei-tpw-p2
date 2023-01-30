@@ -25,6 +25,10 @@ export class ReviewService {
     return this.http.get<Review[]>(this.baseUrl + 'reviews/?user=' + id);
   }
 
+  deleteReview(id: number) {
+    return this.http.delete(this.baseUrl + 'reviews/' + id + '/');
+  }
+
   getComments(id: number): Observable<Comment[]> {
     return this.http.get<Comment[]>(this.baseUrl + 'comments/?review=' + id);
   }

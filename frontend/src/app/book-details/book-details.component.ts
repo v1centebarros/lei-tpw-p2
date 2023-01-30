@@ -124,6 +124,11 @@ export class BookDetailsComponent implements OnInit{
     }
   }
 
+  deleteReview(review: number): void {
+    this.reviewService.deleteReview(review)
+      .subscribe(() => this.getBookReviews());
+  }
+
   getComments(review: number, index: number): void {
     console.log("getComments")
     this.reviewService.getComments(review)
