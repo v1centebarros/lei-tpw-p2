@@ -7,7 +7,7 @@
     <div class="card-body">
       <div class="flex flex-row">
         <div class="mr-3">
-          <img src="{{logo}}" alt="" class="rounded">
+          <img src="{{logo}}" alt="logo" class="rounded">
         </div>
         <div class="flex-1">
           <p class="text-6xl font-bold mb-4">{{publisher.name}}</p>
@@ -18,7 +18,7 @@
 
           <!-- Mostrar só quando tem livros-->
           <p class="text-xl font-bold mb-4"  *ngIf="books.length>0" >Total Books: <span class="font-light text-lg">{{books.length}}</span></p>
-          <p class="text-xl font-bold mb-4" *ngIf="books.length>0">Average Ratings per Book: <span class="font-light text-lg">{{avgRating/books.length}}</span></p>
+          <p class="text-xl font-bold mb-4" *ngIf="books.length>0">Average Book Ratings: <span class="font-light text-lg">{{avgRating/books.length}}</span></p>
         </div>
       </div>
     </div>
@@ -27,6 +27,22 @@
     <div class="flex flex-row justify-between p-4 w-full">
       <p class="text-3xl font-bold my-auto">Favoritos</p>
       <button class="btn btn-primary" (click)="addFav()">{{text_fav}}</button>
+    </div>
+  </div>
+
+  <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="publisher && books.length>0">
+      <p class="text-3xl font-bold p-4">Associated Authors</p>
+  </div>
+  <div class="grid grid-cols-2 gap-4" *ngFor="let author of authors">
+    <div class="card card-side bg-base-100 shadow-xl">
+      <figure><img src={{author.image}} alt="Author"/></figure>
+      <div class="card-body">
+        <h2 class="card-title">{{author.name}}</h2>
+          <p class="line-clamp-5">{{author.description}}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary" routerLink="/author/{{author.id}}">More</button>
+        </div>
+      </div>
     </div>
   </div>
 

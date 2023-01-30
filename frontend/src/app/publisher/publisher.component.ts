@@ -5,6 +5,7 @@ import { Publisher } from '../models/publisher.model';
 import { AuthService } from '../services/auth/auth.service';
 import { PublisherService } from '../services/publisher.service';
 import { UserService } from '../services/user.service';
+import { Author } from '../models/author.model';
 
 @Component({
   selector: 'app-publisher',
@@ -21,6 +22,7 @@ export class PublisherComponent {
   text_fav: string = "Add Fav";
   state_fav: boolean = false;
   avgRating:number = 0;
+  authors: Author[] = [];
 
   constructor(
     private publisherService: PublisherService,
@@ -38,11 +40,17 @@ export class PublisherComponent {
       this.verifyFav();
       this.logged = true;
     }
+    this.getAuthors();
   }
 
   getPublisher(): void {
     const id = +Number(this.route.snapshot.paramMap.get('id')!);
     this.publisherService.getPublisher(id).subscribe(publisher => this.publisher = publisher);
+  }
+
+  getAuthors(): void {
+    const id = +Number(this.route.snapshot.paramMap.get('id')!);
+    this.publisherService.getPublisherAuthors(id).subscribe(authors => this.authors = authors);
   }
 
   getPublisherBooks(): void {
