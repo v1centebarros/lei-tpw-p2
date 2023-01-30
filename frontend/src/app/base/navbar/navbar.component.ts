@@ -30,9 +30,17 @@ export class NavbarComponent  implements OnInit{
     sessionStorage.clear();
     this.authenticationService.logout();
     this.loggedIn = this.authenticationService.loggedIn();
-    this.router.navigate(['/login']);
+    window.location.href = '/login';
   }
 
+  profile(){
+    if (this.user.type == "user"){
+      window.location.href = '/profile';
+    }
+    if (this.user.type == "author"){
+      window.location.href = '/author/'+ this.user.id;
+    }
+  }
   getImage(){
     console.log("get image")
     // let image = this.user.image

@@ -13,6 +13,7 @@ import { BookService } from '../services/book.service';
 export class AuthorProfileComponent implements OnInit {
   author: Author;
   books: Book[];
+  image: any;
 
   constructor(
     private authorService: AuthorService,
@@ -23,6 +24,7 @@ export class AuthorProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getAuthor();
     this.getAuthorBooks();
+    this.getImage();
   }
 
   getAuthor(): void {
@@ -44,6 +46,17 @@ export class AuthorProfileComponent implements OnInit {
       age--;
     }
     return age;
+  }
+
+  getImage(){
+    console.log("get image")
+    // let image = this.user.image
+    let image = null
+    if(image != null){
+      this.image = "http://localhost:8000/" + this.author.image;
+    }
+    else
+      this.image = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
   }
 
 }
