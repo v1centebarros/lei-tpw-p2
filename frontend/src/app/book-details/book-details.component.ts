@@ -4,10 +4,7 @@ import {BookService} from "../services/book.service";
 import {Review} from "../models/review.model";
 import {ReviewService} from "../services/review.service";
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { Session } from '../models/session.model';
-import { User } from '../models/user.model';
-import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-book-details',
@@ -20,35 +17,22 @@ export class BookDetailsComponent implements OnInit{
   myReview: Review | null;
   showReviews: boolean = false;
   userReview: string = '';
-  session!: Session | null;
-  userProfile!: User;
   text_button: string = "Add Reviews";
+  user: any;
 
   constructor(
     private route: ActivatedRoute,
-    private location: Location,
     private bookService: BookService,
     private reviewService: ReviewService,
-    private usersService: UserService,
+    private authenticationService: AuthService
   ) {
-    this.session = Session.getCurrentSession();
-    this.userProfile = User.getNullUser();
   }
 
   ngOnInit() {
-    this.getBook()
+    this.user = this.authenticationService.getUserInfo();
+    this.getBook();
     this.getBookReviews();
     this.getReviewByUser();
-
-    if (this.session === null) return;
-    let user_id = this.session?._user_id;
-        //console.log(user_id)
-
-        this.usersService.getUser(user_id).subscribe(
-            (user: User) => {
-                this.userProfile = user;
-            }
-        );
   }
 
   getBook(): Book {
@@ -66,8 +50,12 @@ export class BookDetailsComponent implements OnInit{
   }
 
   getReviewByUser(): void {
-    this.reviewService.getReviewByUser(1)
-      .subscribe(review => this.myReview = review[0]);
+    if (this.user !== null) {
+      this.reviewService.getReviewByUser(this.user.id)
+        .subscribe(review => this.myReview = review[0]);
+    } else {
+      this.myReview = null;
+    }
   }
 
   showReviewsToggle(): void {
@@ -80,11 +68,15 @@ export class BookDetailsComponent implements OnInit{
   }
 
   submitReview(): void {
-    const id = +Number(this.route.snapshot.paramMap.get('id'));
-    this.reviewService.submitReview(id, this.userReview, 1)
-      .subscribe(() => this.getBookReviews());
+    if (this.user !== null) {
+      const id = +Number(this.route.snapshot.paramMap.get('id'));
+      this.reviewService.submitReview(id, this.userReview, this.user.id)
+        .subscribe(() => this.getBookReviews());
 
-    this.userReview = '';
+      this.userReview = '';
+    } else {
+      alert("You must be logged in to submit a review");
+    }
   }
 }
 

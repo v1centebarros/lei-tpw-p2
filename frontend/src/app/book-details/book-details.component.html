@@ -50,7 +50,7 @@
 
   <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngIf="myReview">
     <p class="text-3xl font-bold my-auto">Your Review</p>
-    <div class="card-body flex flex-row" *ngIf="myReview.user == 1">
+    <div class="card-body flex flex-row" *ngIf="myReview.user == user.id">
       <div class="avatar my-auto">
         <div class="mask mask-squircle w-16 h-16">
           <img src="{{myReview.user_image}}" alt="" />
@@ -67,7 +67,7 @@
   </div>
 
   <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews">
-    <div class="card-body flex flex-row" *ngIf="review.user != 0">
+    <div class="card-body flex flex-row" *ngIf="review.user != user.id">
       <div class="avatar my-auto">
         <div class="mask mask-squircle w-16 h-16">
           <img src="{{review.user_image}}" alt="" />

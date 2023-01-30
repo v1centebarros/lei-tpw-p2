@@ -9,7 +9,6 @@ import {ProfileComponent} from "./profile/profile.component";
 import {PublisherComponent} from "./publisher/publisher.component";
 import {SignupComponent} from "./auth/signup/signup.component";
 import {SignupAuthorComponent } from './auth/signup-author/signup-author.component';
-
 import { AuthorProfileComponent } from './author-profile/author-profile.component';
 
 const routes: Routes = [
