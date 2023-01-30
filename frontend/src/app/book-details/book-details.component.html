@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <div class="w-full flex bg-base-100 rounded-lg mt-4">
+  <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="user.type == 'user'">
     <div class="flex flex-row justify-between p-4 w-full">
       <p class="text-3xl font-bold my-auto">Favoritos</p>
       <button class="btn btn-primary" (click)="addFav()">{{text_fav}}</button>
@@ -57,8 +57,10 @@
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
     <div class="flex flex-row justify-between p-4 w-full">
       <p class="text-3xl font-bold my-auto">Reviews</p>
-      <button class="btn btn-primary" (click)="showReviewsToggle()" *ngIf="myReview == null">{{text_button}}</button>
-      <p #other class="my-auto" *ngIf="myReview != null">You already reviewed this book</p>
+      <div *ngIf="user.type == 'user'">
+        <button class="btn btn-primary" (click)="showReviewsToggle()" *ngIf="myReview == null">{{text_button}}</button>
+        <p #other class="my-auto" *ngIf="myReview != null">You already reviewed this book</p>
+      </div>
     </div>
   </div>
 
@@ -84,7 +86,7 @@
         <div class="my-auto">
           <p>{{review.text}}</p>
         </div>
-        <div class="my-auto mx-auto" *ngIf="review.user == user.id">
+        <div class="my-auto mx-auto" *ngIf="(user.type == 'user') && (review.user == user.id)">
           <button class="btn btn-circle btn-outline mx-2 btn-warning" (click)="showEditReview()">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
               stroke="currentColor" class="w-6 h-6">
@@ -105,7 +107,7 @@
           [(ngModel)]="userReview"  />
         <button class="btn btn-primary my-auto mr-3" (click)="editReview(userReview)">Submit</button>
       </div>
-      <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="review.user != user.id">
+      <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="(user.type == 'user') && (review.user != user.id)">
         <input type="text" class="input input-bordered flex-1 m-4 in" placeholder="Comment this review"
           [(ngModel)]="userComment[i]" />
         <button class="btn btn-primary my-auto mr-3" (click)="submitComment(review.id, i)">Submit</button>
