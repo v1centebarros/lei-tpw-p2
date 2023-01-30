@@ -18,7 +18,7 @@ class UserViewSet(viewsets.ModelViewSet):
         fav_books = user.fav_books.all()
         fav_books_info = []
         for book in fav_books:
-            info = BookSerializer(book).data
+            info = BookSerializer(book, context={"request":request}).data
             fav_books_info.append(info)
         return Response(fav_books_info)
 
@@ -28,7 +28,7 @@ class UserViewSet(viewsets.ModelViewSet):
         fav_authors = user.fav_authors.all()
         fav_authors_info = []
         for author in fav_authors:
-            info = AuthorSerializer(author).data
+            info = AuthorSerializer(author, context={"request":request}).data
             fav_authors_info.append(info)
         return Response(fav_authors_info)
 
@@ -38,7 +38,7 @@ class UserViewSet(viewsets.ModelViewSet):
         fav_publishers = user.fav_publishers.all()
         fav_publishers_info = []
         for publisher in fav_publishers:
-            info = PublisherSerializer(publisher).data
+            info = PublisherSerializer(publisher, context={"request":request}).data
             fav_publishers_info.append(info)
         return Response(fav_publishers_info)
 
@@ -47,7 +47,7 @@ class UserViewSet(viewsets.ModelViewSet):
         reviews = Review.objects.filter(user=pk)
         reviews_info = []
         for review in reviews:
-            info = ReviewSerializer(review).data
+            info = ReviewSerializer(review, context={"request":request}).data
             reviews_info.append(info)
 
         return Response(reviews_info)

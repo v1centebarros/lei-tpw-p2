@@ -84,7 +84,7 @@ class User(models.Model):
 
 class Review(models.Model):
     id = models.AutoField(primary_key=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     text = models.TextField()
     datetime = models.DateTimeField(auto_now=datetime.now())

@@ -9,5 +9,7 @@ export class Review {
     book: number;
     user_name: string;
     user_image: string;
+    book_title: string;
+    book_image: string;
     number_of_comments: number;
 }

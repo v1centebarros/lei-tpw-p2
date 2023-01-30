@@ -16,12 +16,6 @@
             <span class="font-light text-lg">{{user.birth_date}}</span>
             <span class="font-extralight text-lg ml-1">({{get_age(user.birth_date)}} years)</span>
           </p>
-
-
-          <!-- Mostrar só quando tem livros-->
-          <p class="text-xl font-bold mb-4" *ngIf="books">Average Rating: 
-            <span class="font-light text-lg" *ngIf="books.length > 0">{{user.avg_rating}}</span>
-          </p>
         </div>
       </div>
 
@@ -34,57 +28,46 @@
     <p class="text-3xl font-bold p-4">Reviews</p>
   </div>
   <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews">
-    <!-- !ALTERAR -->
-    <div class="pt-4 pl-4 pr-4">
-      <div class="">
-        <a routerLink="/book/{{review.book}}" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">
-        </a>
-        <span class="font-light">{{review.datetime}}</span>
-        <p>
-          {{review.text}}
-        </p>
-        <div class="divider"></div>
+    <a routerLink="/book/{{review.book}}">
+      <div class="card-body flex flex-row">
+        <div class="avatar my-auto">
+          <div class="mask mask-squircle w-16 h-16">
+            <img src="{{review.book_image}}" alt="" />
+          </div>
+        </div>
+        <div class="my-auto">
+          <p class="font-bold">{{review.book_title}}</p>
+          <p>{{calculateDate(review.datetime)}}</p>
+        </div>
+        <div class="divider divider-horizontal"></div>
+        <div class="my-auto">
+          <p>{{review.text}}</p>
+        </div>
       </div>
-    </div>
+    </a>
   </div>
 
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
     <p class="text-3xl font-bold p-4">My Fav Books</p>
-    <!-- !CARD DOS BOOKS -->
-    <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngFor="let book of books">
-      <div class="pt-4 pl-4 pr-4">
-        <div class="">
-          <a routerLink="/book/{{book.id}}" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">
-            {{book.title}}
-          </a>
-          <span class="font-light">{{book.author}}</span>
-          <p>
-            {{book.description}}
-          </p>
-          <div class="divider"></div>
-        </div>
-      </div>
-    </div>
-  
-
   </div>
+  <app-books-container [books]="books"></app-books-container>
 
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
     <p class="text-3xl font-bold p-4">My Fav Authors</p>
-    <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngFor="let author of authors">
-      <!-- !CARD THE AUTHORS -->
-      <div class="pt-4 pl-4 pr-4">
-        <div class="">
-          <a routerLink="/author/{{author.id}}" class="text-primary font-bold hover:underline decoration-wavy underline-offset-2">
-            {{author.name}}
-          </a>
+  </div>
+  <div class="grid grid-cols-2 gap-4" *ngFor="let author of authors">
+    <div class="card card-side bg-base-100 shadow-xl">
+      <figure><img src={{author.image}} alt="Author"/></figure>
+      <div class="card-body">
+        <h2 class="card-title">{{author.name}}</h2>
+          <p class="line-clamp-5">{{author.description}}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary" routerLink="/author/{{author.id}}">More</button>
         </div>
       </div>
     </div>
-  
-
   </div>
-
+  
   <div class="w-full flex bg-base-100 rounded-lg mt-4">
     <p class="text-3xl font-bold p-4">My Fav Publishers</p>
     <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngFor="let publisher of publishers">

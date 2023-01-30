@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 import {UserService} from "../services/user.service";
 import { Comment } from '../models/comment.model';
+import { Rating } from '../models/rating.model';
 
 @Component({
   selector: 'app-book-details',
@@ -25,6 +26,7 @@ export class BookDetailsComponent implements OnInit{
   user: any;
   userComment: string[] = [];
   comments: Comment[][] = [];
+  rating: Rating;
 
   constructor(
     private route: ActivatedRoute,
@@ -113,8 +115,7 @@ export class BookDetailsComponent implements OnInit{
 
   submitReview(): void {
     if (this.user !== null) {
-      const id = +Number(this.route.snapshot.paramMap.get('id'));
-      this.reviewService.submitReview(id, this.userReview, this.user.id)
+      this.reviewService.submitReview(this.book.id, this.userReview, this.user.id)
         .subscribe(() => this.getBookReviews());
 
       this.userReview = '';

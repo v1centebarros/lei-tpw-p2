@@ -11,7 +11,7 @@
         <div class="flex-1">
           <p class="text-6xl font-bold mb-4">{{book.title}}</p>
           <div class="rating rating-lg mb-5">
-            <input type="radio" name="rating-9" class="rating-hidden"
+            <input type="radio" name="rating-8" class="rating-hidden"
               [checked]="book.avg_rating >= 0 && book.avg_rating < 1" />
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400"
               [checked]="book.avg_rating >= 1 && book.avg_rating < 2" />
@@ -23,6 +23,7 @@
               [checked]="book.avg_rating >= 4 && book.avg_rating < 5" />
             <input type="radio" name="rating-8" class="mask mask-star-2 bg-orange-400"
               [checked]="book.avg_rating === 5" />
+            <p class="text-4xl font-bold mx-5 my-auto">{{book.avg_rating}}</p>
           </div>
           <p class="text-xl font-bold mb-4">Author:
             <a routerLink="/author/{{book.author}}" class="font-light text-lg underline">{{book.author_name}}</a>
@@ -63,27 +64,8 @@
     <button class="btn btn-primary my-auto mr-3" (click)="submitReview()">Submit</button>
   </div>
 
-  <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngIf="myReview">
-    <p class="text-3xl font-bold my-auto mx-auto">Your Review</p>
-    <div class="card-body flex flex-row" *ngIf="myReview.user == user.id">
-      <div class="avatar my-auto">
-        <div class="mask mask-squircle w-16 h-16">
-          <img src="{{myReview.user_image}}" alt="" />
-        </div>
-      </div>
-      <div class="my-auto">
-        <p class="font-bold">{{myReview.user_name}}</p>
-        <p>{{calculateDate(myReview.datetime)}}</p>
-      </div>
-      <div class="divider divider-horizontal"></div>
-      <div class="my-auto">
-        <p>{{myReview.text}}</p>
-      </div>
-    </div>
-  </div>
-
   <div class="w-full flex card bg-base-100 rounded-lg mt-4" *ngFor="let review of reviews; let i = index">
-    <div *ngIf="review.user != user.id">
+    <div>
       <div class="card-body flex flex-row">
         <div class="avatar my-auto">
           <div class="mask mask-squircle w-16 h-16">

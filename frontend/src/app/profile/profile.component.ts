@@ -98,4 +98,24 @@ export class ProfileComponent implements OnInit{
       this.image = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
   }
 
+  calculateDate(date: string): string {
+    let currentDate = new Date();
+    let reviewDate = new Date(date);
+    let difference = currentDate.getTime() - reviewDate.getTime();
+    let days = Math.floor(difference / (1000 * 3600 * 24));
+    let hours = Math.floor((difference % (1000 * 3600 * 24)) / (1000 * 3600));
+    let minutes = Math.floor((difference % (1000 * 3600)) / (1000 * 60));
+    let seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    if (days > 0) {
+      return days + " days ago";
+    } else if (hours > 0) {
+      return hours + " hours ago";
+    } else if (minutes > 0) {
+      return minutes + " minutes ago";
+    } else {
+      return seconds + " seconds ago";
+    }
+  }
+
 }

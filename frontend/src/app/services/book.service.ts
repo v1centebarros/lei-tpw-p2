@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {ConnectableObservable, Observable} from "rxjs";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { Observable } from "rxjs";
 import {Book} from "../models/book.model";
 import { User } from '../models/user.model';
 import { Search } from '../models/search.model';
+import { Rating } from '../models/rating.model';
 
 
 const httpOptions = {
@@ -62,4 +63,7 @@ export class BookService {
     return this.http.post(this.baseUrl + 'books/', book);
   }
 
+  addRating(rating: Rating): Observable<any> {
+    return this.http.post(this.baseUrl + 'books/add_rating/', rating);
+  }
 }
