@@ -12,6 +12,7 @@ export class NavbarComponent  implements OnInit{
 
   user!: any;
   loggedIn: boolean;
+  typeAuthor: boolean;
 
   constructor(
     private router: Router, 
@@ -22,6 +23,7 @@ export class NavbarComponent  implements OnInit{
     console.log(this.authenticationService.loggedIn())
     this.loggedIn = this.authenticationService.loggedIn();
     this.user = this.authenticationService.getUserInfo();
+    this.typeAuthor = this.user.type == "author";
     this.getImage()
   }
 
