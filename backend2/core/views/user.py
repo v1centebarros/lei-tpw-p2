@@ -5,12 +5,25 @@ from ..serializers import UserSerializer, BookSerializer, ReviewSerializer,Publi
 from django_filters import rest_framework as filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework import status
+from django.contrib.auth.hashers import make_password
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
     filter_backends = [filters.DjangoFilterBackend]
+
+    def update(self, request, pk=None):
+        user = User.objects.get(pk=pk)
+        print(user)
+        if 'password' in request.data:
+            request.data['password'] = make_password(request.data['password'])
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=True, methods=['get'], name='Get user fav Books')
     def get_fav_book(self,request, pk):
