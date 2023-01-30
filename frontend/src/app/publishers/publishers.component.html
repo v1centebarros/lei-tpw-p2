@@ -1,0 +1,23 @@
+<p>publishers works!</p>
+<div class="flex flex-col space-y-4 m-4 h-screen xl:container xl:mx-auto">
+
+    <app-navbar></app-navbar>
+  
+    <div class="w-full rounded bg-base-100 flex">
+      <p class="text-3xl font-bold p-4 flex-1">Publishers</p>
+    </div>
+  
+    <div class="grid grid-cols-2 gap-4" *ngFor="let publisher of publishers">
+      <div class="card card-side bg-base-100 shadow-xl">
+        <figure><img src={{publisher.logo}} alt="Author"/></figure>
+        <div class="card-body">
+          <h2 class="card-title">{{publisher.name}}</h2>
+            <p class="line-clamp-5">{{publisher.address}}</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary" routerLink="/publisher/{{publisher.id}}">More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

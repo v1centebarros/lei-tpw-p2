@@ -10,7 +10,7 @@ import {PublisherComponent} from "./publisher/publisher.component";
 import {SignupComponent} from "./auth/signup/signup.component";
 import {SignupAuthorComponent } from './auth/signup-author/signup-author.component';
 import { AuthorProfileComponent } from './author-profile/author-profile.component';
-
+import { PublishersComponent } from './publishers/publishers.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: BaseComponent },
@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'author/:id', component: AuthorProfileComponent},
+  { path: 'publishers', component: PublishersComponent },
   { path: 'publisher/:id', component: PublisherComponent },
   { path:'signupReader',component:SignupComponent},
   { path:'signupAuthor',component:SignupAuthorComponent},
