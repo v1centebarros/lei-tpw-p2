@@ -34,6 +34,9 @@
           </p>
           <p class="text-xl font-bold mb-4">Publish Date: <span class="font-light text-lg">{{book.publish_date}}</span>
           </p>
+          <p class="text-xl font-bold mb-4">Publisher:
+            <a routerLink="/publisher/{{book.publisher}}" class="font-light text-lg underline">{{book.publisher_name}}</a>
+          </p>
           <p class="text-xl font-bold mb-4">ISBN: <span class="font-light text-lg">{{book.isbn}}</span></p>
         </div>
       </div>

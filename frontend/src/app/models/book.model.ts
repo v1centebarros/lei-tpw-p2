@@ -12,5 +12,6 @@ export class Book {
   author: number;
   author_name: string;
   publisher: number;
+  publisher_name: string;
   genres: string[];
 }

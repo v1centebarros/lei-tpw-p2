@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Publisher} from "../models/publisher.model";
 import {Book} from "../models/book.model";
+import {Author} from "../models/author.model";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -40,6 +41,8 @@ export class PublisherService {
     return this.http.get<Book[]>(this.baseUrl + 'publishers/' + id + '/get_publisher_books/', httpOptions);
   }
 
-
+  getPublisherAuthors(id: number): Observable<Author[]> {
+    return this.http.get<Author[]>(this.baseUrl + 'publishers/' + id + '/get_publisher_authors/', httpOptions);
+  }
 
 }
