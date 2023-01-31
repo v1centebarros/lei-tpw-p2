@@ -73,6 +73,7 @@ export class BookService {
   }
 
   addBook(book: any): Observable<any> {
+    console.log(book)
     return this.http.post(this.baseUrl + 'books/', book);
   }
 

@@ -20,6 +20,15 @@ class BookViewSet(viewsets.ModelViewSet):
     filter_backends = [django_filters.DjangoFilterBackend]
     filterset_class = BookFilter
 
+    def create(self, request, *args, **kwargs):
+        print(request.data)
+        serializer = BookSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+
     @action(detail=False, methods=['get'])
     def years(self, request):
         publish_date = Book.objects.values('publish_date').distinct()

@@ -40,9 +40,10 @@ export class AddBookComponent {
       publishDate: new FormControl('', [Validators.required]),
       language: new FormControl('', [Validators.required]),
       publisher: new FormControl('', [Validators.required]),
-      genre: new FormControl('', [Validators.required]),
+      genre: new FormControl(''),
       isbn: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
+      image: new FormControl(null)
     });
 
     this.id = this.authService.getUserInfo().id;
@@ -59,22 +60,27 @@ export class AddBookComponent {
       .subscribe(genres => this.genres = genres);
   }
 
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.form.get('image')?.setValue(file);
+    }
+  }
 
   onSubmit(): void {
     if (this.form.valid) {
-      const formData = {
-        title: this.form.value.title,
-        pages: this.form.value.pages,
-        publish_date: this.form.value.publishDate,
-        language: this.form.value.language,
-        publisher: this.form.value.publisher,
-        isbn: this.form.value.isbn,
-        description: this.form.value.description,
-        genres: +Number(this.form.value.genre),
-        author: String(this.id),
-      }
+      const formData = new FormData();
+      formData.append('title', this.form.get('title')?.value);
+      formData.append('pages', this.form.get('pages')?.value);
+      formData.append('publish_date', this.form.get('publishDate')?.value);
+      formData.append('language', this.form.get('language')?.value);
+      formData.append('publisher', this.form.get('publisher')?.value);
+      formData.append('genres', this.form.get('genre')?.value);
+      formData.append('isbn', this.form.get('isbn')?.value);
+      formData.append('description', this.form.get('description')?.value);
+      formData.append('image', this.form.get('image')?.value);
+      formData.append('author', this.id);
 
-      console.log(formData);
       this.bookService.addBook(formData).subscribe(
         (response: any) => {
           this.router.navigate(['/books']);

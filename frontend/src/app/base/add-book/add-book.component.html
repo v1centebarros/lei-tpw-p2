@@ -96,7 +96,7 @@
 
 
       <label class="label">
-        <span class="label-text">Publish Date</span>
+        <span class="label-text">ISBN</span>
       </label>
       <input
         type="text"
@@ -117,6 +117,11 @@
       <textarea class="textarea h-24 textarea-bordered" placeholder="Tell us a bit about you" name="description"
                 required
                 formControlName="description"></textarea>
+      
+      <label class="label">
+        <span class="label-text">Book Cover</span>
+      </label>
+      <input (change)="onFileChange($event)" type="file" class="input input-bordered" name="image"/>         
 
       <div class="text-error" *ngIf="form.get('description')?.touched && form.get('description')?.invalid">
         <div *ngIf="form.get('description')?.errors?.['required']">Publish Date is required</div>
