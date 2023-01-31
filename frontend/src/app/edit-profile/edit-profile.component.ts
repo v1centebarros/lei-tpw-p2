@@ -37,7 +37,7 @@ export class EditProfileComponent implements OnInit{
       oldpassword: new FormControl(null),
       newpassword: new FormControl(null),
       confirmnewpassword: new FormControl(null),
-      birthDate: new FormControl(this.user.date_birth, [Validators.required]),
+      birthDate: new FormControl(this.user.birth_date, [Validators.required]),
       firstName: new FormControl(this.user.first_name, [Validators.required]),
       lastName: new FormControl(this.user.last_name, [Validators.required]),
       description: new FormControl(this.user.description, [Validators.required]),

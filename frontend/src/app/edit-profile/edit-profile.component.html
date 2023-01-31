@@ -86,7 +86,7 @@
         <span class="label-text">Birth Date</span>
       </label>
       <input type="date" placeholder="Birth Date" class="input input-bordered" name="birthDate"
-             formControlName="birthDate"/>
+             formControlName="birthDate" value="{{ user.birth_date }}"/>
 
       <div class="text-error" *ngIf="form.get('birth_date')?.touched && form.get('birth_date')?.invalid">
         <div *ngIf="form.get('birth_date')?.errors?.['required']">Birth Date is required</div>

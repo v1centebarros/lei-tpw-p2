@@ -29,14 +29,14 @@ export class EditAuthorComponent implements OnInit{
       this.router.navigate(['/login']);
     }
     this.author = this.authService.getUserInfo();
-
+    console.log(this.author)
 
     this.form = new FormGroup({
       name: new FormControl(this.author.name, [Validators.required]),
       newpassword: new FormControl(null),
       oldpassword: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl(null),
-      birthDate: new FormControl('', [Validators.required]),
+      birthDate: new FormControl(this.author.birth_date, [Validators.required]),
       nationality: new FormControl(this.author.nationality, [Validators.required]),
       description: new FormControl(this.author.description, [Validators.required]),
       image: new FormControl(null)

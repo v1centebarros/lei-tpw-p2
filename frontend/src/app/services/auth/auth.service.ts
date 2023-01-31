@@ -66,7 +66,7 @@ export class AuthService {
                 id: sessionStorage.getItem("id"),
                 email: sessionStorage.getItem("email"),
                 name: sessionStorage.getItem("name"),
-                date_birth: sessionStorage.getItem("date_birth"),
+                nationality: sessionStorage.getItem("nationality"),
                 type: sessionStorage.getItem("type"),
                 token: sessionStorage.getItem("token"),
                 description: sessionStorage.getItem("description"),
