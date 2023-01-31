@@ -58,7 +58,7 @@ export class NavbarComponent  implements OnInit{
       window.location.href = '/settings';
     }
     if (this.user.type == "author"){
-      window.location.href = '/author/'+ this.user.id;
+      window.location.href = '/authorSettings';
     }
   }
 }
