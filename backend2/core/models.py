@@ -59,10 +59,9 @@ class Book(models.Model):
     image = models.ImageField(upload_to='books', blank=True, null=True, default='books/default.jpg')
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
-    genres = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    genres = models.ForeignKey(Genre, on_delete=models.CASCADE, blank=True, null=True)
     avg_rating = models.FloatField(default=0.0, blank=True, null=True)
     num_ratings = models.IntegerField(default=0, blank=True, null=True)
-
     def __str__(self):
         return self.title
 

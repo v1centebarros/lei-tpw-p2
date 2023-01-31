@@ -52,7 +52,7 @@ export class AddBookComponent {
       publishDate: new FormControl('', [Validators.required]),
       language: new FormControl('', [Validators.required]),
       publisher: new FormControl('', [Validators.required]),
-      genre: new FormControl(''),
+      genre: new FormControl('', [Validators.required]),
       isbn: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       image: new FormControl(null, [Validators.required])

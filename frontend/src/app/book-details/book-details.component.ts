@@ -127,6 +127,14 @@ export class BookDetailsComponent implements OnInit{
     return this.book;
   }
 
+  deleteBook(): void {
+    const id = +Number(this.route.snapshot.paramMap.get('id'));
+    this.bookService.deleteBook(id)
+      .subscribe(() => {
+        window.location.href = '/books';
+      });
+  }
+
 
   getBookReviews(): void {
     const id = +Number(this.route.snapshot.paramMap.get('id'));

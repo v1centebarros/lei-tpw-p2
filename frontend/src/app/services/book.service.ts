@@ -81,6 +81,10 @@ export class BookService {
     return this.http.put(this.baseUrl + 'books/' + id + '/', book);
   }
 
+  deleteBook(id: number): Observable<any> {
+    return this.http.delete(this.baseUrl + 'books/' + id + '/');
+  }
+
   getRatingByBookAndUser(book_id: number, user_id: number): Observable<Rating[]> {
     return this.http.get<Rating[]>(this.baseUrl + 'ratings/?book=' + book_id + '&user=' + user_id);
   }

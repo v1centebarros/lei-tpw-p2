@@ -6,6 +6,7 @@ import { BookService } from '../services/book.service';
 import { PublisherService } from '../services/publisher.service';
 import { Book } from '../models/book.model';
 import { AuthService } from '../services/auth/auth.service';
+import { Genre } from '../models/genre.model';
 
 @Component({
   selector: 'app-edit-book',
@@ -19,6 +20,7 @@ export class EditBookComponent implements OnInit{
   form: FormGroup;
   book: Book;
   id: number;
+  genres: Genre[];
   author: any;
   book2: any;
 
@@ -45,23 +47,31 @@ export class EditBookComponent implements OnInit{
 
     this.getPublishers();
     this.getBook(this.id);
+    this.getGenre();
     this.book2 = sessionStorage.getItem("book")
     this.book2 = JSON.parse(this.book2)
     if( this.book2.author != this.author.id){
       this.router.navigate(['/book/' + this.id +'/']);
     }
 
-    console.log(this.book2)
     this.form = new FormGroup({
       title: new FormControl(this.book2.title, [Validators.required]),
       pages: new FormControl(this.book2.pages, [Validators.required]),
       publishDate: new FormControl(this.book2.publish_date, [Validators.required]),
       language: new FormControl(this.book2.language,[Validators.required]),
       publisher: new FormControl(this.book2.publisher,[Validators.required]),
+      genres: new FormControl(this.book2.genres, [Validators.required]),
       isbn: new FormControl(this.book2.isbn,[Validators.required]),
       description: new FormControl(this.book2.description,[Validators.required]),
       image: new FormControl(null),
     })
+  }
+
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.form.get('image')?.setValue(file);
+    }
   }
 
   getPublishers(): void {
@@ -74,23 +84,29 @@ export class EditBookComponent implements OnInit{
       .subscribe(book => this.book = book);
   }
 
+  getGenre(): void {
+    this.bookService.getBooksGenre()
+      .subscribe(genres => this.genres = genres);
+  }
+
   onSubmit(): void {
     if (this.form.valid) {
-      const formData = {
-        title: this.form.get('title')?.value,
-        pages: this.form.get('pages')?.value,
-        publish_date: this.form.get('publishDate')?.value,
-        language: this.form.get('language')?.value,
-        publisher: this.form.get('publisher')?.value,
-        isbn: this.form.get('isbn')?.value,
-        description: this.form.get('description')?.value,
-        image: this.form.get('image')?.value,
-        author: +Number(this.author.id),
-        avg_rating: this.book2.avg_rating,
-        num_ratings: this.book2.num_ratings,
-        id: this.id
+      let formData = new FormData();
+      formData.append('title', this.form.get('title')?.value);
+      formData.append('pages', this.form.get('pages')?.value);
+      formData.append('publish_date', this.form.get('publishDate')?.value);
+      formData.append('language', this.form.get('language')?.value);
+      formData.append('publisher', this.form.get('publisher')?.value);
+      formData.append('genres', this.form.get('genres')?.value);
+      formData.append('isbn', this.form.get('isbn')?.value);
+      formData.append('description', this.form.get('description')?.value);
+      formData.append('image', this.form.get('image')?.value);
+      formData.append('author', this.author.id);
+
+      if (this.form.get('image')?.value == null) {
+        formData.delete('image');
       }
-      console.log(formData);
+
       this.bookService.editBook(this.id, formData).subscribe(
         (response: any) => {
           this.router.navigate(['/book/' + this.id +'/']);

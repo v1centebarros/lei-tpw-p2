@@ -68,6 +68,18 @@
           <option *ngFor="let publisher of publishers" value={{publisher.id}}>{{publisher.name}}</option>
         </select>
 
+        <label class="label">
+          <span class="label-text">Genre</span>
+        </label>
+        <select
+          class="input input-bordered"
+          name="genres"
+          formControlName="genres"
+          value = "{{ book.genres }}"
+          >
+          <option selected value="">Genre</option>
+          <option *ngFor="let genre of genres" value={{genre.id}}>{{genre.name}}</option>
+        </select>
 
         <label class="label">
           <span class="label-text">Publish Date</span>
@@ -81,6 +93,11 @@
           formControlName="isbn"
 
         />
+
+        <label class="label">
+          <span class="label-text">Book Cover</span>
+        </label>
+        <input (change)="onFileChange($event)" type="file" class="input input-bordered" name="image"/>
 
         <label class="label">
           <span class="label-text">Description</span>
