@@ -14,4 +14,5 @@ export class Book {
   publisher: number;
   publisher_name: string;
   genres: string[];
+  genre_name: string;
 }

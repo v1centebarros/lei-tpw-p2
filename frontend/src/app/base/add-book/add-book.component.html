@@ -79,6 +79,21 @@
         <div *ngIf="form.get('publisher')?.errors?.['required']">Publisher is required</div>
       </div>
 
+      <label class="label">
+        <span class="label-text">Genre</span>
+      </label>
+      <select
+        class="input input-bordered"
+        name="genre"
+        formControlName="genre"
+        >
+        <option selected value="">Genre</option>
+        <option *ngFor="let genre of genres" value={{genre.id}}>{{genre.name}}</option>
+      </select>
+      <div class="text-error" *ngIf="form.get('genre')?.touched && form.get('genre')?.invalid">
+        <div *ngIf="form.get('genre')?.errors?.['required']">Genre is required</div>
+      </div>
+
 
       <label class="label">
         <span class="label-text">Publish Date</span>

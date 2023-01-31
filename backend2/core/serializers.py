@@ -77,6 +77,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 class BookSerializer(serializers.ModelSerializer):
     author_name = serializers.CharField(source='author.name', read_only=True)
     publisher_name = serializers.CharField(source='publisher.name', read_only=True)
+    genre_name = serializers.CharField(source='genres.name', read_only=True)
     class Meta:
         model = Book
         fields = '__all__'

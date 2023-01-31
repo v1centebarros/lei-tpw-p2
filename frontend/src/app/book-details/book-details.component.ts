@@ -39,7 +39,7 @@ export class BookDetailsComponent implements OnInit{
     private reviewService: ReviewService,
     private authenticationService: AuthService,
     private userService: UserService
-  ) { 
+  ) {
   }
 
   download(){
@@ -47,72 +47,66 @@ export class BookDetailsComponent implements OnInit{
   }
   getdoc(){
     const { jsPDF } = require("jspdf");
-let doc = new jsPDF({
-});
+    let doc = new jsPDF({
+    });
 
-// Set font and font size
-doc.setFont("times");
-doc.setFontSize(16);
+    // Set font and font size
+    doc.setFont("times");
+    doc.setFontSize(16);
 
-// Set text color
-doc.setTextColor(0, 0, 0);
+    // Set text color
+    doc.setTextColor(0, 0, 0);
 
-// Generate a PDF with all the information about the book 
-doc.text("Title: " + this.book.title, 10, 20);
+    // Generate a PDF with all the information about the book
+    doc.text("Title: " + this.book.title, 10, 20);
 
-// Set font size for author
-doc.setFontSize(14);
-doc.text("Author: " + this.book.author_name, 10, 40);
+    // Set font size for author
+    doc.setFontSize(14);
+    doc.text("Author: " + this.book.author_name, 10, 40);
 
-// Set font size for publisher
-doc.setFontSize(14);
-doc.text("Publisher: " + this.book.publisher_name, 10, 60);
+    // Set font size for publisher
+    doc.setFontSize(14);
+    doc.text("Publisher: " + this.book.publisher_name, 10, 60);
 
-// Set font size for ISBN
-doc.setFontSize(14);
-doc.text("ISBN: " + this.book.isbn, 10, 80);
+    // Set font size for ISBN
+    doc.setFontSize(14);
+    doc.text("ISBN: " + this.book.isbn, 10, 80);
 
-// Set font size for Publish date
-doc.setFontSize(14);
-doc.text("Publish_date: " + this.book.publish_date, 10, 100);
+    // Set font size for Publish date
+    doc.setFontSize(14);
+    doc.text("Publish_date: " + this.book.publish_date, 10, 100);
 
-// Set font size for Description
-doc.setFontSize(14);
-doc.text("Description: " + this.book.description, 10, 120);
+    // Set font size for Description
+    doc.setFontSize(14);
+    doc.text("Description: " + this.book.description, 10, 120);
 
-// Set font size for Language
-doc.setFontSize(14);
-doc.text("Language: " + this.book.language, 10, 140);
+    // Set font size for Language
+    doc.setFontSize(14);
+    doc.text("Language: " + this.book.language, 10, 140);
 
-// Set font size for Pages
-doc.setFontSize(14);
-doc.text("Pages: " + this.book.pages, 10, 160);
+    // Set font size for Pages
+    doc.setFontSize(14);
+    doc.text("Pages: " + this.book.pages, 10, 160);
 
-// Set font size for Average Rating
-doc.setFontSize(14);
-doc.text("Average Rating: " + this.book.avg_rating, 10, 180);
+    // Set font size for Average Rating
+    doc.setFontSize(14);
+    doc.text("Average Rating: " + this.book.avg_rating, 10, 180);
 
-// Set font size for Number of Ratings
-doc.setFontSize(14);
-doc.text("Number of Ratings: " + this.book.num_ratings, 10, 200);
+    // Set font size for Number of Ratings
+    doc.setFontSize(14);
+    doc.text("Number of Ratings: " + this.book.num_ratings, 10, 200);
 
-// Set font size for Genre
-doc.setFontSize(14);
-doc.text("Genre: ", 10, 220);
+    // Set font size for Genre
+    doc.setFontSize(14);
+    doc.text("Genre: " + this.book.genre_name, 10, 220);
 
-// set imagem from the book 
+    // set imagem from the book
 
-doc.addImage(this.book.image, 'JPEG', 10, 230, 50, 50);
+    doc.addImage(this.book.image, 'JPEG', 10, 230, 50, 50);
 
 
-// Set font size for Genre values
-doc.setFontSize(12);
-this.book.genres.map((genre) => {
-  doc.text(genre, 10, 240);
-});
-
-// Save the PDF
-doc.save(this.book.title +".pdf");
+    // Save the PDF
+    doc.save(this.book.title +".pdf");
 
   }
 
@@ -309,6 +303,6 @@ doc.save(this.book.title +".pdf");
     }
   }
 
-  
+
 }
 
