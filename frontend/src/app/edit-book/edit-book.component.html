@@ -16,9 +16,7 @@
           formControlName="title"
   
         />
-        <div class="text-error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
-          <div *ngIf="form.get('title')?.errors?.['required']">Name is required</div>
-        </div>
+
   
   
         <label class="label">
@@ -33,11 +31,6 @@
           formControlName="pages"
   
         />
-        <div class="text-error" *ngIf="form.get('pages')?.touched && form.get('pages')?.invalid">
-          <div *ngIf="form.get('pages')?.errors?.['required']">Number of Pages is required</div>
-          <div *ngIf="form.get('pages')?.errors?.['pattern']">Invalid Number</div>
-        </div>
-  
   
         <label class="label">
           <span class="label-text">Publish Date</span>
@@ -45,9 +38,7 @@
         <input type="date" placeholder="Publish Date" class="input input-bordered" name="publishDate"
                formControlName="publishDate" value = "{{ book.publish_date }}"/>
   
-        <div class="text-error" *ngIf="form.get('publishDate')?.touched && form.get('publishDate')?.invalid">
-          <div *ngIf="form.get('publishDate')?.errors?.['required']">Publish Date is required</div>
-        </div>
+ 
   
   
         <label class="label">
@@ -57,13 +48,11 @@
           class="input input-bordered"
           name="language"
           formControlName="language"
+          value = "{{ book.language }}"
           >
           <option selected value="">Language</option>
           <option *ngFor="let language of languages" value={{language}}>{{language}}</option>
         </select>
-        <div class="text-error" *ngIf="form.get('language')?.touched && form.get('language')?.invalid">
-          <div *ngIf="form.get('language')?.errors?.['required']">Language is required</div>
-        </div>
   
   
         <label class="label">
@@ -73,13 +62,11 @@
           class="input input-bordered"
           name="publisher"
           formControlName="publisher"
+          value = "{{ book.publisher }}"
           >
           <option selected value="">Publisher</option>
           <option *ngFor="let publisher of publishers" value={{publisher.id}}>{{publisher.name}}</option>
         </select>
-        <div class="text-error" *ngIf="form.get('publisher')?.touched && form.get('publisher')?.invalid">
-          <div *ngIf="form.get('publisher')?.errors?.['required']">Publisher is required</div>
-        </div>
   
   
         <label class="label">
@@ -94,9 +81,6 @@
           formControlName="isbn"
   
         />
-        <div class="text-error" *ngIf="form.get('isbn')?.touched && form.get('isbn')?.invalid">
-          <div *ngIf="form.get('isbn')?.errors?.['required']">Publish Date is required</div>
-        </div>
   
   
         <label class="label">
@@ -109,17 +93,13 @@
           <span class="label-text">Description</span>
         </label>
         <textarea class="textarea h-24 textarea-bordered" placeholder="Tell us a bit about you" name="description"
-                  required
                   value = "{{ book.description }}"
                   formControlName="description"></textarea>
-  
-        <div class="text-error" *ngIf="form.get('description')?.touched && form.get('description')?.invalid">
-          <div *ngIf="form.get('description')?.errors?.['required']">Publish Date is required</div>
-        </div>
+
   
         <div class="flex flex-row mt-6 justify-between">
           <a routerLink="/" class="btn btn-accent w-5/12">Go Back</a>
-          <input type="submit" value="Add Book" class="btn btn-primary w-5/12" [disabled]="form.invalid" (click)="onSubmit()"/>
+          <input type="submit" value="Add Book" class="btn btn-primary w-5/12"  (click)="onSubmit()"/>
         </div>
   
       </div>

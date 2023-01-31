@@ -18,6 +18,9 @@ export class EditBookComponent implements OnInit{
   languages: String[] = ['English', 'Spanish', 'Portuguese'];
   form: FormGroup;
   book: Book;
+  id: number;
+  author: any;
+  book2: any;
 
   constructor(
     private publisherService: PublisherService,
@@ -38,24 +41,29 @@ export class EditBookComponent implements OnInit{
   }
 
   ngOnInit() {
-    const id = +Number(this.route.snapshot.paramMap.get('id'));
+    this.id = +Number(this.route.snapshot.paramMap.get('id'));
     if(this.authService.loggedIn() == false){
       this.router.navigate(['/login']);
     }
     if(this.authService.getUserInfo().type != 'author'){
-      this.router.navigate(['/book/' + id +'/']);
+      this.router.navigate(['/book/' + this.id +'/']);
     }
+    this.author = this.authService.getUserInfo();
 
     this.getPublishers();
-    this.getBook(id);
+    this.getBook(this.id);
+    this.book2 = sessionStorage.getItem("book")
+    this.book2 = JSON.parse(this.book2)
+    
+    console.log(this.book2)
     this.form = new FormGroup({
-      title: new FormControl(this.book.title, [Validators.required]),
-      pages: new FormControl(this.book.pages, [Validators.required, Validators.pattern('^[0-9]*$')]),
-      publishDate: new FormControl(this.book.publish_date, [Validators.required]),
-      language: new FormControl(this.book.language, [Validators.required]),
-      publisher: new FormControl(this.book.publisher, [Validators.required]),
-      isbn: new FormControl(this.book.isbn, [Validators.required]),
-      description: new FormControl(this.book.description, [Validators.required]),
+      title: new FormControl(this.book2.title, [Validators.required]),
+      pages: new FormControl(this.book2.pages, [Validators.required]),
+      publishDate: new FormControl(this.book2.publish_date, [Validators.required]),
+      language: new FormControl(this.book2.language,[Validators.required]),
+      publisher: new FormControl(this.book2.publisher,[Validators.required]),
+      isbn: new FormControl(this.book2.isbn,[Validators.required]),
+      description: new FormControl(this.book2.description,[Validators.required]),
       image: new FormControl(null),
     })
   }
@@ -72,20 +80,24 @@ export class EditBookComponent implements OnInit{
 
   onSubmit(): void {
     if (this.form.valid) {
-      const formData = new FormData();
-      formData.append('title', this.form.value.title);
-      formData.append('pages', this.form.value.pages);
-      formData.append('publish_date', this.form.value.publishDate);
-      formData.append('language', this.form.value.language);
-      formData.append('publisher', this.form.value.publisher);
-      formData.append('isbn', this.form.value.isbn);
-      formData.append('description', this.form.value.description);
-      formData.append('image', this.form.get('image')?.value);
-      formData.append('author', '1'); //Change this to the current user
-      
-      this.bookService.addBook(formData).subscribe(
+      const formData = {
+        title: this.form.get('title')?.value,
+        pages: this.form.get('pages')?.value,
+        publish_date: this.form.get('publishDate')?.value,
+        language: this.form.get('language')?.value,
+        publisher: this.form.get('publisher')?.value,
+        isbn: this.form.get('isbn')?.value,
+        description: this.form.get('description')?.value,
+        image: this.form.get('image')?.value,
+        author: this.author.id,
+        avg_rating: this.book2.avg_rating,
+        num_ratings: this.book2.num_ratings,
+        id: this.id
+      }
+      console.log(formData);
+      this.bookService.editBook(this.id, formData).subscribe(
         (response: any) => {
-          console.log(response);
+          this.router.navigate(['/book/' + this.id +'/']);
         }
       );
     }

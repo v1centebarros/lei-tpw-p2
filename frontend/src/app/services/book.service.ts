@@ -17,6 +17,7 @@ const httpOptions = {
 })
 export class BookService {
   private baseUrl = 'http://localhost:8000/api/';
+  private Book = new Book();
   constructor(private http: HttpClient) { }
 
   getBooks(): Observable<Book[]> {
@@ -24,7 +25,13 @@ export class BookService {
   }
 
   getBook(id: number): Observable<Book> {
-    return this.http.get<Book>(this.baseUrl + 'books/' + id + '/');
+    let infoBook = this.http.get<Book>(this.baseUrl + 'books/' + id + '/');
+    infoBook.subscribe(
+      (data) => {
+        sessionStorage.setItem('book', JSON.stringify(data));
+      }
+    );
+    return infoBook;
   }
 
   getAllAuthors(): Observable<User[]> {
@@ -61,6 +68,10 @@ export class BookService {
 
   addBook(book: any): Observable<any> {
     return this.http.post(this.baseUrl + 'books/', book);
+  }
+
+  editBook(id: number, book: any): Observable<any> {
+    return this.http.put(this.baseUrl + 'books/' + id + '/', book);
   }
 
   addRating(rating: Rating): Observable<any> {
