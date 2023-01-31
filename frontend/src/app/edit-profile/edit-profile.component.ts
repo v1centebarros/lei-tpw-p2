@@ -43,17 +43,18 @@ export class EditProfileComponent implements OnInit{
       description: new FormControl(this.user.description, [Validators.required]),
       image: new FormControl(null)
     });
-
-
   }
-  
+
   onFileChange(event: any) {
+    console.log(event.target.files)
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.form.get('image')?.setValue(file);
-      this.image = true ;
+      console.log(file)
+      console.log(this.form.get('image')?.value)
+      this.image = true;
     }
-    else{
+    else {
       this.image = false;
     }
   }
@@ -67,16 +68,18 @@ export class EditProfileComponent implements OnInit{
   editUser(){
     if(this.form.get('newpassword')?.value == null && this.form.get('oldpassword')?.value != null && this.form.get('confirmnewpassword')?.value == null ){
       let formData = null;
+
       if (this.image){
-        formData = new FormData();
-        formData.append('image', this.form.get("image")?.value);
-        formData.append('username', this.form.value.username);
-        formData.append('email', this.form.value.email);
-        formData.append('password', this.form.value.oldpassword);
-        formData.append('birth_date', this.form.value.birthDate);
-        formData.append('first_name', this.form.value.firstName);
-        formData.append('last_name', this.form.value.lastName);
-        formData.append('description', this.form.value.description);
+        formData = {
+          username: this.form.value.username,
+          email: this.user.email,
+          password: this.form.value.oldpassword,
+          birth_date: this.form.value.birthDate,
+          first_name: this.form.value.firstName,
+          last_name: this.form.value.lastName,
+          description: this.form.value.description,
+          image: this.form.get('image')?.value
+        }
       }
       else{
         formData={

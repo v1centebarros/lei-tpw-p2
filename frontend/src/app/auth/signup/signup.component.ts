@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit{
       if (this.authService.loggedIn()) {
         this.router.navigate(['/']);
       }
-      
+
       this.form = new FormGroup({
         username: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit{
         image: new FormControl(null)
       });
     }
-    
+
     onFileChange(event: any) {
       if (event.target.files.length > 0) {
         const file = event.target.files[0];
@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit{
       if( this.form.valid){
         this.registerUser();
       }
-    
+
     }
     registerUser(){
 
@@ -92,8 +92,7 @@ export class SignupComponent implements OnInit{
 
         this.authService.registerUser(formData).subscribe(response => {
           this.response = response;
-          // ! ALTERAR ERROS MENSAGES
-  
+
             if ('error' in response) {
               this.registerFail = true;
               this.form.reset();
@@ -102,7 +101,7 @@ export class SignupComponent implements OnInit{
             else{
               this.router.navigate(['/login']);
             }
-              
+
         });
       }
     }

@@ -9,7 +9,7 @@ import { lastValueFrom } from 'rxjs';
   templateUrl: './signup-author.component.html',
   styleUrls: ['./signup-author.component.css']
 })
-export class SignupAuthorComponent implements OnInit{
+export class SignupAuthorComponent implements OnInit {
   response: any;
   form: FormGroup;
   image: boolean = false;
@@ -26,7 +26,7 @@ export class SignupAuthorComponent implements OnInit{
     if (this.authService.loggedIn()) {
       this.router.navigate(['/']);
     }
-    
+
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -38,34 +38,37 @@ export class SignupAuthorComponent implements OnInit{
       image: new FormControl(null)
     });
   }
-  
+
   onFileChange(event: any) {
+    console.log(event.target.files)
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.form.get('image')?.setValue(file);
-      this.image = true ;
+      console.log(file)
+      console.log(this.form.get('image')?.value)
+      this.image = true;
     }
-    else{
+    else {
       this.image = false;
     }
   }
 
   onSubmit() {
-    if( this.form.valid){
+    if (this.form.valid) {
       this.registerAuthor();
     }
-  
+
   }
-  registerAuthor(){
+  registerAuthor() {
 
     // Validar password
-    if(this.form.get('password')?.value != this.form.get('confirmPassword')?.value){
+    if (this.form.get('password')?.value != this.form.get('confirmPassword')?.value) {
       this.registerFail = true;
       return;
     }
-    else{
+    else {
       let formData = null;
-      if (this.image){
+      if (this.image) {
         formData = new FormData();
         formData.append('image', this.form.get("image")?.value);
         formData.append('name', this.form.value.name);
@@ -75,14 +78,14 @@ export class SignupAuthorComponent implements OnInit{
         formData.append('description', this.form.value.description);
         formData.append('nationality', this.form.value.description);
       }
-      else{
-        formData={
+      else {
+        formData = {
           name: this.form.value.name,
           email: this.form.value.email,
           password: this.form.value.password,
           birth_date: this.form.value.birthDate,
           description: this.form.value.description,
-          nationality:this.form.value.nationality,
+          nationality: this.form.value.nationality,
         }
       }
 
@@ -90,13 +93,13 @@ export class SignupAuthorComponent implements OnInit{
         this.response = response;
         // ! ALTERAR ERROS MENSAGES
 
-          if ('error' in response) {
-            this.registerFail = true;
-            this.form.reset();
-            this.message = response.error;
-          }
-          else
-            this.router.navigate(['/login']);
+        if ('error' in response) {
+          this.registerFail = true;
+          this.form.reset();
+          this.message = response.error;
+        }
+        else
+          this.router.navigate(['/login']);
       });
     }
   }
