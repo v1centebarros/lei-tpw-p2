@@ -24,7 +24,7 @@ export class PublisherComponent {
   state_fav: boolean = false;
   avgRating:number = 0;
   authors: Author[] = [];
-  qrInfo: any;
+  qrInfo: string;
 
   constructor(
     private publisherService: PublisherService,
@@ -43,8 +43,6 @@ export class PublisherComponent {
       this.logged = true;
     }
     this.getAuthors();
-    let  website = this.publisher.website
-    this.qrInfo = window.location.href;
   }
 
   getPublisher(): void {
@@ -77,7 +75,7 @@ export class PublisherComponent {
      else
        this.logo = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
    }
-  
+
   verifyFav(){
     this.userService.getUserFavPublisher(this.user.id).subscribe(publishers => {
       for (let publisher of publishers){
