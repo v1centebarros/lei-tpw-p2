@@ -50,6 +50,9 @@ Com o Bookify,podem adicionar os seus próprios livros à plataforma, permitindo
 - [Autenticação](#autenticação)
 - [Execute](#execute)
 - [Deploy](#deploy)
+  - [Login Informações](#login-informações)
+    - [Leitor](#leitor)
+    - [Autor](#autor)
 - [Referências](#referências)
 - [Créditos](#créditos)
 
@@ -665,6 +668,15 @@ A aplicação pode ser acedida no seguinte link:
 
 Agora segue-se o link da APi REst:
 [https://marianaandrade.pythonanywhere.com/api/](hhttps://marianaandrade.pythonanywhere.com/api/)
+
+## Login Informações
+
+### Leitor
+    email:leitor@gmail.com
+    password: leitor
+### Autor
+    email: autor@gmail.com
+    password: autor
 
 
 # Referências
