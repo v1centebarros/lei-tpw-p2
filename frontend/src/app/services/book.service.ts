@@ -5,6 +5,7 @@ import {Book} from "../models/book.model";
 import { User } from '../models/user.model';
 import { Search } from '../models/search.model';
 import { Rating } from '../models/rating.model';
+import { Genre } from '../models/genre.model';
 
 
 const httpOptions = {
@@ -55,6 +56,10 @@ export class BookService {
     if (search.language) {
       params = params.append('language', search.language);
     }
+    if (search.genre) {
+      params = params.append('genre', search.genre);
+    }
+    console.log(this.baseUrl + 'books/', {params: params})
     return this.http.get<Book[]>(this.baseUrl + 'books/', {params: params});
   }
 
@@ -64,6 +69,10 @@ export class BookService {
 
   getAvailableYears(): Observable<string[]> {
     return this.http.get<string[]>(this.baseUrl + 'books/years/');
+  }
+
+  getBooksGenre(): Observable<Genre[]> {
+    return this.http.get<Genre[]>(this.baseUrl + 'books/genres/');
   }
 
   addBook(book: any): Observable<any> {

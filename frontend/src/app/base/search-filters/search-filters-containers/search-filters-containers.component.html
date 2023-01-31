@@ -21,5 +21,10 @@
       <option selected value="">Language</option>
       <option *ngFor="let language of languages" [value]="language">{{language}}</option>
     </select>
+
+    <select class="select" [(ngModel)]="genre" (ngModelChange)="onSearchChanged()">
+      <option selected value="">Genre</option>
+      <option *ngFor="let genre of genres" [value]="genre">{{genre.name}}</option>
+    </select>
   </div>
 </div>

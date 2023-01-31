@@ -18,6 +18,7 @@ export class BaseComponent implements OnInit{
   year: string;
   publisher: string;
   language: string;
+  genre: string;
   books: Book[];
 
   ngOnInit() {
@@ -30,6 +31,7 @@ export class BaseComponent implements OnInit{
     this.year = search.year;
     this.publisher = search.publisher;
     this.language = search.language;
+    this.genre = search.genre;
     this.getBooksWithFilters();
   }
 
@@ -62,7 +64,8 @@ export class BaseComponent implements OnInit{
       avg_rating: this.avg_rating,
       year: this.year,
       publisher: this.publisher,
-      language: this.language
+      language: this.language,
+      genre: this.genre
     }).subscribe(books => this.books = books);
   }   
 }
