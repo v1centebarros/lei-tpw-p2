@@ -28,7 +28,7 @@ export class BookDetailsComponent implements OnInit{
   user: any;
   userComment: string[] = [];
   comments: Comment[][] = [];
-  rating: Rating;
+  rating: Rating = new Rating();
   editMyReview: boolean = false;
   showRateBook: boolean = false;
   selectedRating: number = 0;
@@ -127,6 +127,14 @@ export class BookDetailsComponent implements OnInit{
     return this.book;
   }
 
+  deleteBook(): void {
+    const id = +Number(this.route.snapshot.paramMap.get('id'));
+    this.bookService.deleteBook(id)
+      .subscribe(() => {
+        window.location.href = '/books';
+      });
+  }
+
 
   getBookReviews(): void {
     const id = +Number(this.route.snapshot.paramMap.get('id'));
@@ -141,7 +149,6 @@ export class BookDetailsComponent implements OnInit{
 
   showRateToggle(): void {
     this.showRateBook = !this.showRateBook;
-    console.log(this.showRateBook)
   }
 
   getRatingbyBookAndUser(): void {

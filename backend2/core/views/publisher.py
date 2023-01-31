@@ -33,7 +33,7 @@ class PublisherViewSet(viewsets.ModelViewSet):
         for book in publisher_books:
            authors.append(book.author) 
 
-        for author in authors:
+        for author in set(authors):
             info = AuthorSerializer(author, context={"request":request}).data
             publisher_books_authors.append(info)
 

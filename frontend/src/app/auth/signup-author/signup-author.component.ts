@@ -44,8 +44,6 @@ export class SignupAuthorComponent implements OnInit {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.form.get('image')?.setValue(file);
-      console.log(file)
-      console.log(this.form.get('image')?.value)
       this.image = true;
     }
     else {
