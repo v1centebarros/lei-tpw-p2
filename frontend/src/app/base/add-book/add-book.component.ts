@@ -41,7 +41,7 @@ export class AddBookComponent {
   }
 
   ngOnInit() {
-    if (this.authService.loggedIn() == false && this.authService.getUserInfo().type != 'author') {
+    if (this.authService.loggedIn() == false || this.authService.getUserInfo().type != 'author') {
       this.router.navigate(['/login']);
     }
     this.getPublishers();
