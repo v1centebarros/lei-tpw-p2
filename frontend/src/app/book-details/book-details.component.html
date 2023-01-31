@@ -67,8 +67,8 @@
             </svg>
           </span>
         </div>
-        <button class="btn btn-primary" (click)="addRating()">Rate Book</button>
       </div>
+      <button *ngIf="rating == null" class="btn btn-primary" (click)="addRating()">Rate Book</button>
       <div *ngIf="rating != null">
         <input type="range" min="0" max="5" value="0" class="range range-primary" step="1" [(ngModel)]="selectedRating"/>
         <div class="w-full flex justify-between text-xs px-2">
@@ -80,8 +80,8 @@
             </svg>
           </span>
         </div>
-        <button class="btn btn-primary" (click)="changeRating()">Change Rating</button>
       </div>
+      <button  *ngIf="rating != null" class="btn btn-primary" (click)="changeRating()">Change Rating</button>
     </div>
   </div>
 
