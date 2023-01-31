@@ -12,7 +12,6 @@ import { AuthorService } from '../services/author.service';
 export class EditAuthorComponent implements OnInit{
   response: any;
   form: FormGroup;
-  image: boolean = false;
   registerFail: boolean = false;
   message: string;
   author: any;
@@ -39,50 +38,26 @@ export class EditAuthorComponent implements OnInit{
       birthDate: new FormControl(this.author.birth_date, [Validators.required]),
       nationality: new FormControl(this.author.nationality, [Validators.required]),
       description: new FormControl(this.author.description, [Validators.required]),
-      image: new FormControl(null)
     });
-  }
-  
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.form.get('image')?.setValue(file);
-      this.image = true ;
-    }
-    else{
-      this.image = false;
-    }
   }
 
   onSubmit() {
     if( this.form.valid){
       this.editAuthor();
     }
-  
+
   }
   editAuthor(){
 
     if(this.form.get('newpassword')?.value == null && this.form.get('oldpassword')?.value != null && this.form.get('confirmPassword')?.value == null ){
       let formData = null;
-        formData = new FormData();
-        if (this.image){
-          formData = new FormData();
-          formData.append('image', this.form.get("image")?.value);
-          formData.append('name', this.form.value.name);
-          formData.append('password', this.form.value.oldpassword);
-          formData.append('birth_date', this.form.value.birthDate);
-          formData.append('description', this.form.value.description);
-          formData.append('nationality', this.form.value.description);
-        }
-        else{
-          formData={
-            name: this.form.value.name,
-            email: this.author.email,
-            password: this.form.value.oldpassword,
-            birth_date: this.form.value.birthDate,
-            description: this.form.value.description,
-            nationality:this.form.value.nationality,
-          }
+        formData={
+          name: this.form.value.name,
+          email: this.author.email,
+          password: this.form.value.oldpassword,
+          birth_date: this.form.value.birthDate,
+          description: this.form.value.description,
+          nationality:this.form.value.nationality,
         }
         console.log(formData)
         this.authorService.updateAuthor(this.author.id,formData).subscribe(
@@ -106,9 +81,6 @@ export class EditAuthorComponent implements OnInit{
         );
     }
     else {
-      console.log(this.form.get('newpassword')?.value)
-      console.log(this.form.get('oldpassword')?.value)
-      console.log(this.form.get('confirmPassword')?.value)
 
       if(this.form.get('newpassword')?.value != null && this.form.get('oldpassword')?.value != null && this.form.get('confirmPassword')?.value != null ){
         if(this.form.get('newpassword')?.value != this.form.get('confirmPassword')?.value){
@@ -117,18 +89,6 @@ export class EditAuthorComponent implements OnInit{
           return;
         }
         let formData = null;
-        if (this.image){
-          formData = new FormData();
-          formData.append('image', this.form.get("image")?.value);
-          formData.append('name', this.form.value.name);
-          formData.append('oldpassword', this.form.value.oldpassword);
-          formData.append('newpassword', this.form.value.newpassword);
-          formData.append('birth_date', this.form.value.birthDate);
-          formData.append('description', this.form.value.description);
-          formData.append('nationality', this.form.value.nationality);
-
-        }
-        else{
           formData={
             name: this.form.value.name,
             email: this.author.email,
@@ -138,7 +98,6 @@ export class EditAuthorComponent implements OnInit{
             description: this.form.value.description,
             nationality:this.form.value.nationality,
           }
-        }
         console.log(formData)
         this.authorService.updateAuthor(this.author.id,formData).subscribe(
           (res) => {
@@ -165,8 +124,8 @@ export class EditAuthorComponent implements OnInit{
         this.message = "Error in update profile"
       }
     }
-    
-  
+
+
   }
   cancelar(){
     this.router.navigate(['/author/' + this.author.id +"/"]);
