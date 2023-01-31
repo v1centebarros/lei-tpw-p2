@@ -54,6 +54,9 @@ export class EditBookComponent implements OnInit{
     this.getBook(this.id);
     this.book2 = sessionStorage.getItem("book")
     this.book2 = JSON.parse(this.book2)
+    if( this.book2.author != this.author.id){
+      this.router.navigate(['/book/' + this.id +'/']);
+    }
     
     console.log(this.book2)
     this.form = new FormGroup({
@@ -89,7 +92,7 @@ export class EditBookComponent implements OnInit{
         isbn: this.form.get('isbn')?.value,
         description: this.form.get('description')?.value,
         image: this.form.get('image')?.value,
-        author: this.author.id,
+        author: +Number(this.author.id),
         avg_rating: this.book2.avg_rating,
         num_ratings: this.book2.num_ratings,
         id: this.id
