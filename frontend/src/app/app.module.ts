@@ -22,6 +22,7 @@ import { AuthorProfileComponent } from './author-profile/author-profile.componen
 import { PublishersComponent } from './publishers/publishers.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditAuthorComponent } from './edit-author/edit-author.component';
+import { EditBookComponent } from './edit-book/edit-book.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { EditAuthorComponent } from './edit-author/edit-author.component';
     PublishersComponent,
     EditProfileComponent,
     EditAuthorComponent,
+    EditBookComponent,
   ],
   imports: [
     BrowserModule,

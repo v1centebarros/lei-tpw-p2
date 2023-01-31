@@ -13,6 +13,7 @@ import { AuthorProfileComponent } from './author-profile/author-profile.componen
 import { PublishersComponent } from './publishers/publishers.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { EditAuthorComponent } from './edit-author/edit-author.component';
+import { EditBookComponent } from './edit-book/edit-book.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: BaseComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path:'signupAuthor',component:SignupAuthorComponent},
   { path: "settings", component:EditProfileComponent},
   { path: "authorSettings", component:EditAuthorComponent},
+  { path: "editBook/:id", component:EditBookComponent},
   { path: '**', redirectTo: 'home' }
 ];
 
