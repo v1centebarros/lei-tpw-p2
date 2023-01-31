@@ -39,10 +39,12 @@ Com o Bookify,podem adicionar os seus próprios livros à plataforma, permitindo
     - [API](#api)
       - [User](#user-1)
       - [Publisher](#publisher-1)
+      - [Author](#author-1)
       - [Book](#book-1)
       - [login](#login)
       - [rattings](#rattings)
       - [reviews](#reviews-1)
+      - [Comments](#comments-1)
       - [Genres](#genres)
   - [Base de dados](#base-de-dados)
 - [Autenticação](#autenticação)
@@ -416,23 +418,46 @@ Os endpoints apresentados pela _Api_, são o seguintes:
 
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
-| POST   | /user    | Cria um novo utilizador |
-| GET    | /user    | Retorna todos os utilizadores |
-| GET    | /user/:id | Retorna um utilizador específico |
-| PUT    | /user/:id | Atualiza um utilizador específico |
-| DELETE | /user/:id | Remove um utilizador específico |
-| GET    | users/?avg_rating__gte= | Retorna a lista de utilizadores com bases no seu rating médio |
+| GET    | /api/users    | Retorna todos os utilizadores |
+| GET    | /api/users/:id | Retorna um utilizador específico |
+| PUT    | /api/users/:id | Atualiza um utilizador específico |
+| DELETE | /api/users/:id | Remove um utilizador específico |
+| GET    | /api/users/?avg_rating__gte= | Retorna a lista de utilizadores com bases no seu rating médio |
+| GET    | /api/users/:id/get_user_reviews/ | Retorna a lista de reviews de um utilizador específico |
+| GET    | /api/users/:id/get_fav_book/ | Retorna a lista de livros de um utilizador específico |
+| GET    | /api/users/:id/get_fav_author/ | Retorna a lista de autores de um utilizador específico |
+| GET    | /api/users/:id/get_fav_publisher/ | Retorna a lista de editoras de um utilizador específico |
+| POST   | /api/users/:id/add_fav_book/:book_id | Adiciona um livro específico aos favoritos de um utilizador específico |
+| POST   | /api/users/:id/add_fav_author/:author_id | Adiciona um autor específico aos favoritos de um utilizador específico |
+| POST   | /api/users/:id/add_fav_publisher/:publisher_id | Adiciona uma editora específica aos favoritos de um utilizador específico |
+| DELETE | /api/users/:id/remove_fav_book/:book_id | Remove um livro específico dos favoritos de um utilizador específico |
+| DELETE | /api/users/:id/remove_fav_author/:author_id | Remove um autor específico dos favoritos de um utilizador específico |
+| DELETE | /api/users/:id/remove_fav_publisher/:publisher_id | Remove uma editora específica dos favoritos de um utilizador específico |
+
 
 ####  Publisher
 
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
-| POST   | /publisher | Cria uma nova editora |
-| GET    | /publisher | Retorna todas as editoras |
-| GET    | /publisher/:id | Retorna uma editora específica |
-| PUT    | /publisher/:id | Atualiza uma editora específica |
-| DELETE | /publisher/:id | Remove uma editora específica |
-| GET    | publishers/?name=&city=&country= | retorna a lista de editoras com base no nome, cidade ou país |
+| POST   | /api/publishers | Cria uma nova editora |
+| GET    | /api/publishers | Retorna todas as editoras |
+| GET    | /api/publishers/:id | Retorna uma editora específica |
+| PUT    | /api/publishers/:id | Atualiza uma editora específica |
+| DELETE | /api/publishers/:id | Remove uma editora específica |
+| GET    | /api/publishers/?name=&city=&country= | retorna a lista de editoras com base no nome, cidade ou país |
+| GET    | /api/publishers/:id/get_publisher_books/ | retorna a lista de livros de uma editora específica |
+| GET    | /api/publishers/:id/get_publisher_authors/ | retorna a lista de autores de uma editora específica |
+
+####  Author
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| GET    | /api/authors | Retorna todos os autores |
+| GET    | /api/authors/:id | Retorna um autor específico |
+| PUT    | /api/authors/:id | Atualiza um autor específico |
+| DELETE | /api/authors/:id | Remove um autor específico |
+| GET    | /api/authors/?name=&birth_date=&death_date=&country= | retorna a lista de autores com base no nome, data de nascimento, data de morte ou país |
+
 
 ####  Book
 
@@ -446,12 +471,20 @@ Os endpoints apresentados pela _Api_, são o seguintes:
 | GET    | books/get_all_authors/ | retorna todos os autores de livros |
 | GET    | books/get_available_years/ | retorna a lista de anos onde se publicaram livros
 | GET    | /books/?name__icontains=&language=&publish_date__year=&publisher=&avg_rating__gte= | retorna a lista de livros com base no nome, lingua, data de publicação, ano ou rating médio
+| GET    | /books/?author=' | retorna a lista de livros de um autor específico
+| GET    | /books/years/ | retorna a lista de anos onde se publicaram livros
+| GET    | /books/genres/| retorna a lista de todos os generos|
+
+
 
 ####  login
 
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
 | POST   | /login | Cria uma nova sessão |
+| POST    | /user/register/| Cria um novo User|
+| POST    | /author/register/| Cria um novo Author|
+
 
 ####  rattings
 
@@ -462,6 +495,8 @@ Os endpoints apresentados pela _Api_, são o seguintes:
 | GET    | /rating/:id | Retorna um rating específico |
 | PUT    | /rating/:id | Atualiza um rating específico |
 | DELETE | /rating/:id | Remove um rating específico |
+| GET    | /ratings/?book=&user= | retorna a lista de ratings com base no livro ou no utilizador |
+
 
 ####  reviews
 
@@ -474,6 +509,18 @@ Os endpoints apresentados pela _Api_, são o seguintes:
 | DELETE | /review/:id | Remove uma review específica |
 | GET    | /reviews/?book=&user= | retorna a lista de reviews com base no livro ou no utilizador |
 
+
+#### Comments
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| POST   | /comment | Cria um novo comentário |
+| GET    | /comment | Retorna todos os comentários |
+| GET    | /comment/:id | Retorna um comentário específico |
+| PUT    | /comment/:id | Atualiza um comentário específico |
+| DELETE | /comment/:id | Remove um comentário específico |
+
+
 ####  Genres
 
 | Método | Endpoint | Descrição |
@@ -483,7 +530,7 @@ Os endpoints apresentados pela _Api_, são o seguintes:
 | GET    | /genres/:id | Retorna um género específico |
 | PUT    | /genres/:id | Atualiza um género específico |
 | DELETE | /genres/:id | Remove um género específico |
-
+| GET    | /genres/?name= | retorna a lista de géneros com base no nome |
 
 
 ## Base de dados
@@ -491,68 +538,61 @@ Os endpoints apresentados pela _Api_, são o seguintes:
 A Base de dados é camada de persistência, responsável por armazenar e gerir os dados da plataforma. Ela é implementada usando um banco de dados relacional e inclui tabelas para armazenar informações sobre utilizadores, livros, avaliações e outros dados relevantes. A camada de aplicativo acessa os dados por consultas SQL e utiliza as informações para fornecer os recursos e funcionalidades da plataforma para os utilizadores.
 
 
-
 # Autenticação 
-A autenticação é uma parte essencial da aplicação, pois garante que apenas utilizadors autorizados tenham acesso aos recursos da aplicação. No Bookify, a autenticação é implementada usando o pacote django-rest-framework-simplejwt. Ele permite que os utilizadors se autentiquem por tokens JWT, gerados quando um utilizador faz login e enviados para o cliente. O cliente deve enviar o token em todas as requisições subsequentes para acessar os recursos protegidos. O token expira após um período configurável e o utilizador precisará fazer login novamente para obter um novo token. Isso garante que apenas os utilizadors autorizados tenham acesso aos recursos da aplicação.
+A autenticação é uma parte essencial da aplicação, pois garante que apenas utilizadors autorizados tenham acesso aos recursos da aplicação. No Bookify, a autenticação é implementada usando o pacote django-rest-framework-authtoken. Ele permite que os utilizadors se autentiquem por tokens JWT, gerados quando um utilizador faz login e enviados para o cliente. O cliente deve enviar o token em todas as requisições subsequentes para acessar os recursos protegidos. O token expira após um período configurável e o utilizador precisará fazer login novamente para obter um novo token. Isso garante que apenas os utilizadors autorizados tenham acesso aos recursos da aplicação.
 
 
 Para a implementação da autenticação no lado do Django foram criados os endpoints de login e registo na API RESTful do Django para permitir que os utilizadors façam login e criem contas, e ainda de logout para apermitir que os utilizadores terminem a sessão.
 
-[ver ficheiro](./backend/core/views/auth.py)
+[ver ficheiro](./backend2/core/views/auth.py)
 ```py 
-def get_tokens_for_user(user):
-    global all_tokens
-
-    username = user.username
-    if username in all_tokens and all_tokens[username] is not None:
-        return all_tokens[username]
-
-    token = str(AccessToken.for_user(user))
-
-    all_tokens[username] = token
-    return token
-
 @api_view(['POST'])
 def login(request):
-    username = request.data['username']
-    password = request.data['password']
+    try:
+        email = request.data['email']
+        password = request.data['password']
 
-    user = authenticate(request, username=username, password=password)
-    
-    if user:
-        # Get token
-        token = get_tokens_for_user(user)
-        user_data = CustomUser.objects.all().filter(username=username).values()
+        try:
+            user = MyUser.objects.get(email=email)
+            api_user = API_User.objects.get(email=email)
+            if check_password(password, user.password):
+                serializer = UserSerializer(user)
+                token, _ = Token.objects.get_or_create(user=api_user)
+                response = serializer.data
+                response['token'] = token.key
+                response["type"] = "user"
+                return Response(response, status=status.HTTP_200_OK)
+            return Response({"error": "wrong email or password"},status=status.HTTP_200_OK)
+        except MyUser.DoesNotExist:
+            pass
 
-        return Response({
-            "Message": "Login Successful",
-            "Code": "HTTP_200_OK",
-            "Authorization": "Bearer " + token,
-            "user_id": user_data.first()["id"],
-            "username": user_data.first()["username"]
-        }, status=status.HTTP_200_OK)
+        try:
+            author = Author.objects.get(email=email)
+            api_user = API_User.objects.get(email=email)
+            if check_password(password, author.password):
+                serializer = AuthorSerializer(author)
+                token, _ = Token.objects.get_or_create(user=api_user)
+                response = serializer.data
+                response['token'] = token.key
+                response["type"] = "author"
+                return Response(response, status=status.HTTP_200_OK)
+            return Response({"error": "wrong email or password"},status=status.HTTP_200_OK)
+        except Author.DoesNotExist:
+            return Response({"error": "wrong email or password"},status=status.HTTP_200_OK)
 
-    return Response({
-        "Message": "User doesn't exist",
-        "Code": "HTTP_400_BAD_REQUEST",
-    }, status=status.HTTP_400_BAD_REQUEST)
+    except KeyError:
+        return Response({"error": "Invalid Credenciais"},status=status.HTTP_200_OK)
 
 ```
 
 Para implementar a autenticação no lado do Angular, criou-se um serviço de autenticação para gerir o login e o logout do utilizador. Esse serviço deve fazer chamadas HTTP para os endpoints de login e logout da API RESTful do Django e armazenar o token JWT recebido na resposta.
 
-[ver ficheiro](./frontend/src/app/services/auth.service.ts)
+[ver ficheiro](./frontend/src/app/services/auth/auth.service.ts)
 ```ts
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Session } from "../models/session.model";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-
-const httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-}
-  
 @Injectable({
 providedIn: 'root'
 })
@@ -563,13 +603,40 @@ export class AuthService {
     constructor(private httpClient: HttpClient) {
     }
 
-    login(username: string, password: string): Observable<Session> {
-        const uri = this.baseUrl + 'login';
-        return this.httpClient.post<Session>(uri, {'username': username, 'password': password}, httpOptions);
+    authenticate(header: any): Observable<any> {
+        const url = this.baseUrl + 'login/';
+        return this.http.post(url, header);
     }
+
+    registerUser(header: any): Observable<any> {
+        const url = this.baseUrl + 'user/register/';
+        return this.http.post(url, header);
+    }
+
+    registerAuthor(header: any): Observable<any> {
+        const url = this.baseUrl + 'author/register/';
+        return this.http.post(url, header);
+    }
+
+    loggedIn(){
+        return !!localStorage.getItem('token');
+    }
+
+    getToken(){
+        return localStorage.getItem('token');
+    }
+
+    setToken(token:any){
+        localStorage.setItem('token',token);
+    }
+
+    logout(){
+        localStorage.removeItem('token');
+    }
+
 ```
 
-A informação de cada login foi guardada num interceptador de autenticação, de forma a garantir que o token fosse enviado com cada requisitação para acessar os recursos protegidos da Api.
+A informação de cada login foi guardada na SessionStorage, de forma a garantir a recolha e o envio do token fosse mais simples, de modo a que este fosse enviado com cada requisitação para acessar os recursos protegidos da Api.
 
 
 # Execute 
@@ -594,8 +661,7 @@ ng serve
 # Deploy 
 
 A aplicação pode ser acedida no seguinte link:
-
-[https://bookify-frontend.herokuapp.com/](https://bookify-frontend.herokuapp.com/)
+[https://tpw-project2.vercel.app/home](https://tpw-project2.vercel.app/home)
 
 
 # Referências
