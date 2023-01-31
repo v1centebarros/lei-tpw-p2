@@ -1,8 +1,8 @@
 # Bookify - TPW_Project2
 Se é um amante de livros e está à procura de uma maneira de partilhar as suas opiniões e descobrir novos títulos, o Bookify é a plataforma perfeita.
-Com o Bookify, os utilizadores podem pesquisar e adicionar livros à sua biblioteca pessoal, 
-adicionar os seus próprios livros à plataforma como autores e avaliar e classificar os livros
-que já leram.
+Com o Bookify, os utilizadores podem pesquisar e adicionar livros à sua biblioteca pessoal, adicionar authores favoritos e editoras.
+Se é um autor que procura um novo público para os seus livros, o Bookify é a plataforma perfeita.
+Com o Bookify,podem adicionar os seus próprios livros à plataforma, permitindo uma maior interação e colaboração com o seu público.
 
 
 ## Conteúdo
@@ -10,9 +10,9 @@ que já leram.
   - [Conteúdo](#conteúdo)
   - [Visão do projeto](#visão-do-projeto)
 - [Persona](#persona)
-  - [**Wednesday**](#wednesday)
-  - [**William**](#william)
-  - [**Júlia**](#júlia)
+  - [Wednesday](#wednesday)
+  - [William](#william)
+  - [Júlia](#júlia)
 - [Cenários](#cenários)
   - [Cenário 1](#cenário-1)
   - [Cenário 2](#cenário-2)
@@ -21,20 +21,19 @@ que já leram.
 - [Requisitos](#requisitos)
 - [Arquitetura](#arquitetura)
   - [Frontend](#frontend)
-    - [**Componentes**](#componentes)
+    - [Componentes](#componentes)
       - [Comunicação entre componentes](#comunicação-entre-componentes)
     - [**Serviços**](#serviços)
     - [**Módulos**](#módulos)
       - [User](#user)
+      - [Author](#author)
       - [Publisher](#publisher)
       - [Book](#book)
-      - [Session](#session)
       - [Search](#search)
-      - [Language](#language)
-      - [Genero](#genero)
-      - [Year](#year)
+      - [Género](#género)
       - [Reviews](#reviews)
       - [Rating](#rating)
+      - [Comments](#comments)
     - [**Forms**](#forms)
   - [Backend](#backend)
     - [API](#api)
@@ -48,13 +47,14 @@ que já leram.
   - [Base de dados](#base-de-dados)
 - [Autenticação](#autenticação)
 - [Execute](#execute)
-- [Informações de login](#informações-de-login)
+- [Deploy](#deploy)
 - [Referências](#referências)
 - [Créditos](#créditos)
 
 ## Visão do projeto 
 
-O Bookify é um projeto de software que visa fornecer uma plataforma online inovadora para os amantes de livros, permitindo a procura e a adição de livros à sua biblioteca pessoal, bem como a partilha de opiniões sobre os títulos lidos através de **reviews** e **ratings**. Além disso, os utilizadores agora têm a opção de adicionar os seus próprios livros à plataforma, permitindo uma maior interação e colaboração entre os utilizadores.
+O Bookify é um projeto de software que visa fornecer uma plataforma online inovadora para os amantes de livros, permitindo a procura e a adição de livros à sua biblioteca pessoal, bem como a partilha de opiniões sobre os títulos lidos através de **reviews** e **ratings**. Além disso, podem obter informações dos seus authores favoritos e editoras.
+Enquanto autores, podem visualizar informações das editoras da plataforma, podem adicionar os seus própios livros, permitindo uma nova interação com os seus leitores.
 
 O Bookify foi desenvolvido utilizando as tecnologias **Angular** e **Django Rest Framework**, juntanmente com outras ferramentas adicionar funcionaliades às tecnologias descritas anteriormente, garantindo alta performance e escalabilidade. 
 
@@ -68,13 +68,14 @@ _Wednesday_ é uma estudante universitária de 21 anos que adora ler livros de f
 
 ## William
 
-_William_ é um escritor de 35 anos que está sempre à procura de novas fontes de inspiração. Ele utiliza o Bookify para encontrar recomendações de livros que lhe possam fornecer ideias para os seus próximos projetos. Ele também adiciona os seus próprios livros à plataforma, permitindo que outros utilizadores possam descobrir e ler suas obras. Permitindo-lhe expandir as suas oportunidades de marketing e alcançar um público mais amplo.
+_William_ é um escritor de 35 anos que está sempre à procura de novas fontes de inspiração. Ele utiliza o Bookify para encontrar recomendações de livros que lhe possam fornecer ideias para os seus próximos projetos. 
+Ele ainda utiliza a plataforma como forma expandir as suas oportunidades de marketing e alcançar um público mais amplo, adicionando seus livros à plaforma.
 
 ## Júlia
 Júlia é uma advogada de 30 anos que utiliza o Bookify para encontrar livros de criminologia e direito penal. Ela gosta de manter uma biblioteca pessoal organizada e valoriza a opção de poder adicionar tags e categorias aos seus livros para facilitar a sua pesquisa.
 
 # Cenários
-O projeto Bookify inclui quatro cenários que descrevem como as personas mencionadas acima podem usar a plataforma. Os cenários são:
+O projeto Bookify inclui ? cenários que descrevem como as personas mencionadas acima podem usar a plataforma. Os cenários são:
 
 ## Cenário 1
 
@@ -90,21 +91,33 @@ O projeto Bookify inclui quatro cenários que descrevem como as personas mencion
 
 ## Cenário 4
 
-**Joana** acabou de descobrir o Bookify e está interessada em utilizar a plataforma. Ela abre o Bookify e clica no botão "Criar conta". Ela preenche os campos necessários e cria a sua conta. Agora ela pode utilizar todas as funcionalidades do Bookify, incluindo adicionar livros à sua biblioteca pessoal, adicionar reviews e ratings, e receber recomendações personalizadas.
+**Joana** acabou de descobrir o Bookify e está interessada em utilizar a plataforma. Ela abre o Bookify e clica no botão "Criar conta". Ela preenche os campos necessários e cria a sua conta. Agora ela pode utilizar todas as funcionalidades do Bookify, incluindo adicionar livros à sua biblioteca pessoal, adicionar reviews e ratings, visitar a pagina da suas editoras favoritas com recurso do qrcode.
 
 # Requisitos
-Como utilizador, posso:
-- Visualizar a _homepage_ da aplicação sem estar autenticado
-- Criar uma conta
-- Fazer login / autenticar-se 
-- Visualizar a página de perfil 
-- Visualizar a página de livros
-- Visualizar a página de Autores
-- Adicionar livros
-- Visualizar a livros de outros utilizadores
-- Adicionar reviews
-- Visualizar reviews de outros utilizadores
+                
+Sem estar autenticado, posso:
+- Visualizar a _homepage_ da aplicação
+- Visualizar a _authores_ da aplicação
+- Visualizar a _publishers_ da aplicação
+- Visualizar a pagina especifica de um livro 
+- Visualizar a pagina especifica de um autor
+- Visualizar a pagina especifica de uma editora 
+- Criar uma conta como autor
+- Criar uma conta como leitor
 - Pesquisar por diferentes filtros
+
+Como utilizador, posso ainda:
+- Fazer login / autenticar-se 
+- Visualizar a página de perfil
+- Editar dados do seu perfil
+- Adicionar um livro, um autor ou uma editora aos favoritos
+- Adicionar, remover e editar reviews
+- Responder a outras reviews
+
+Como autor, posso ainda:
+- Adicionar, Remover e editar livros
+
+
 
 # Arquitetura
 
@@ -122,20 +135,27 @@ No frontend do Bookify, a interface é construída com componentes reutilizávei
 
 Alguns componentes utilizados:
 
-- **Navbar**: responsável por exibir a barra de navegação no topo da página e permite aos utilizadores aceder as principais áreas da plataforma.
+Nome | Funcionalidade|
+-----|---------------|
+**Login** | Responsável por exibir o formulário de login e enviar as credênciais para a camada de aplicativo.|
+**Signup** | Responsável por exibir o formulário de registo e enviar as informações do utilizador para a camada de aplicativo.|
+**Signup-author**| Responsável por exibir o formulário de registo e enviar as informações do autor para a camada de aplicativo.|
+**Navbar** | Responsável por exibir a barra de navegação e permitir que o utilizador navegue entre as diferentes páginas da aplicação.|
+**Search-filters**| Responsável por exibir os filtros de pesquisa e enviar os filtros selecionados para a camada de aplicativo.|
+**author-profile**| Responsável por exibir o perfil do autor.|
+**authors**| Responsável por exibir uma lista de um autores e ainda com um filtro de rating.|
+**edit-author**| Responsável por exibir o formulário de editar e enviar dados do autor para a camada de aplicativo.|
+**add-book**| Responsável por exibir o formulário de criação de livro e enviar as informações do livro para a camada de aplicativo.|
+**edit-book**| Responsável por exibir o formulário de editar e enviar dados do livro para a camada de aplicativo.|
+**book**| Responsável por exibir um card de um livro.|
+**books-conatiner**| Responsável por exibir uma lista de cards de livros.|
+**book-details**| Respónsavel por exibir a informação de um livro e enviar informações de rating, riews para a camada de aplicativo.|
+**publisher**| Responsável por exibir a informação de uma editora.|
+**publishers**| Responsável por exibir uma lista de editoras.|
+**Profile**| Responsável por exibir o perfil do utilizador.|
+**edit-profile**| Responsável por exibir o formulário de editar e enviar dados do utilizador para a camada de aplicativo.|
 
-- **Login**: responsável por exibir o formulário de login e enviar as credênciais para a camada de aplicativo.
-
-- **Signup**: responsável por exibir o formulário de registo e enviar as informações do utilizador para a camada de aplicativo.
-
-- **Book-details**: responsável por exibir os detalhes de um livro.
-
-- **Book-container**: responsável por exibir a lista de livros.
-
-- **Book**: responsável por exibir um livro em uma lista.
-
-- **add-book** : responsável por exibir o formulário de criação de livro e enviar as informações do livro para a camada de aplicativo.
-
+</br>
 Estes são apenas alguns exemplos de componentes que podem ser encontrados na aplicação. A divisão em componentes permite que o frontend seja facilmente estendido e atualizado com novas funcionalidades no futuro.
 
 #### Comunicação entre componentes
@@ -183,14 +203,16 @@ No frontend do Bookify, os serviços são usados para gerir tarefas comuns e for
 
 Alguns exemplos de serviços utilizados no Bookify incluem:
 
-- **BookService**: responsável por gerir a comunicação com a API RESTful do Bookify, permitindo que os componentes obtenham informações sobre livros e enviem dados para o back-end.
+Name | Funcionalidade |
+--- | --- |
+**BookService** | Responsável por gerir a comunicação com a API RESTful do Bookify, permitindo que os componentes obtenham informações sobre livros e enviem dados para o back-end.|
+**authService** | Responsável por gerir a autenticação do utilizador, incluindo o login e o registo.|
+**userService** | Responsável por gerir a comunicação com a API RESTful do Bookify relacionada ao utilizador, incluindo a obtenção e atualização de informações do perfil.|
+**reviewService** | Responsável por gerir a comunicação com a API RESTful do Bookify relacionada aos reviews, incluindo a adição e remoção de reviews.|
+**authoreService**| Responsável por gerir a comunicação com a API RESTful do Bookify relacionada ao autor, incluindo a obtenção e atualização de informações do perfil.|
+**publisherService**| Responsável por gerir a comunicação com a API RESTful do Bookify relacionada à editora, incluindo a obtenção de informações do perfil.|
 
-- **authService**: responsável por gerir a autenticação do utilizador, incluindo o login e o registo.
-  
-- **userService**: responsável por gerir a comunicação com a API RESTful do Bookify relacionada ao utilizador, incluindo a obtenção e atualização de informações do perfil.
-
-- **reviewService**: responsável por gerir a comunicação com a API RESTful do Bookify relacionada aos reviews, incluindo a adição e remoção de reviews.
-
+</br>
 Estes são apenas alguns exemplos de serviços que podem ser encontrados no Bookify. Eles são úteis para centralizar lógicas específicas e permitir que vários componentes da aplicação possam compartilhar essas funcionalidades sem precisar duplicá-las. Além disso, os serviços são úteis para realizar chamadas de API e gerir o fluxo de dados entre o front-end e o back-end da aplicação.
 
 </br>
@@ -216,6 +238,20 @@ O _user_ inclui informações sobre os utilizadores da plataforma, como nome de 
 | description | String | Descrição do utilizador               |
 | avg_rating  | Number | Rating médio dos livros do utilizador |
 
+#### Author
+
+O _author_ inclui informações sobre os autores dos livros disponibilizados na plataforma.
+
+| Campo       | Tipo   | Descrição                             |
+|-------------|--------|---------------------------------------|
+| id          | Number | Identificador único do autor          |
+| name        | String | Nome do autor                         |
+| birth_date  | String | Data de nascimento do autor           |
+| image       | String | Imagem de perfil do autor             |
+| description | String | Descrição do autor                    |
+| nationality | String | Nacionalidade do autor                |
+| avg_rating  | Number | Rating médio dos livros do autor      |
+
 
 #### Publisher 
 
@@ -225,6 +261,7 @@ O _publisher_ inclui informações sobre as editoras que publicam os livros na p
 |-------------|--------|---------------------------------------|
 | id          | Number | Identificador único da editora        |
 | name        | String | Nome da editora                       |
+| email       | String | Email da editora                      |
 | address     | String | Morada da editora                     |
 | city        | String | Cidade da editora                     |
 | country     | String | País da editora                       |
@@ -238,26 +275,21 @@ O _book_ inclui as informações sobre os livros disponibilizados no Bookify.
 | Campo       | Tipo   | Descrição                             |
 |-------------|--------|---------------------------------------|
 | id          | Number | Identificador único do livro          |
-| name        | String | Título do livro                       |
+| title       | String | Título do livro                       |
 | pages       | Number | Número de páginas do livro            |
-| author_info | User   | Autor do Livro                        |
-| publisher   | Publisher | Editora do livro                   |
+| author      | id     | Identificador do autor do Livro       |
+| publisher   | id     | Identificador da editora do livro     |
 | isbn        | String | ISBN do livro                         |
 | description | String | Descrição do livro                    |
 | image       | String | Imagem do livro                       |
 | language    | String | Idioma do livro                       |
 | publish_date | Date  | Data de publicação do livro           |
-
-####  Session
-
-A _Session_ armazena informações sobre as sessões de login dos utilizadores.
-
-| Campo       | Tipo   | Descrição                             |
-|-------------|--------|---------------------------------------|
-| token       | String | Token de autenticação                 |
-| _user_id    | Number | Identificador único do utilizador     |
-| username    | String | Nome de utilizador                    |
-
+| avg_rating  | Number | Rating médio do livro                 |
+| num_ratings | Number | Número the ratings dados              |
+| genres      | Array  | Géneros do livro                      |
+| author_name | String | Nome do autor                         |
+| publisher_name | String | Nome da editora                    |
+| genre_name  | String | Nome do genero do livro               |
 
 ####  Search 
 
@@ -272,15 +304,6 @@ A _Search_ armazena informações sobre as pesquisas efetuadas pelos utilizadore
 | avg_rating  | Number | Rating médio                          |
 
 
-####  Language
-
-A _Language_ guarada as diferentes Idiomas de livros existentes na plataforma.
-
-| Campo       | Tipo   | Descrição                             |
-|-------------|--------|---------------------------------------|
-| language    | String | Nome do idioma                        |
-
-
 ####  Género
 
 O _Género_ guarda os diferentes Géneros de livros existentes na plataforma.
@@ -288,15 +311,8 @@ O _Género_ guarda os diferentes Géneros de livros existentes na plataforma.
 | Campo       | Tipo   | Descrição                             |
 |-------------|--------|---------------------------------------|
 | genre       | String | Nome do género                        |
+| id          | Number | Identificador único do género         |
 
-
-####  Year 
-
-A _Year_ guarda os diferentes Anos de publicação de livros existentes na plataforma.
-
-| Campo       | Tipo   | Descrição                             |
-|-------------|--------|---------------------------------------|
-| year        | Number | Ano de publicação                     |
 
 ####  Reviews
 
@@ -305,12 +321,15 @@ A _Reviews_ guarda as reviews dos livros feitas pelos utilizadores.
 | Campo       | Tipo   | Descrição                             |
 |-------------|--------|---------------------------------------|
 | id          | Number | Identificador único da review         |
-| user        | Number | Identificador único do utilizador     |
-| user_info   | User   | Utilizador que fez a review           |
-| book        | Number | Identificador único do livro          |
-| book_info   | Book   | Livro que foi reviewado               |
-| review      | String | Review do livro                       |
-| date        | Date   | Data da review                        |
+| text        | String | Texto da review                       |
+| datetime    | Date   | Data da review                        |
+| user        | Number | Identificador do utilizador           |
+| book        | Number | Identificador do livro                |
+| user_name   | String | Nome do utilizador                    |
+| user_image  | String | Imagem de perfil do utilizador        |
+| book_title  | String | Título do livro                       |
+| book_image  | String | Imagem do livro                       |
+| number_of_comments | Number | Número de comentários da review    |
 
 
 ####  Rating 
@@ -320,10 +339,23 @@ A _Rating_ guarda os ratings dos livros feitas pelos utilizadores.
 | Campo       | Tipo   | Descrição                             |
 |-------------|--------|---------------------------------------|
 | id          | Number | Identificador único do rating         |
-| user_info   | User   | Utilizador que fez o rating           |
-| book_info   | Book   | Livro que foi ratingado               |
 | rating      | Number | Rating do livro                       |
-| date        | Date   | Data do rating                        |
+| user        | Number | Identificador do utilizador           |
+| book        | Number | Identificador do livro                |
+
+####  Comments
+
+Os _Comments_ guardam os comentários feitos pelos utilizadores nas reviews.
+
+| Campo       | Tipo   | Descrição                             |
+|-------------|--------|---------------------------------------|
+| id          | Number | Identificador único do comentário     |
+| text        | String | Texto do comentário                   |
+| datetime    | Date   | Data do comentário                    |
+| user        | Number | Identificador do utilizador           |
+| review      | Number | Identificador da review               |
+| user_name   | String | Nome do utilizador                    |
+| user_image  | String | Imagem de perfil do utilizador        |
 
 
 ### **Forms**
@@ -559,12 +591,11 @@ npm install
 ng serve
 ```
 
+# Deploy 
 
+A aplicação pode ser acedida no seguinte link:
 
-# Informações de login
-
-- username: wednesday
-- password: 1234
+[https://bookify-frontend.herokuapp.com/](https://bookify-frontend.herokuapp.com/)
 
 
 # Referências
