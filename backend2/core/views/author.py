@@ -28,8 +28,7 @@ class AuthorViewSet(viewsets.ModelViewSet):
                 request.data['password'] = make_password(request.data['newpassword'])
             else:
                 return Response({"error": "Old password is incorrect"}, status=status.HTTP_200_OK)
-        if 'password' in request.data:
-            print("ola")
+        elif 'password' in request.data:
             if check_password(request.data['password'],author.password):
                 request.data['password'] = make_password(request.data['password'])
             else:
