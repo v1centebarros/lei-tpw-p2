@@ -14,11 +14,11 @@
           name="title"
           value = "{{ book.title }}"
           formControlName="title"
-  
+
         />
 
-  
-  
+
+
         <label class="label">
           <span class="label-text">Number of pages</span>
         </label>
@@ -29,18 +29,18 @@
           name="pages"
           value = "{{ book.pages }}"
           formControlName="pages"
-  
+
         />
-  
+
         <label class="label">
           <span class="label-text">Publish Date</span>
         </label>
         <input type="date" placeholder="Publish Date" class="input input-bordered" name="publishDate"
                formControlName="publishDate" value = "{{ book.publish_date }}"/>
-  
- 
-  
-  
+
+
+
+
         <label class="label">
           <span class="label-text">Language</span>
         </label>
@@ -53,8 +53,8 @@
           <option selected value="">Language</option>
           <option *ngFor="let language of languages" value={{language}}>{{language}}</option>
         </select>
-  
-  
+
+
         <label class="label">
           <span class="label-text">Publisher</span>
         </label>
@@ -67,8 +67,8 @@
           <option selected value="">Publisher</option>
           <option *ngFor="let publisher of publishers" value={{publisher.id}}>{{publisher.name}}</option>
         </select>
-  
-  
+
+
         <label class="label">
           <span class="label-text">Publish Date</span>
         </label>
@@ -79,16 +79,9 @@
           name="isbn"
           value = "{{ book.isbn }}"
           formControlName="isbn"
-  
+
         />
-  
-  
-        <label class="label">
-          <span class="label-text">Book Cover</span>
-        </label>
-        <input (change)="onFileChange($event)" type="file" class="input input-bordered" name="image"/>
-  
-  
+
         <label class="label">
           <span class="label-text">Description</span>
         </label>
@@ -96,13 +89,13 @@
                   value = "{{ book.description }}"
                   formControlName="description"></textarea>
 
-  
+
         <div class="flex flex-row mt-6 justify-between">
           <a routerLink="/" class="btn btn-accent w-5/12">Go Back</a>
-          <input type="submit" value="Add Book" class="btn btn-primary w-5/12"  (click)="onSubmit()"/>
+          <input type="submit" value="Edit Book" class="btn btn-primary w-5/12"  (click)="onSubmit()"/>
         </div>
-  
+
       </div>
     </form>
   </div>
-  
+

@@ -33,13 +33,6 @@ export class EditBookComponent implements OnInit{
     this.book = new Book();
   }
 
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.form.get('image')?.setValue(file);
-    }
-  }
-
   ngOnInit() {
     this.id = +Number(this.route.snapshot.paramMap.get('id'));
     if(this.authService.loggedIn() == false){
@@ -57,7 +50,7 @@ export class EditBookComponent implements OnInit{
     if( this.book2.author != this.author.id){
       this.router.navigate(['/book/' + this.id +'/']);
     }
-    
+
     console.log(this.book2)
     this.form = new FormGroup({
       title: new FormControl(this.book2.title, [Validators.required]),
