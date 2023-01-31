@@ -663,6 +663,9 @@ ng serve
 A aplicação pode ser acedida no seguinte link:
 [https://tpw-project2.vercel.app/home](https://tpw-project2.vercel.app/home)
 
+Agora segue-se o link da APi REst:
+[https://marianaandrade.pythonanywhere.com/api/](hhttps://marianaandrade.pythonanywhere.com/api/)
+
 
 # Referências
 
