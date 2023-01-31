@@ -1,6 +1,5 @@
 <div class="flex flex-col space-y-4 m-4 h-screen xl:container xl:mx-auto">
   <app-navbar></app-navbar>
-  <qrcode [qrdata]="publisher.website" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
   <div class="w-full flex card bg-base-100 rounded-lg">
 
     <div class="card-body">
@@ -18,6 +17,7 @@
           <p class="text-xl font-bold mb-4"  *ngIf="books.length>0" >Total Books: <span class="font-light text-lg">{{books.length}}</span></p>
           <p class="text-xl font-bold mb-4" *ngIf="books.length>0">Average Book Ratings: <span class="font-light text-lg">{{avgRating/books.length}}</span></p>
         </div>
+        <qrcode [qrdata]="publisher.website" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
       </div>
     </div>
   </div>
@@ -31,18 +31,21 @@
   <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="publisher && books.length>0">
       <p class="text-3xl font-bold p-4">Associated Authors</p>
   </div>
-  <div class="grid grid-cols-2 gap-4" *ngFor="let author of authors">
-    <div class="card card-side bg-base-100 shadow-xl">
-      <figure><img src={{author.image}} alt="Author"/></figure>
-      <div class="card-body">
-        <h2 class="card-title">{{author.name}}</h2>
+  <div class="grid grid-cols-2 gap-2">
+    <div *ngFor="let author of authors">
+      <div class="card card-side bg-base-100 shadow-xl">
+        <figure><img [src]="author.image" alt="Author"/></figure>
+        <div class="card-body">
+          <h2 class="card-title">{{author.name}}</h2>
           <p class="line-clamp-5">{{author.description}}</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary" routerLink="/author/{{author.id}}">More</button>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary" [routerLink]="'/author/' + author.id">More</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 
   <div class="w-full flex bg-base-100 rounded-lg mt-4" *ngIf="publisher && books.length>0">
       <p class="text-3xl font-bold p-4">{{publisher.name}}'s Books</p>

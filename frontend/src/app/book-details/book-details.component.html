@@ -5,13 +5,12 @@
 
     <div class="card-body">
     <div class="col-md-12 mt-3">
-      <button (click)="download()"  class="btn btn-primary">Download PDF</button>
     </div>
       <div class="flex flex-row">
         <div class="mr-3">
-          <img src="{{book.image}}" alt="" class="rounded">
+          <img src="{{book.image}}" alt="" class="rounded" style="max-height: 20rem; max-width: 20rem;">
         </div>
-        <div class="flex-1">
+        <div class="flex-1 ml-10">
           <p class="text-6xl font-bold mb-4">{{book.title}}</p>
           <div class="rating rating-lg mb-5">
             <input type="radio" name="rating-7" class="rating-hidden"
@@ -40,6 +39,7 @@
             <a routerLink="/publisher/{{book.publisher}}" class="font-light text-lg underline">{{book.publisher_name}}</a>
           </p>
           <p class="text-xl font-bold mb-4">ISBN: <span class="font-light text-lg">{{book.isbn}}</span></p>
+          <button (click)="download()"  class="btn btn-primary">Download PDF</button>
         </div>
       </div>
       <p class="text-xl font-bold ">Description:</p>
