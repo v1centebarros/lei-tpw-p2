@@ -17,13 +17,13 @@ class UserViewSet(viewsets.ModelViewSet):
     def update(self, request, pk=None):
         user = User.objects.get(pk=pk)
         if 'oldpassword' in request.data and 'newpassword' in request.data:
-            if check_password(user.password,request.data['oldpassword']):
+            if check_password(request.data['oldpassword'],user.password):
                 request.data['password'] = make_password(request.data['newpassword'])
             else:
                 return Response({"error": "Old password is incorrect"}, status=status.HTTP_200_OK)
-        if 'password' in request.data:
+        elif 'password' in request.data:
             print("ola")
-            if check_password(user.password,request.data['password']):
+            if check_password(request.data['password'],user.password):
                 request.data['password'] = make_password(request.data['password'])
             else:
                 return Response({"error": "Password is incorrect"}, status=status.HTTP_200_OK)
