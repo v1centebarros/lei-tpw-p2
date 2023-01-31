@@ -8,7 +8,7 @@ import {Author} from "../models/author.model";
   providedIn: 'root'
 })
 export class AuthorService {
-  private baseUrl = 'http://localhost:8000/api/';
+  private baseUrl = 'https://marianaandrade.pythonanywhere.com/api/';
 
   constructor(private http: HttpClient) { }
 

@@ -12,7 +12,7 @@ import { Publisher } from '../models/publisher.model';
 })
 export class UserService {
 
-  private baseUrl = 'http://localhost:8000/api/';
+  private baseUrl = 'https://marianaandrade.pythonanywhere.com/api/';
   constructor(private http: HttpClient) { }
 
   getUser(id: Number): Observable<User> {
@@ -35,7 +35,7 @@ export class UserService {
   }
 
   getUserFavAuthor(id: number): Observable<Author[]>{
-    return this.http.get<Author[]>(this.baseUrl + 'users/' + id + '/get_fav_author/');  
+    return this.http.get<Author[]>(this.baseUrl + 'users/' + id + '/get_fav_author/');
   }
 
   getUserFavPublisher(id: number): Observable<Publisher[]>{
@@ -61,7 +61,7 @@ export class UserService {
   removeFavBook(id: number, book_id: number): Observable<Book[]>{
     return this.http.delete<Book[]>(this.baseUrl + 'users/' + id + '/remove_fav_book/' + book_id + '/');
   }
-  
+
   // Remover um author dos favoritos
   removeFavAuthor(id: number, author_id: number): Observable<Author[]>{
     return this.http.delete<Author[]>(this.baseUrl + 'users/' + id + '/remove_fav_author/' + author_id + '/');

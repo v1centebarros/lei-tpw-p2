@@ -9,7 +9,7 @@ import {Comment} from "../models/comment.model";
 })
 export class ReviewService {
 
-  private baseUrl = 'http://localhost:8000/api/';
+  private baseUrl = 'https://marianaandrade.pythonanywhere.com/api/';
   constructor(private http: HttpClient) { }
 
   getBookReviews(id: Number): Observable<Review[]> {

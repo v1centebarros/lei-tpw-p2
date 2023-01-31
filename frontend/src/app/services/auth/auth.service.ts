@@ -7,8 +7,8 @@ import { User } from 'src/app/models/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-    private baseUrl = 'http://127.0.0.1:8000/api/';
-    private baseUrlImage ='http://127.0.0.1:8000/api/user/image/';
+    private baseUrl = 'https://marianaandrade.pythonanywhere.com/api/';
+    private baseUrlImage ='https://marianaandrade.pythonanywhere.com/api/user/image/';
 
     constructor(private http: HttpClient) { }
 
@@ -16,7 +16,7 @@ export class AuthService {
         const url = this.baseUrl + 'login/';
         return this.http.post(url, header);
     }
-    
+
     registerUser(header: any): Observable<any> {
         const url = this.baseUrl + 'user/register/';
         return this.http.post(url, header);

@@ -17,7 +17,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class BookService {
-  private baseUrl = 'http://localhost:8000/api/';
+  private baseUrl = 'https://marianaandrade.pythonanywhere.com/api/';
   private Book = new Book();
   constructor(private http: HttpClient) { }
 
