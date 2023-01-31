@@ -101,7 +101,10 @@ class Rating(models.Model):
         ratings = book.ratings.all()
         num_ratings = len(ratings)
         sum_ratings = sum(rating.rating for rating in ratings)
-        book.avg_rating = (sum_ratings + new_rating) / (num_ratings + 1)
+        if num_ratings:
+            book.avg_rating = (sum_ratings + new_rating) / (num_ratings + 1)
+        else:
+            book.avg_rating = new_rating
         book.save()
 
         # update author avg rating
@@ -110,7 +113,10 @@ class Rating(models.Model):
         author_ratings = Rating.objects.filter(book__in=author_books)
         author_num_ratings = len(author_ratings)
         author_sum_ratings = sum(rating.rating for rating in author_ratings)
-        author.avg_rating = author_sum_ratings / author_num_ratings
+        if author_num_ratings:
+            author.avg_rating = author_sum_ratings / author_num_ratings
+        else:
+            author.avg_rating = 0
         author.save()
 
         super().save(*args, **kwargs)
@@ -141,7 +147,7 @@ class Rating(models.Model):
         ratings = book.ratings.all()
         num_ratings = len(ratings)
         sum_ratings = sum(rating.rating for rating in ratings)
-        book.avg_rating = (sum_ratings - self.rating + self.rating) / num_ratings
+        book.avg_rating = (sum_ratings - self.rating) / (num_ratings - 1)
         book.save()
 
         # update author avg rating

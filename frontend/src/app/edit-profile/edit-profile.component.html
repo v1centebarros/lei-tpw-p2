@@ -103,13 +103,6 @@
         <div *ngIf="form.get('description')?.errors?.['required']">Description is required</div>
       </div>
 
-
-      <!--IMAGE-->
-      <label class="label">
-        <span class="label-text">Image</span>
-      </label>
-      <input (change)="onFileChange($event)" type="file" class="input input-bordered" name="image"/>
-
       <div *ngIf="registerFail" style="text-align: center;">
         <div class="alert alert-error shadow-lg  mt-6">
           <div>
