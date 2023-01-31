@@ -28,7 +28,7 @@ export class BookDetailsComponent implements OnInit{
   user: any;
   userComment: string[] = [];
   comments: Comment[][] = [];
-  rating: Rating;
+  rating: Rating = new Rating();
   editMyReview: boolean = false;
   showRateBook: boolean = false;
   selectedRating: number = 0;
@@ -149,7 +149,6 @@ export class BookDetailsComponent implements OnInit{
 
   showRateToggle(): void {
     this.showRateBook = !this.showRateBook;
-    console.log(this.showRateBook)
   }
 
   getRatingbyBookAndUser(): void {
