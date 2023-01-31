@@ -126,7 +126,8 @@ export class EditProfileComponent implements OnInit{
         formData.append('image', this.form.get("image")?.value);
         formData.append('username', this.form.value.username);
         formData.append('email', this.form.value.email);
-        formData.append('password', this.form.value.newpassword);
+        formData.append('oldpassword', this.form.value.oldpassword);
+        formData.append('newpassword', this.form.value.newpassword);
         formData.append('birth_date', this.form.value.birthDate);
         formData.append('first_name', this.form.value.firstName);
         formData.append('last_name', this.form.value.lastName);
@@ -136,7 +137,8 @@ export class EditProfileComponent implements OnInit{
         formData={
           username: this.form.value.username,
           email: this.user.email,
-          password: this.form.value.newpassword,
+          oldpassword: this.form.value.oldpassword,
+          newpassword: this.form.value.newpassword,
           birth_date: this.form.value.birthDate,
           first_name: this.form.value.firstName,
           last_name: this.form.value.lastName,

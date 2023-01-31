@@ -1,0 +1,114 @@
+<p>edit-author works!</p>
+<div class="max-w-xl mx-auto p-6 my-6 bg-base-100 rounded-xl shadow-xl" id="login-container">
+    <h1 class="text-5xl font-bold mb-6 tracking-wider">Edit Profile</h1>
+  
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+    >
+      <!-- Name -->
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Name</span>
+        </label>
+        <input
+          type="text"
+          placeholder="Name"
+          class="input input-bordered"
+          name="name"
+          formControlName="name"
+  
+        />
+        <div class="text-error" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">
+          <div *ngIf="form.get('name')?.errors?.['required']">Name is required</div>
+        </div>
+  
+        <!-- Email -->
+        <label class="label">
+          <span class="label-text"> Old Password </span>
+        </label>
+        <input
+          type="password"
+          placeholder="Old Password"
+          class="input input-bordered"
+          name="oldpassword"
+          formControlName="oldpassword"
+        />
+  
+        <div class="text-error" *ngIf="form.get('oldpassword')?.touched && form.get('oldpassword')?.invalid">
+          <div *ngIf="form.get('oldpassword')?.errors?.['required']">Email is required</div>
+        </div>
+  
+        <!-- Password -->
+        <label class="label">
+          <span class="label-text"> New Password</span>
+        </label>
+        <input type="password" placeholder="New Password" class="input input-bordered" name="newpassword" 
+               formControlName="newpassword"/>
+  
+        <!-- Confirm Password -->
+        <label class="label">
+          <span class="label-text">Confirm New Password</span>
+        </label>
+        <input type="password" placeholder="Confirm New Password" class="input input-bordered" name="confirm_password"
+            formControlName="confirmPassword"/>
+  
+  
+        <!-- Birth Date -->
+        <label class="label">
+          <span class="label-text">Birth Date</span>
+        </label>
+        <input type="date" placeholder="Birth Date" class="input input-bordered" name="birthDate"
+               formControlName="birthDate"/>
+  
+        <div class="text-error" *ngIf="form.get('birth_date')?.touched && form.get('birth_date')?.invalid">
+          <div *ngIf="form.get('birth_date')?.errors?.['required']">Birth Date is required</div>
+        </div>
+
+        <!--nationality-->
+        <label class="label">
+          <span class="label-text">Nationality</span>
+        </label>
+        <input type="text" placeholder="Nacionality" class="input input-bordered" name="nationality"
+               formControlName="nationality"/>
+        
+        <div class="text-error" *ngIf="form.get('nationality')?.touched && form.get('nationality')?.invalid">
+          <div *ngIf="form.get('nationality')?.errors?.['required']">Nationality is required</div>
+        </div>
+  
+        <!-- Description -->
+        <label class="label">
+          <span class="label-text">Description</span>
+        </label>
+        <textarea class="textarea h-24 textarea-bordered" placeholder="Tell us a bit about you" name="description"
+                  required
+                  formControlName="description"></textarea>
+  
+        <div class="text-error" *ngIf="form.get('description')?.touched && form.get('description')?.invalid">
+          <div *ngIf="form.get('description')?.errors?.['required']">Description is required</div>
+        </div>
+  
+  
+        <!--IMAGE-->
+        <label class="label">
+          <span class="label-text">Image</span>
+        </label>
+        <input (change)="onFileChange($event)" type="file" class="input input-bordered" name="image"/>
+  
+        <div *ngIf="registerFail" style="text-align: center;">
+          <div class="alert alert-error shadow-lg  mt-6">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <span>{{ message }}</span>
+            </div>
+          </div>
+        </div>
+  
+        <!-- SUBMIT -->
+        <div class="flex flex-row mt-6 justify-between">
+        <input type="submit" value="Register" class="btn btn-primary w-5/12" [disabled]="form.invalid"/>
+        <a routerLink="/profile" class="btn btn-accent w-5/12" (click)="cancelar()">Canelar</a>
+    </div> </div>
+    </form>
+  </div>
+  

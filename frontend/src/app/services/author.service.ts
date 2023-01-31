@@ -25,4 +25,9 @@ export class AuthorService {
     params = params.append('rating', rating.toString());
     return this.http.get<Author[]>(this.baseUrl + 'authors/', {params: params});
   }
+
+  updateAuthor(id:number, header: any): Observable<any> {
+    const url = this.baseUrl + 'authors/' + id + '/';
+    return this.http.put(url, header);
+  }
 }
