@@ -4,5 +4,4 @@ export class Search {
   year: string;
   publisher: string;
   language: string;
-  genre: string;
 }

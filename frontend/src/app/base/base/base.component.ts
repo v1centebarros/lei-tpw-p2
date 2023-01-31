@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { Session } from '../../models/session.model';
 import {Search} from "../../models/search.model";
 import { Book } from '../../models/book.model';
 import { BookService } from '../../services/book.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 
 @Component({
@@ -31,16 +31,14 @@ export class BaseComponent implements OnInit{
     this.year = search.year;
     this.publisher = search.publisher;
     this.language = search.language;
-    this.genre = search.genre;
     this.getBooksWithFilters();
   }
 
 
-  constructor(public router: Router, public location: Location, private bookService: BookService) {
+  constructor(public router: Router, public location: Location, private bookService: BookService, private authenticationService: AuthService) {
     router.events.subscribe(
       () => {
         if (!this.loggedIn() && (location.path() !== '/login' && location.path() != '/register')) {
-          // window.location.href = "/login";
           router.navigate(['/login']);
         }
       }
@@ -49,7 +47,7 @@ export class BaseComponent implements OnInit{
 
   // Check if current user is logged in
   loggedIn() {
-    return (Session.getCurrentSession() !== null);
+    return this.authenticationService.loggedIn();
   }
 
   // Get all books
@@ -64,8 +62,7 @@ export class BaseComponent implements OnInit{
       avg_rating: this.avg_rating,
       year: this.year,
       publisher: this.publisher,
-      language: this.language,
-      genre: this.genre
+      language: this.language
     }).subscribe(books => this.books = books);
-  }   
+  }
 }

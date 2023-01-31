@@ -3,7 +3,6 @@ import {PublisherService} from "../../../services/publisher.service";
 import {Publisher} from "../../../models/publisher.model";
 import {BookService} from "../../../services/book.service";
 import { Search } from '../../../models/search.model';
-import { Genre } from '../../../models/genre.model';
 
 @Component({
   selector: 'app-search-filters-containers',
@@ -15,14 +14,12 @@ export class SearchFiltersContainersComponent implements OnInit {
   years: string[] = [];
   ratings: number[] = [1, 2, 3, 4, 5];
   languages: string[] = ['English', 'Spanish', 'Portuguese'];
-  genres: Genre[];
   publishers: Publisher[] = [];
   query: string = '';
   avg_rating: number = 0;
   year: string = '';
   publisher: string = '';
   language: string = '';
-  genre: string = '';
 
 
   constructor(
@@ -33,7 +30,6 @@ export class SearchFiltersContainersComponent implements OnInit {
   ngOnInit() {
     this.getPublishers();
     this.getBooksYearsAvailable();
-    this.getBooksGenre();
   }
 
   getPublishers(): void {
@@ -44,10 +40,6 @@ export class SearchFiltersContainersComponent implements OnInit {
     this.bookService.getAvailableYears().subscribe(years => this.years = years);
   }
 
-  getBooksGenre(): void{
-    this.bookService.getBooksGenre().subscribe(genre => this.genres = genre);
-  }
-
   onSearchChanged(): void {
     this.searchChanged.emit({
       query: this.query,
@@ -55,7 +47,6 @@ export class SearchFiltersContainersComponent implements OnInit {
       year: this.year,
       publisher: this.publisher,
       language: this.language,
-      genre: this.genre
     });
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
-import {Book} from "../models/book.model";
+import { Book } from "../models/book.model";
 import { User } from '../models/user.model';
 import { Search } from '../models/search.model';
 import { Rating } from '../models/rating.model';
@@ -9,7 +9,7 @@ import { Genre } from '../models/genre.model';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 }
 
 
@@ -56,15 +56,12 @@ export class BookService {
     if (search.language) {
       params = params.append('language', search.language);
     }
-    if (search.genre) {
-      params = params.append('genre', search.genre);
-    }
-    console.log(this.baseUrl + 'books/', {params: params})
-    return this.http.get<Book[]>(this.baseUrl + 'books/', {params: params});
+    console.log(this.baseUrl + 'books/', { params: params })
+    return this.http.get<Book[]>(this.baseUrl + 'books/', { params: params });
   }
 
   getAuthorBooks(id: number): Observable<Book[]> {
-    return this.http.get<Book[]>(this.baseUrl + 'books/?author=' + id );
+    return this.http.get<Book[]>(this.baseUrl + 'books/?author=' + id);
   }
 
   getAvailableYears(): Observable<string[]> {
@@ -82,7 +79,7 @@ export class BookService {
   editBook(id: number, book: any): Observable<any> {
     return this.http.put(this.baseUrl + 'books/' + id + '/', book);
   }
-  
+
   getRatingByBookAndUser(book_id: number, user_id: number): Observable<Rating[]> {
     return this.http.get<Rating[]>(this.baseUrl + 'ratings/?book=' + book_id + '&user=' + user_id);
   }
