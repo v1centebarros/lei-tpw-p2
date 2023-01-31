@@ -17,6 +17,7 @@ export class AddBookComponent {
   languages: String[] = ['English', 'Spanish', 'Portuguese'];
   genres: Genre[];
   id: any;
+  image: boolean = false;
 
   form: FormGroup;
 
@@ -28,8 +29,19 @@ export class AddBookComponent {
   ) {
   }
 
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.form.get('image')?.setValue(file);
+      this.image = true;
+    }
+    else {
+      this.image = false;
+    }
+  }
+
   ngOnInit() {
-    if (this.authService.loggedIn() == false || this.authService.getUserInfo().type != 'author') {
+    if (this.authService.loggedIn() == false && this.authService.getUserInfo().type != 'author') {
       this.router.navigate(['/login']);
     }
     this.getPublishers();
@@ -43,6 +55,7 @@ export class AddBookComponent {
       genre: new FormControl('', [Validators.required]),
       isbn: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
+      image: new FormControl(null),
     });
 
     this.id = this.authService.getUserInfo().id;
@@ -72,6 +85,7 @@ export class AddBookComponent {
         description: this.form.value.description,
         genres: +Number(this.form.value.genre),
         author: String(this.id),
+        image: this.form.get('image')?.value
       }
 
       console.log(formData);
