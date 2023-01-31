@@ -15,7 +15,7 @@ import { Rating } from '../models/rating.model';
   styleUrls: ['./book-details.component.css']
 })
 export class BookDetailsComponent implements OnInit{
-  book: Book;
+  book: Book = new Book();
   reviews: Review[];
   myReview: Review | null;
   showReviews: boolean = false;
@@ -28,6 +28,8 @@ export class BookDetailsComponent implements OnInit{
   comments: Comment[][] = [];
   rating: Rating;
   editMyReview: boolean = false;
+  showRateBook: boolean = false;
+  selectedRating: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +46,7 @@ export class BookDetailsComponent implements OnInit{
     this.getBookReviews();
     this.getReviewByUserAndBook();
     this.verifyFav();
+    this.getRatingbyBookAndUser();
   }
 
   getBook(): Book {
@@ -64,6 +67,53 @@ export class BookDetailsComponent implements OnInit{
           this.userComment[i] = '';
         }
       });
+  }
+
+  showRateToggle(): void {
+    this.showRateBook = !this.showRateBook;
+    console.log(this.showRateBook)
+  }
+
+  getRatingbyBookAndUser(): void {
+    const id = +Number(this.route.snapshot.paramMap.get('id'));
+    this.bookService.getRatingByBookAndUser(id, this.user.id)
+      .subscribe(rating => {
+        this.rating = rating[0]
+        this.selectedRating = this.rating.rating;
+      });
+  }
+
+  addRating(): void {
+    const newRating = new Rating();
+    newRating.rating = this.selectedRating;
+    newRating.book = this.book.id;
+    newRating.user = this.user.id;
+    if (this.user !== null) {
+      this.bookService.addRating(newRating)
+        .subscribe(() => {
+          this.getRatingbyBookAndUser();
+          this.getBook();
+        });
+    } else {
+      alert("You must be logged in to rate a book");
+    }
+  }
+
+  changeRating(): void {
+    const newRating = new Rating();
+    newRating.id = this.rating.id;
+    newRating.rating = this.selectedRating;
+    newRating.book = this.book.id;
+    newRating.user = this.user.id;
+    if (this.user !== null) {
+      this.bookService.changeRating(newRating)
+        .subscribe(() => {
+          this.getRatingbyBookAndUser();
+          this.getBook();
+        });
+    } else {
+      alert("You must be logged in to rate a book");
+    }
   }
 
   getReviewByUserAndBook(): void {
