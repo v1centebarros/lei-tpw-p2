@@ -91,8 +91,6 @@ export class SignupAuthorComponent implements OnInit {
 
       this.authService.registerAuthor(formData).subscribe(response => {
         this.response = response;
-        // ! ALTERAR ERROS MENSAGES
-
         if ('error' in response) {
           this.registerFail = true;
           this.form.reset();
