@@ -14,7 +14,6 @@ export class EditProfileComponent implements OnInit{
 
   response: any;
   form: FormGroup;
-  image: boolean = false;
   registerFail: boolean = false;
   user: any;
   message: string ;
@@ -41,22 +40,7 @@ export class EditProfileComponent implements OnInit{
       firstName: new FormControl(this.user.first_name, [Validators.required]),
       lastName: new FormControl(this.user.last_name, [Validators.required]),
       description: new FormControl(this.user.description, [Validators.required]),
-      image: new FormControl(null)
     });
-  }
-
-  onFileChange(event: any) {
-    console.log(event.target.files)
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.form.get('image')?.setValue(file);
-      console.log(file)
-      console.log(this.form.get('image')?.value)
-      this.image = true;
-    }
-    else {
-      this.image = false;
-    }
   }
 
 
@@ -68,20 +52,6 @@ export class EditProfileComponent implements OnInit{
   editUser(){
     if(this.form.get('newpassword')?.value == null && this.form.get('oldpassword')?.value != null && this.form.get('confirmnewpassword')?.value == null ){
       let formData = null;
-
-      if (this.image){
-        formData = {
-          username: this.form.value.username,
-          email: this.user.email,
-          password: this.form.value.oldpassword,
-          birth_date: this.form.value.birthDate,
-          first_name: this.form.value.firstName,
-          last_name: this.form.value.lastName,
-          description: this.form.value.description,
-          image: this.form.get('image')?.value
-        }
-      }
-      else{
         formData={
           username: this.form.value.username,
           email: this.user.email,
@@ -91,9 +61,8 @@ export class EditProfileComponent implements OnInit{
           last_name: this.form.value.lastName,
           description: this.form.value.description,
         }
-      }
-      console.log(formData)
-      this.userService.updateUser(this.user.id, formData).subscribe(
+        console.log(formData)
+          this.userService.updateUser(this.user.id, formData).subscribe(
 
         (response) => {
           if ("error" in response) {
@@ -124,19 +93,6 @@ export class EditProfileComponent implements OnInit{
         return;
       }
       let formData = null;
-      if (this.image){
-        formData = new FormData();
-        formData.append('image', this.form.get("image")?.value);
-        formData.append('username', this.form.value.username);
-        formData.append('email', this.form.value.email);
-        formData.append('oldpassword', this.form.value.oldpassword);
-        formData.append('newpassword', this.form.value.newpassword);
-        formData.append('birth_date', this.form.value.birthDate);
-        formData.append('first_name', this.form.value.firstName);
-        formData.append('last_name', this.form.value.lastName);
-        formData.append('description', this.form.value.description);
-      }
-      else{
         formData={
           username: this.form.value.username,
           email: this.user.email,
@@ -147,7 +103,6 @@ export class EditProfileComponent implements OnInit{
           last_name: this.form.value.lastName,
           description: this.form.value.description,
         }
-      }
       this.userService.updateUser(this.user.id, formData).subscribe(
         (response) => {
           if ("error" in response) {
