@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { QRCodeModule } from 'angularx-qrcode';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BaseComponent } from './base/base/base.component';
@@ -52,6 +52,7 @@ import { EditBookComponent } from './edit-book/edit-book.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    QRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,6 @@
 <div class="flex flex-col space-y-4 m-4 h-screen xl:container xl:mx-auto">
   <app-navbar></app-navbar>
-
-
+  <qrcode [qrdata]="'ola'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
   <div class="w-full flex card bg-base-100 rounded-lg">
 
     <div class="card-body">
@@ -15,7 +14,6 @@
           <p class="text-xl font-bold mb-4">City: <span class="font-light text-lg">{{publisher.city}}</span></p>
           <p class="text-xl font-bold mb-4">Country: <span class="font-light text-lg">{{publisher.country}}</span></p>
           <p class="text-xl font-bold mb-4">Website: <a class="font-light text-lg" href="{{publisher.website}}">{{publisher.website}}</a></p>
-
           <!-- Mostrar só quando tem livros-->
           <p class="text-xl font-bold mb-4"  *ngIf="books.length>0" >Total Books: <span class="font-light text-lg">{{books.length}}</span></p>
           <p class="text-xl font-bold mb-4" *ngIf="books.length>0">Average Book Ratings: <span class="font-light text-lg">{{avgRating/books.length}}</span></p>

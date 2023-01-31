@@ -6,6 +6,7 @@ import { AuthService } from '../services/auth/auth.service';
 import { PublisherService } from '../services/publisher.service';
 import { UserService } from '../services/user.service';
 import { Author } from '../models/author.model';
+import { SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-publisher',
@@ -23,6 +24,7 @@ export class PublisherComponent {
   state_fav: boolean = false;
   avgRating:number = 0;
   authors: Author[] = [];
+  qrInfo: any;
 
   constructor(
     private publisherService: PublisherService,
@@ -41,6 +43,8 @@ export class PublisherComponent {
       this.logged = true;
     }
     this.getAuthors();
+    let  website = this.publisher.website
+    this.qrInfo = window.location.href;
   }
 
   getPublisher(): void {
@@ -101,6 +105,5 @@ export class PublisherComponent {
       alert("You must be logged in to add a favorite");
     }
   }
-
 
 }
