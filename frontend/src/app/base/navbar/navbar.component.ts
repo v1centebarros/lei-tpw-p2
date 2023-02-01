@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-
+import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthorService } from 'src/app/services/author.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,10 +14,15 @@ export class NavbarComponent  implements OnInit{
   user!: any;
   loggedIn: boolean;
   typeAuthor: boolean;
+  type: string;
+
 
   constructor(
     private router: Router, 
-    private authenticationService: AuthService 
+    private authenticationService: AuthService,
+    private userService: UserService,
+    private authorService: AuthorService
+
     ) {}
 
   ngOnInit(): void {
@@ -24,7 +30,19 @@ export class NavbarComponent  implements OnInit{
     this.loggedIn = this.authenticationService.loggedIn();
     this.user = this.authenticationService.getUserInfo();
     this.typeAuthor = this.user.type == "author";
-    this.getImage()
+    if(this.user.type=="user"){
+      this.userService.getUser(this.user.id).subscribe((data: any) => {
+        this.user = data;
+      })
+      this.type="user";
+      
+    }else{
+      this.authorService.getAuthor(this.user.id).subscribe((data: any) => {
+        this.user = data;
+      })
+      this.type="author";
+    }
+    
   }
 
   logout() {
@@ -36,28 +54,19 @@ export class NavbarComponent  implements OnInit{
   }
 
   profile(){
-    if (this.user.type == "user"){
+    if (this.type == "user"){
       window.location.href = '/profile';
     }
-    if (this.user.type == "author"){
+    if (this.type == "author"){
       window.location.href = '/author/'+ this.user.id;
     }
   }
-  getImage(){
-    console.log("get image")
-    let image = this.user.image
-    if(image != null){
-      this.user.image = "http://localhost:8000/" + this.user.image;
-    }
-    else
-      this.user.image = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-  }
 
   settings(){
-    if (this.user.type == "user"){
+    if (this.type == "user"){
       window.location.href = '/settings';
     }
-    if (this.user.type == "author"){
+    if (this.type == "author"){
       window.location.href = '/authorSettings';
     }
   }
